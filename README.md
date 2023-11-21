@@ -1,0 +1,2 @@
+# dotfile
+Store multiple dotfiles.
