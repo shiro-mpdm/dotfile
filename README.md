@@ -1,3 +1,3 @@
-# # dotfile
+# # dotfiles
 ## || WHY
 Store multiple dotfiles.
