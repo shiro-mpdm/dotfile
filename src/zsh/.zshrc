@@ -26,14 +26,8 @@ setopt extended_history
 alias history='history -t "%F %T"'
 
 # プロンプト（コンソール表示）
-# 1行表示
-# PROMPT="%~ %# "
 PROMPT="%{${fg[blue]}%}🐻‍❄️(%n)@%m%{${reset_color}%} %c/ %# " #EDIT
-
-# 複数行表示
-# PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-# %# " 
-
+ 
 # 出力の後に改行を入れる
 function add_line {
   if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
@@ -127,7 +121,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-alias sudo='sudo ' #sudo の後のコマンドでエイリアスを有効にする
+# alias sudo='sudo ' #sudo の後のコマンドでエイリアスを有効にする
  
 # グローバルエイリアス
 alias -g L='| less'
@@ -174,6 +168,9 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 # GitHub GPG （署名付コミット）
 export GPG_TTY=$(tty)
+
+# GitHub CLI（コマンド補完）)
+eval "$(gh completion -s zsh)"
 
 
 
