@@ -1,8 +1,10 @@
 " reference
 " cf. https://zenn.dev/antyuntyun/articles/vim_custmoize
+" cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc
 
 
 
+" """"""""""""""""""""""""""""""""""""""""""""""""""
 " 基本操作メモ (忘れがちなものピックアップ)
 " Ctrl + v    visualブロックモード
 " vjj         visualモードで範囲選択
@@ -10,7 +12,8 @@
 " $           行末に移動
 " ^           行頭に移動
 " :bw         バッファを閉じる
-" Git操作メモ (vim-fugitve))
+" """"""""""""""""""""""""""""""""""""""""""""""""""
+" Git操作メモ (vim-fugitve)
 " :Gdiff      git diff の表示
 " :Git        git status のようなステータス表示
 " :Git blame  git blame
@@ -20,6 +23,7 @@
 " :Git pull   git pull
 " :Gbranches  fzfを利用したブランチのcheckout
 " :Git <command> :Gitの後の引数は通常のgitコマンドの引数として受け取られて処理される
+" """"""""""""""""""""""""""""""""""""""""""""""""""
 " fzf操作メモ
 " :Commands   コマンド一覧
 " :Files      カレントディレクトリ以下のファイルの曖昧検索
@@ -27,6 +31,7 @@
 " :History    過去開いたファイルの曖昧検索
 " :History:   過去実行したvimコマンドの曖昧検索
 " :Commits    commit log 確認(require fugitive.vim))
+" """"""""""""""""""""""""""""""""""""""""""""""""""
 " ショートカット設定まとめ
 " Ctrl + ]    fzfによるブランチチェックアウト
 " Ctrl + e    NerdTreeによるエクスプローラ表示。デフォルトで隠しファイル表示。Shift + iで切り替え
@@ -35,6 +40,7 @@
 " Ctrl + k    コメントアウト
 " vjj gcc     複数行をまとめてコメントアウト
 " ga =        EasyAlignを起動して、= でアライン
+" """"""""""""""""""""""""""""""""""""""""""""""""""
 " Lsp周り
 " :LspInstallServeri LspServerのインストール
 " :LspMangaServer    LaunguageServer一覧表示と管理
@@ -56,6 +62,7 @@ let g:jellybeans_overrides = {
 \    'Comment': { 'guifg': 'cccccc' },
 \}
 
+colorscheme iceberg
 syntax enable
 
 set encoding=utf-8
@@ -102,11 +109,11 @@ set ambiwidth=double
 " set laststatus=2
 
 " undo 永続化
-silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
-if has('persistent_undo')
-  set undodir=~/.vim/undo
-  set undofile
-endif
+" silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
+" if has('persistent_undo')
+"   set undodir=~/.vim/undo
+"   set undofile
+" endif
 
 
 
@@ -128,26 +135,37 @@ set rtp+=/usr/local/opt/fzf
 
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""
-" vim-plug
-" install vim-plug if not exists
+" vim-plug 
+" (cf.) https://github.com/junegunn/vim-plug
+
+" install vim-plug if not exists.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-" auto install plugin
+
+" auto install plugin.
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 
+" the range below is plugin.
 call plug#begin('~/.vim/plugged')
-
-    Plug 'bling/vim-airline'
+    " -- display statusbar.
+    " Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    
     Plug 'junegunn/vim-easy-align'
+    Plug 'lambdalisue/fern.vim'                   " ファイルツリー
+    Plug 'lambdalisue/fern-git-status.vim'        " ファイルツリーにgitの差分が表示
+    Plug 'lambdalisue/nerdfont.vim'               " ファイルツリーにファイルのアイコンを表示 
+    Plug 'lambdalisue/fern-renderer-nerdfont.vim' " ファイルツリーにファイルのアイコンを表示
+    Plug 'lambdalisue/glyph-palette.vim'          " ファイルツリーのアイコンに色をつける 
     Plug 'preservim/nerdtree'
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter' " gitの追加/削除/変更 行の表示
+    Plug 'airblade/vim-gitgutter' " git差分（追加/削除/変更） 行の表示
     Plug 'mhinz/vim-signify'
     " Ctrl + p でファイル・バッファをあいまい検索
     Plug 'ctrlpvim/ctrlp.vim'
@@ -164,6 +182,38 @@ call plug#begin('~/.vim/plugged')
     " auto-complete
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+
+    " Ctrl+nでファイルツリーを表示/非表示する
+    nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+
+    let g:fern#renderer = 'nerdfont' " ファイルツリーにファイルのアイコンを表示有効化
+
+    " アイコンに色をつける
+    augroup my-glyph-palette
+      autocmd! *
+      autocmd FileType fern call glyph_palette#apply()
+      autocmd FileType nerdtree,startify call glyph_palette#apply()
+    augroup END
+
+    " git操作
+    " g]で前の変更箇所へ移動する
+    nnoremap g[ :GitGutterPrevHunk<CR>
+    " g[で次の変更箇所へ移動する
+    nnoremap g] :GitGutterNextHunk<CR>
+    " ghでdiffをハイライトする
+    nnoremap gh :GitGutterLineHighlightsToggle<CR>
+    " gpでカーソル行のdiffを表示する
+    nnoremap gp :GitGutterPreviewHunk<CR>
+    " 記号の色を変更する
+    highlight GitGutterAdd ctermfg=green
+    highlight GitGutterChange ctermfg=blue
+    highlight GitGutterDelete ctermfg=red
+
+    "" 反映時間を短くする(デフォルトは4000ms)
+    set updatetime=250
+
+
 
     " fzf-checkout.vim オプション
     " Sort branches/tags by committer date. Minus sign to show in reverse order (recent first):
@@ -187,39 +237,54 @@ call plug#begin('~/.vim/plugged')
 
     set ttimeoutlen=50 " モード変更遅延解消
 
-    " Airline setting
+    " -- airline settings.
+    "  (cf.) https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
     " let g:airline_powerline_fonts = 1
-    " テーマ指定
-    let g:airline_theme = 'luna'
-    " 他テーマを指定したい場合には以下を参考にお好みのものを指定
-    " cf. https://github.com/vim-airline/vim-airline/wiki/Screenshots
+    let g:airline_theme = 'papercolor' " テーマ指定 
+                                       " 他テーマを指定したい場合には以下を参考にお好みのものを指定
+                                       " (cf.) https://github.com/vim-airline/vim-airline/wiki/Screenshots
 
     set t_Co=256 " この設定がないと色が正しく表示されない場合がある
     let g:airline#extensions#hunks#enabled = 0
     let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#tabline#enabled = 1 " タブラインを表示
+    let g:airline#extensions#tabline#enabled = 1         " タブラインを表示
     let g:airline#extensions#tabline#buffer_idx_mode = 1 " タブ番号表示
 
+    " -- ステータスラインに表示する項目を変更する
+    let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'error', 'warning' ]
+      \ ]
+    let g:airline_section_c = '%t %M'
+    let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+    
+    let g:airline#extensions#hunks#non_zero_only = 1 " 変更がなければ、diff行数を表示しない
+
+
+    " --  
+    " -- (cf.) https://original-game.com/vim-airline/
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
-    " unicode symbols
+    " -- unicode symbols left.
     " let g:airline_left_sep = '»'
     " let g:airline_left_sep = '▶'
+    " let g:airline_left_alt_sep = ''
+    " -- unicode symbols right.
     " let g:airline_right_sep = '«'
     let g:airline_right_sep = '◀'
-    let g:airline_symbols.crypt = '🔒'
-    " let g:airline_symbols.linenr = '␊'
-    " let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    " let g:airline_symbols.maxlinenr = '☰'
-    let g:airline_symbols.maxlinenr = ''
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    " let g:airline_symbols.paste = 'Þ'
-    " let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.spell = 'Ꞩ'
-    let g:airline_symbols.notexists = '∄'
-    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_symbols.crypt = '🔒'      " 暗号化されたファイル
+    " let g:airline_symbols.linenr = '␊'    " 行
+    " let g:airline_symbols.linenr = '␤'    " ”
+    let g:airline_symbols.linenr = '¶'     " ”
+    " let g:airline_symbols.maxlinenr = '☰' " 最大行
+    let g:airline_symbols.maxlinenr = '㏑'  " ”
+    let g:airline_symbols.branch = '⎇'      " gitブランチ
+    let g:airline_symbols.paste = 'ρ'      " ペーストモード
+    " let g:airline_symbols.paste = 'Þ'    " ”
+    " let g:airline_symbols.paste = '∥'    " ”
+    let g:airline_symbols.spell = 'Ꞩ'       " 
+    let g:airline_symbols.notexists = '∄'   " gitで管理されていない場合
+    let g:airline_symbols.whitespace = 'Ξ' " 空白の警告(余分な空白など)
 
 call plug#end()
