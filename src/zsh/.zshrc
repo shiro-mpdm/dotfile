@@ -184,6 +184,10 @@ eval "$(pyenv init -)"
 # PostgreSQLパス
 # export PATH=$PATH:/Library/PostgreSQL/12/bin
 
+# ChatGPT
+# cf. https://namileriblog.com/python/chatgpt-api/
+# export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
+                                         # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 
 
 ########################################
@@ -226,15 +230,17 @@ fi
 #=============================
 # Google Cloud SDK 
 #=============================
+# ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/{アカウント名}/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/{アカウント名}/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/{YourUserName}/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/{YourUserName}/google-cloud-sdk/path.zsh.inc'; 
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/{アカウント名}/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/{アカウント名}/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/{YourUserName}/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/{YourUserName}/google-cloud-sdk/completion.zsh.inc'; 
 fi
+
 
 
 # vim:set ft=zsh:
