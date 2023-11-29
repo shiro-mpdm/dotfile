@@ -48,6 +48,7 @@
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "" Vim Color
+"" cf. 
 " if empty(glob('~/.vim/colors/jellybeans.vim'))
 "   silent !curl -fLo ~/.vim/colors/jellybeans.vim --create-dirs
 "     \ https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
