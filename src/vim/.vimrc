@@ -15,6 +15,7 @@
 "  cf. https://zenn.dev/vim_jp/articles/2023-05-19-vim-keybind-philosophy 
 "  cf. https://original-game.com/vim-mac9/
 "  cf. https://zenn.dev/antyuntyun/articles/vim_custmoize     --.vimrc完結思考
+"  --参考
 "  cf. https://zenn.dev/monaqa
 "  cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc --VSCodeﾗｲｸにする
 "  cf. https://envader.plus/                                  --遊びながら学べる
@@ -85,11 +86,11 @@ set ambiwidth=double           " 記号表記で崩れないようにする
 set autoread                   " 
 set tabstop=4                  " 行頭以外のtab表示幅
 set shiftwidth=4               " 行頭でのtab表示幅
-set smartindent                "
+set smartindent                " 
 set hlsearch                   " 
 set incsearch                  " 
 set ignorecase                 " 
-set smartcase                  "
+set smartcase                  " 
 set wrapscan                   " 
 set wildmenu                   " 
 set history=5000               " 
@@ -161,7 +162,7 @@ call plug#begin('~/.vim/plugged')
     "  cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'                       " 
-    Plug 'stsewd/fzf-checkout.vim'                "
+    Plug 'stsewd/fzf-checkout.vim'                " 
 
     Plug 'preservim/nerdtree'                     "  
     Plug 'sheerun/vim-polyglot'                   " 
@@ -175,7 +176,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tyru/caw.vim'                           "  
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'                       " 
-    Plug 'stsewd/fzf-checkout.vim'                "
+    Plug 'stsewd/fzf-checkout.vim'                " 
     
     "" LSP
     Plug 'prabirshrestha/vim-lsp'
@@ -245,6 +246,13 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 set ttimeoutlen=50 " モード変更遅延解消
+
+"" SQL Language Server
+"  cf. https://github.com/joe-re/sql-language-server
+"  cf. https://marketplace.visualstudio.com/items?itemName=joe-re.sql-language-server#neovim
+let g:LanguageClient_serverCommands = {
+    \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+    \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
