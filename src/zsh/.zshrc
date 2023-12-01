@@ -10,6 +10,7 @@
 #  cf. https://qiita.com/knao124/items/04e3625eb12237de5743
 #  cf. https://rapicro.com/customize_zsh_prompt/#google_vignette
 #  cf. https://babababand.hatenablog.com/entry/2020/07/06/181946
+#  cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 
 ## License : MIT
 #  cf. http://mollifier.mit-license.org/
@@ -45,13 +46,13 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps コマンド�
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                               /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
-
 ## ヒストリの設定
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
+## 時間表記
 setopt extended_history
-alias history='history -t "%F %T"'
+alias history='history -t "%F %T"' 
 
 ##  キーバインド
 #   ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
@@ -117,7 +118,7 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 
 
-PROMPT="%{${fg[blue]}%}🐻‍❄️(%n)@%m%{${reset_color}%} %c/ %#"
+PROMPT="🐻‍❄️%{${fg[blue]}%}(%S%F{255}%n%s%f%{${fg[blue]}%})%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%} %c/ %# "
 
 
 
@@ -234,6 +235,8 @@ eval "$(pyenv init -)"
 ########################################
 
 # PLIGIN #
+
+# cf.https://zenn.dev/ganta/articles/e1e0746136ce67
 
 ## source zsh-syntax-highlighting
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; 
