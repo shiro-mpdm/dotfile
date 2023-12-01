@@ -55,6 +55,7 @@
 " :Commits    commit log 確認(require fugitive.vim))
 
 "" ショートカット設定まとめ
+" Ctrl + o    ファイルツリー開閉    
 " Ctrl + ]    fzfによるブランチチェックアウト
 " Ctrl + e    NerdTreeによるエクスプローラ表示。デフォルトで隠しファイル表示。Shift + iで切り替え
 " Ctrl + b    タブ移動
@@ -193,9 +194,9 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 
-"" ファイルツリー
-" Ctrl+nでファイルツリーを表示/非表示する
-nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+"" ファイルツリー 
+" Ctrl+oでファイルツリーを表示/非表示する
+nnoremap <C-o> :Fern . -reveal=% -drawer -toggle -width=40<CR>
 let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
 " アイコンに色をつける
 augroup my-glyph-palette
@@ -260,7 +261,7 @@ let g:LanguageClient_serverCommands = {
 " VIM DISPLAY CONTENT "
 
 "" StatusLine
-set laststatus=2 "常に表示
+set laststatus=2 " 常に表示
                  " 0: 表示しない、1: 2つ以上ウィンドウがある時だけ表示
 
 "" ステータスラインをカスタマイズ
@@ -342,12 +343,12 @@ inoremap {<Enter> {}<Left><CR><CR><BS><Up><Right>
 "  ファイル検索を開く
 "  git管理されていれば:GFiles、そうでなければ:Filesを実行する
 fun! FzfOmniFiles()
-  let is_git = system('git status')
-  if v:shell_error
-    :Files
-  else
-    :GitFiles
-  endif
+    let is_git = system('git status')
+    if v:shell_error
+        :Files
+    else
+        :GitFiles
+    endif
 endfun
 nnoremap <C-p> :call FzfOmniFiles()<CR>
 
