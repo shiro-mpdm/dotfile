@@ -223,7 +223,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 ## PostgreSQLパス
-# export PATH=$PATH:/Library/PostgreSQL/12/bin
+export PATH=$PATH:/Library/PostgreSQL/14/bin
 
 ## ChatGPTパス
 #  cf. https://namileriblog.com/python/chatgpt-api/
