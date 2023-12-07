@@ -14,12 +14,14 @@ brwe "mas"           # App Store application Search
 brew "pgformatter"   
 brew "pinentry-mac"
 brew "pipenv"
+brew "postgresql@14", restart_service: true
 brew "pyenv"
 # brew "python@3.11"
 brew "ripgrep"
 brew "smimesign"
 brew "tig"           # GitHub 
 brew "yamllint"
+brew "hashicorp/tap/terraform"
 
 cask "appcleaner"
 # cask "aws-vault"
