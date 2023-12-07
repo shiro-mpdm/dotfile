@@ -20,7 +20,7 @@
 "  cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc --VSCodeﾗｲｸにする
 "  cf. https://envader.plus/                                  --遊びながら学べる
 "  cf. https://original-game.com/convenient_tools/set-vimrc/  --.vimrc生成ツール
-
+"  cf. https://minerva.mamansoft.net/Notes/%F0%9F%93%9CVim%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92Vundle%E3%81%8B%E3%82%89vim-plug%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,6 +61,7 @@
 " Ctrl + b    タブ移動
 " Ctrl + n    タブ移動
 " Ctrl + /    コメントアウト
+" Ctrl + k    マルチカーソル
 " vjj gcc     複数行をまとめてコメントアウト
 " ga =        EasyAlignを起動して、= でアライン
 
@@ -74,30 +75,36 @@
 
 " VIM DISPLAY FRAME "
 
-"" Meta
+"" Meta.
 set encoding=utf-8             " 
+" set fenc=utf-8                 "
 set fileencodings=utf-8,cp932  " 
 set number                     " 行番号表示
 set backspace=indent,eol,start " バックスペースを有効にする
 " set termwinsize=12x0           " ターミナルのサイズを指定
 set updatetime=250             " 反映時間短縮(デフォルト=4,000ms)
-set list listchars=tab:\▸\-    " 不可視文字を可視化(タブが「▸-」と表示される)
 set virtualedit=onemore        " 行末の1文字先までカーソルを移動できるように
 set ambiwidth=double           " 記号表記で崩れないようにする
-set autoread                   " 
-set tabstop=4                  " 行頭以外のtab表示幅
-set shiftwidth=4               " 行頭でのtab表示幅
-set smartindent                " 
-set hlsearch                   " 
-set incsearch                  " 
-set ignorecase                 " 
-set smartcase                  " 
-set wrapscan                   " 
+set autoread                   " オートインデント
+set smartindent                " オートインデント
+set expandtab                  " タブをスペースにする
+set tabstop=4                  " 行頭以外のtab表示幅（タブスペース　4つ分に）
+set shiftwidth=4               " 行頭で　のtab表示幅（シフトスペース4つ分に）
+set list listchars=tab:\▸\-    " 不可視文字を可視化(タブが「▸-」と表示される)
 set wildmenu                   " 
 set history=5000               " 
+set nobackup                   " バックアップファイルを作らない
+set noswapfile                 " スワップファイルを作らない
+set showmatch                  " 対応する括弧を表示
+set incsearch                  " (検索)
+set ignorecase                 " (検索)サーチ時に大文字小文字を区別しない
+set smartcase                  " (検索)小文字で検索すると大文字小文字を区別しない
+set wrapscan                   " (検索)検索がファイルの終わりまで行ったら先頭に戻る
+set hlsearch                   " (検索)検索結果をハイライト表示
+set vb t_vb=                   " beepもビジュアルベルも無効
 
 
-"" UnDo (永続化)
+"" UnDo (永続化).
 "  cf.
 " silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
 if has('persistent_undo')
@@ -106,7 +113,7 @@ if has('persistent_undo')
 endif
 
 
-"" Color
+"" Color.
 "  cf. 
 colorscheme iceberg
 let g:iceberg_overrides = {
@@ -119,15 +126,14 @@ let g:iceberg_overrides = {
 syntax enable " ソースコードに色付け
 
 
-"" Font
+"" Font.
 "  e.g. ={NAME}:h{SIZE} 
 "       set guifont=Cica:h14, Mono:h13
 set guifont=*      " 半角文字
 set guifontwide=*  " 全角文字 
 
 
-
-"" Pligin
+"" Pligin.
 "  cf. https://github.com/junegunn/vim-plug
 
 "" install vim-plug if not exists.
@@ -191,22 +197,34 @@ call plug#begin('~/.vim/plugged')
     "  cf. https://dancroak.com/format-sql-in-vim/
     Plug 'dense-analysis/ale' 
 
+    " マルチカーソル
+    Plug 'mg979/vim-visual-multi'
+    let g:VM_maps = {}
+    let g:VM_maps['Find Under'] = '<C-k>'
+    let g:VM_maps['Find Subword Under'] = '<C-k>'
+
+
 call plug#end()
 
 
-"" ファイルツリー 
-" Ctrl+oでファイルツリーを表示/非表示する
-nnoremap <C-o> :Fern . -reveal=% -drawer -toggle -width=40<CR>
-let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
-" アイコンに色をつける
-augroup my-glyph-palette
-    autocmd! *
-    autocmd FileType fern call glyph_palette#apply()
-    autocmd FileType nerdtree,startify call glyph_palette#apply()
-augroup END
+"" ファイルツリー.
+"  cf. https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1 " デフォルトで隠しファイルを表示（Shift + i） 
+
+"" Ctrl + o でファイルツリーを表示/非表示する
+" nnoremap <C-o> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+" let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
+" let g:fern#renderer#nerdfont#indent_markers = 1
+""  アイコンに色をつける
+" augroup my-glyph-palette
+"    autocmd! *
+"     autocmd FileType fern call glyph_palette#apply()
+"     autocmd FileType nerdtree,startify call glyph_palette#apply()
+" augroup END
 
 
-"" Git操作
+"" Git操作.
 " g[で前の変更箇所へ移動する
 nnoremap g[ :GitGutterPrevHunk<CR>
 " g]で次の変更箇所へ移動する
@@ -221,50 +239,48 @@ highlight GitGutterChange ctermfg=blue
 highlight GitGutterDelete ctermfg=red
 
 
-"" fzf-checkout.vim オプション
+"" fzf-checkout.vim オプション.
 "  Sort branches/tags by committer date. Minus sign to show in reverse order (recent first):
 let g:fzf_checkout_git_options = '--sort=-committerdate'
 "  Define a diff action using fugitive. You can use it with :GBranches diff or with :GBranches and pressing ctrl-f:
 "  Ctrl + ] でfzf-checkout
 nnoremap <silent><C-]> :GBranches<CR>
 
-"" Ctrl + e でエクスプローラー表示
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-let NERDTreeShowHidden = 1 " 隠しファイルを表示 Shift + i で切り替え
-
-"" Ctrl + b Ctrl + n でタブ移動
+"" タブ移動.
 nmap <C-b> <Plug>AirlineSelectPrevTab
 nmap <C-n> <Plug>AirlineSelectNextTab
 
-"" Ctr + / でコメントアウト
-" nmap <C-/> <plug>(caw:i:toggle)
-" vmap <C-/> <plug>(caw:i:toggle)
+"" コメントアウト.
 nmap <C-/> <plug>(caw:hatpos:toggle)
 vmap <C-/> <plug>(caw:hatpos:toggle)
 
-"" gaでEasy Align 起動(e.g. =で揃える場合はga=)
+"" Clipboardからペースト可能
+vmap <C-c> "+y
+
+"" gaでEasy Align 起動
+"  e.g. =で揃える場合は、ga=
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 set ttimeoutlen=50 " モード変更遅延解消
 
-"" SQL Language Server
+"" SQL Language Server.
 "  cf. https://github.com/joe-re/sql-language-server
 "  cf. https://marketplace.visualstudio.com/items?itemName=joe-re.sql-language-server#neovim
-let g:LanguageClient_serverCommands = {
-    \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
-    \ }
+" let g:LanguageClient_serverCommands = {
+"     \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+"     \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
 " VIM DISPLAY CONTENT "
 
-"" StatusLine
-set laststatus=2 " 常に表示
+"" StatusLine.
+set laststatus=2 " ステータスを常に表示
                  " 0: 表示しない、1: 2つ以上ウィンドウがある時だけ表示
 
-"" ステータスラインをカスタマイズ
+"" ステータスラインをカスタマイズ.
 " set statusline=%F    " ファイル名表示
 " set statusline+=%m   " 変更チェック表示
 " set statusline+=%r   " 読み込み専用かどうか表示
@@ -277,7 +293,7 @@ set laststatus=2 " 常に表示
 " set statusline+=[row=%l/%L]            " 現在行数/全行数
 " set statusline+=[col=%c]               " 現在列数
 
-"" ステータスラインに表示する項目を変更する
+"" ステータスラインに表示する項目を変更する.
 "  cf.
 let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
@@ -293,15 +309,14 @@ let g:airline#extensions#hunks#non_zero_only = 1 " 変更がなければdiff行�
 "  cf. https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
 " let g:airline_powerline_fonts = 1
 let g:airline_theme = 'papercolor' " テーマ指定 
-                                   " cf.  https://github.com/vim-airline/vim-airline/wiki/Screenshots
-
-set t_Co=256 " この設定がないと色が正しく表示されない場合がある
+                                   " cf. https://github.com/vim-airline/vim-airline/wiki/Screenshots
+set t_Co=256                       " この設定がないと色が正しく表示されない場合がある
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1         " タブラインを表示
 let g:airline#extensions#tabline#buffer_idx_mode = 1 " タブ番号表示
 
-"" 
+"" airline symbols.
 "  cf. https://original-game.com/vim-airline/
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -391,3 +406,6 @@ nnoremap fm :Marks<CR>
 nnoremap fh :History<CR>
 " コミット履歴検索を開く
 nnoremap fc :Commits<CR>
+
+" ESCの2回押しでハイライト消去
+nnoremap <ESC><ESC> :nohl<CR>
