@@ -1,0 +1,21 @@
+[user]
+	name = shiro
+	email = shir@shiro.com
+	signingkey = **************
+	# signingkey = /PATH/TO/.SSH/KEY.PUB  #(case)GPG署名
+[commit]
+	gpgsign = true
+[gpg "x509"]
+	program = smimesign  #(case)S/MIME署名
+[push]
+	autoSetupRemote = true
+[alias]
+	s = status -sb
+	cm = commit -m
+	# cmx = commit --no-verify -m
+	lls = log --oneline -n 20
+	l1 = log -1 -p
+	l1c = log -1 -p --color-words
+	d = diff --color-words
+	dc = diff --cached
+	dcc = diff --cached --color-words
