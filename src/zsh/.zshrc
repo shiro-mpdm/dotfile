@@ -266,13 +266,13 @@ fi
 ## Google Cloud SDK 
 #  ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 #  The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/{shiro}/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/{shiro}/google-cloud-sdk/path.zsh.inc'; 
 fi
 
 #  The next line enables shell command completion for gcloud.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/{shiro}/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/{shiro}/google-cloud-sdk/completion.zsh.inc'; 
 fi
 
 
