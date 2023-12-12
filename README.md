@@ -3,4 +3,4 @@
 `SSIA`
 
 ## || WHY
-Store multiple dotfiles.
+Save multiple dotfiles for use in daily work.
