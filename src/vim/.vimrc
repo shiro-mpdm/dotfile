@@ -80,6 +80,7 @@ set encoding=utf-8             "
 " set fenc=utf-8                 "
 set fileencodings=utf-8,cp932  " 
 set number                     " 行番号表示
+set cursorline                 " かーソールライン表示 
 set backspace=indent,eol,start " バックスペースを有効にする
 " set termwinsize=12x0           " ターミナルのサイズを指定
 set updatetime=250             " 反映時間短縮(デフォルト=4,000ms)
@@ -95,20 +96,22 @@ set wildmenu                   "
 set history=5000               " 
 set nobackup                   " バックアップファイルを作らない
 set noswapfile                 " スワップファイルを作らない
-set showmatch                  " 対応する括弧を表示
-set incsearch                  " (検索)
+" set showmatch                  " 対応する括弧を表示
+set incsearch                  " (検索)インクリメントサーチ
 set ignorecase                 " (検索)サーチ時に大文字小文字を区別しない
 set smartcase                  " (検索)小文字で検索すると大文字小文字を区別しない
 set wrapscan                   " (検索)検索がファイルの終わりまで行ったら先頭に戻る
 set hlsearch                   " (検索)検索結果をハイライト表示
 set vb t_vb=                   " beepもビジュアルベルも無効
-
+set wildmenu                   " (補完)コマンドライン 
 
 "" UnDo (永続化).
 "  cf.
 " silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
 if has('persistent_undo')
-    set undodir=~/.vim/undo
+    let undo_path = expand('~/.vim/undo')
+	exe 'set undodir=' .. undo_path
+    " set undodir=~/.vim/undo
     set undofile
 endif
 
@@ -159,16 +162,16 @@ call plug#begin('~/.vim/plugged')
     
     "" Filetree
     Plug 'junegunn/vim-easy-align'
-    Plug 'lambdalisue/fern.vim'                   " ファイルツリー
-    Plug 'lambdalisue/fern-git-status.vim'        " ┗ ファイルツリーに、gitの差分が表示
-    Plug 'lambdalisue/nerdfont.vim'               " ┗ ファイルツリーに、ファイルのアイコンを表示 
-    Plug 'lambdalisue/fern-renderer-nerdfont.vim' " ┗ ファイルツリーに、ファイルのアイコンを表示
-    Plug 'lambdalisue/glyph-palette.vim'          " ┗ ファイルツリーの、アイコンに色をつける 
+    Plug 'lambdalisue/fern.vim'                   "（ファイルツリー）
+    Plug 'lambdalisue/fern-git-status.vim'        "  ┗ ファイルツリーに、gitの差分が表示
+    Plug 'lambdalisue/nerdfont.vim'               "  ┗ ファイルツリーに、ファイルのアイコンを表示 
+    Plug 'lambdalisue/fern-renderer-nerdfont.vim' "  ┗ ファイルツリーに、ファイルのアイコンを表示
+    Plug 'lambdalisue/glyph-palette.vim'          "  ┗ ファイルツリーの、アイコンに色をつける 
 
     "" Fileserch
     "  cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'                       " 
+    Plug 'junegunn/fzf.vim'                       " （検索）ファイルの曖昧検索
     Plug 'stsewd/fzf-checkout.vim'                " 
 
     Plug 'preservim/nerdtree'                     "  
@@ -176,7 +179,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'                     " 
 
     Plug 'mhinz/vim-signify'                      " 
-    Plug 'ctrlpvim/ctrlp.vim'                     " Ctrl + p でファイル・バッファをあいまい検索
+    Plug 'ctrlpvim/ctrlp.vim'                     " （検索）Ctrl + p でファイル・バッファを曖昧検索
     Plug 'jmcantrell/vim-virtualenv'
     "" (caw.vimに移行したので利用していない) 通常モードでgcc, Visualモードでgcでコメントアウト
     " Plug 'tomtom/tcomment_vim'
