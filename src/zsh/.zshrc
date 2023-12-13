@@ -162,7 +162,7 @@ setopt extended_glob        # 高機能なワイルドカード展開を使用�
 
 ########################################
 
-# ALIAS #
+# ALIAS COMMON #
 
 alias la='ls -a'
 alias ll='ls -l'
@@ -205,11 +205,15 @@ fi
 #     git config --global user.email "[メインのGitHubのメールアドレス]"
 # }
 
-## GitHub GPG （署名付コミット）
+## GitHub GPG（署名付コミット）
 export GPG_TTY=$(tty)
 
-## GitHub CLI（コマンド補完）)
+## GitHub CLI（コマンド補完）
 eval "$(gh completion -s zsh)"
+
+## Git Command Alias
+# マージ済の不要ブランチ一掃 (cf. https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea ) 
+alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|master|develop)\" | xargs git branch -d'
 
 
 
@@ -266,13 +270,13 @@ fi
 ## Google Cloud SDK 
 #  ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 #  The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/{shiro}/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/{shiro}/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/shiro/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/shiro/google-cloud-sdk/path.zsh.inc'; 
 fi
 
 #  The next line enables shell command completion for gcloud.
-if [ -f '/Users/{shiro}/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/{shiro}/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/shiro/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/shiro/google-cloud-sdk/completion.zsh.inc'; 
 fi
 
 
