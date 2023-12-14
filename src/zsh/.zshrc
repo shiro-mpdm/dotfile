@@ -213,7 +213,7 @@ eval "$(gh completion -s zsh)"
 
 ## Git Command Alias
 # マージ済の不要ブランチ一掃 (cf. https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea ) 
-alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|master|develop)\" | xargs git branch -d'
+alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop)\" | xargs git branch -d'
 
 
 
