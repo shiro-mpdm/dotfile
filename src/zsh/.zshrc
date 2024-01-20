@@ -1,19 +1,19 @@
 #------------------------------------------------
-# Explain   : 
+# Explain  
 # 
-# Reference :
-#         cf. https://envader.plus/course/7/scenario/1034
-#         cf. https://ktksq.hatenablog.com/entry/mac-customize
-#         cf. https://qiita.com/knao124/items/04e3625eb12237de5743
-#         cf. https://rapicro.com/customize_zsh_prompt/#google_vignette
-#         cf. https://babababand.hatenablog.com/entry/2020/07/06/181946
-#         cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
+# Reference (cf.)
+#     https://envader.plus/course/7/scenario/1034
+#     https://ktksq.hatenablog.com/entry/mac-customize
+#     https://qiita.com/knao124/items/04e3625eb12237de5743
+#     https://rapicro.com/customize_zsh_prompt/#google_vignette
+#     https://babababand.hatenablog.com/entry/2020/07/06/181946
+#     https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 #
-# License   : MIT
-#           cf. http://mollifier.mit-license.org/
+# License (MIT)
+#     http://mit-license.org/
 #------------------------------------------------
 
-
+# vim:set ft=zsh:
 
 #------------------------------------------------
 # BASICLY ENVIROMENTAL 
@@ -184,35 +184,43 @@ alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|
 
 
 #------------------------------------------------
-# SOFT / MIDLE WEAR 
+# PATH SOFT/MIDLE WEAR 
 #------------------------------------------------
 
 # Git
-# # GitHub 複数アカウント運用の場合
+# GitHub 複数アカウント運用の場合
 # function gitmain() {
 #     git config --global user.name "[メインのGitHubアカウント名]"
 #     git config --global user.email "[メインのGitHubのメールアドレス]"
 # }
 # function gitsub() {
-#     git config --global user.name "[メインのGitHubアカウント名]"
-#     git config --global user.email "[メインのGitHubのメールアドレス]"
+#     git config --global user.name "[その他のGitHubアカウント名]"
+#     git config --global user.email "[その他のGitHubのメールアドレス]"
 # }
 
 export GPG_TTY=$(tty)          # GitHub GPG（署名付コミット）
 eval "$(gh completion -s zsh)" # GitHub CLI（コマンド補完）
 
-# Pythoパス
+# Python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# PostgreSQLパス
+# PostgreSQL
 export PATH=$PATH:/Library/PostgreSQL/14/bin
 
-# ChatGPTパス
+# ChatGPT
 # cf. https://namileriblog.com/python/chatgpt-api/
 # export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
                                          # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
+
+
+# direnv
+# cf. https://github.com/direnv/direnv
+#     https://zenn.dev/web_chima/articles/06edf842b0da39
+# 開発環境毎に環境変数を管理することができるツール。
+eval "$(direnv hook zsh)"
+
 
 
 
@@ -257,6 +265,3 @@ fi
 if [ -f '/Users/shiro/google-cloud-sdk/completion.zsh.inc' ]; 
 	then . '/Users/shiro/google-cloud-sdk/completion.zsh.inc'; 
 fi
-
-
-# vim:set ft=zsh:

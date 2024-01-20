@@ -2,6 +2,7 @@
 # $brew bundle dump
 # 
 
+tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -10,6 +11,7 @@ tap "homebrew/services"
 
 ## Homebrew
 brew "bat"
+brew "direnv"
 brew "docker"
 brew "gh"            # GitHub CLI
 brew "git"

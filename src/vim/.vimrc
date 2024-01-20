@@ -31,20 +31,7 @@
 " Ctrl + v    visualブロックモード
 " vjj         visualモードで範囲選択
 " w           単語区切りで移動
-" $           行末に移動
-" ^           行頭に移動
 " :bw         バッファを閉じる
-
-"" Git操作メモ (vim-fugitve)
-" :Gdiff      git diff の表示
-" :Git        git status のようなステータス表示
-" :Git blame  git blame
-" :Gwrite     git add
-" :Git commit git commit
-" :Git push   git push
-" :Git pull   git pull
-" :Gbranches  fzfを利用したブランチのcheckout
-" :Git <command> :Gitの後の引数は通常のgitコマンドの引数として受け取られて処理される
 
 "" fzf操作メモ
 " :Commands   コマンド一覧
@@ -64,11 +51,6 @@
 " Ctrl + k    マルチカーソル
 " vjj gcc     複数行をまとめてコメントアウト
 " ga =        EasyAlignを起動して、= でアライン
-
-"" LSP周り
-" :LspInstallServeri  LspServerのインストール
-" :LspMangaServer     LaunguageServer一覧表示と管理
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -176,7 +158,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'preservim/nerdtree'                     "  
     Plug 'sheerun/vim-polyglot'                   " 
-    Plug 'tpope/vim-fugitive'                     " 
+    Plug 'tpope/vim-fugitive'                     " https://github.com/tpope/vim-fugitive
 
     Plug 'mhinz/vim-signify'                      " 
     Plug 'ctrlpvim/ctrlp.vim'                     " （検索）Ctrl + p でファイル・バッファを曖昧検索
@@ -225,6 +207,19 @@ let NERDTreeShowHidden = 1 " デフォルトで隠しファイルを表示（Shi
 "     autocmd FileType fern call glyph_palette#apply()
 "     autocmd FileType nerdtree,startify call glyph_palette#apply()
 " augroup END
+
+"" 
+"" Mac
+set guifont=Cica:h16
+set printfont=Cica:h12
+set ambiwidth=double
+"" Windows
+" set guifont=Cica:h11
+" set printfont=Cica:h8
+" set renderingoptions=type:directx,renmode:5
+" set ambiwidth=double
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1 " フォルダアイコンの表示をON
 
 
 "" Git操作.
