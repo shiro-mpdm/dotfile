@@ -1,15 +1,17 @@
-# Google Chromeの拡張機能の管理
-# 
-# (展望)自動でChromeの設定が揃うようにしたい
+#
+# Chrome WebStore
 # 
 
-# 管理
+# （メモ）　Google Chromeの拡張機能の管理
+# (展望)自動でChromeの設定が揃うようにしたい
+
+# Chrome管理
 chrome://extensions/
 
-# ストア（取得先）
+# CChromeストア
 https://chromewebstore.google.com/
 
-# インストール
+# インストール拡張機能
 （AdGuard AdBlocker）https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg
 （ato-ichinen）      https://chromewebstore.google.com/detail/ato-ichinen/pojaolkbbklmcifckclknpolncdmbaph
 （Clear Cache）      https://chromewebstore.google.com/detail/clear-cache/cppjkneekbjaeellbfkmgnhonkkjfpdn

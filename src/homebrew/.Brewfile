@@ -26,6 +26,7 @@ brew "pyenv"
 brew "ripgrep"
 brew "smimesign"
 brew "tig"           # GitHub command like a $git graph
+brew "tree"
 brew "yamllint"
 brew "hashicorp/tap/terraform"
 

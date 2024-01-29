@@ -1,19 +1,31 @@
-#------------------------------------------------
-# Explain  
-# 
-# Reference (cf.)
-#     https://envader.plus/course/7/scenario/1034
-#     https://ktksq.hatenablog.com/entry/mac-customize
-#     https://qiita.com/knao124/items/04e3625eb12237de5743
-#     https://rapicro.com/customize_zsh_prompt/#google_vignette
-#     https://babababand.hatenablog.com/entry/2020/07/06/181946
-#     https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
-#
-# License (MIT)
-#     http://mit-license.org/
-#------------------------------------------------
-
 # vim:set ft=zsh:
+: << \COMMENT
+------------------------------------------------
+$ man zsh 
+  Welcome to Zsh
+      https://www.zsh.org/
+  ZSH Documentation
+      https://zsh.sourceforge.io/Doc/
+------------------------------------------------
+License (MIT) 
+  http://mit-license.org/
+------------------------------------------------
+Reference 
+  zshを使いこなそう！ - エンベーダー
+      https://envader.plus/course/7/scenario/1034
+  Mac: ターミナルとプロンプトをカスタマイズする(zsh) - HatenaBLog
+      https://ktksq.hatenablog.com/entry/mac-customize
+  Macで最低限のzshの設定を行う - Qiita
+      https://qiita.com/knao124/items/04e3625eb12237de5743
+  【zsh/iTerm2】プロンプトのカスタマイズ【色付けなど】
+      https://rapicro.com/customize_zsh_prompt/#google_vignette
+  最低限の.zshrc - Hatena Blog
+      https://babababand.hatenablog.com/entry/2020/07/06/181946
+
+------------------------------------------------
+COMMENT
+
+
 
 #------------------------------------------------
 # BASICLY ENVIROMENTAL 
@@ -31,6 +43,7 @@ if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+# 補完入力の有効化
 autoload -U compinit
 compinit -u
 
@@ -54,14 +67,29 @@ setopt extended_history
 alias history='history -t "%F %T"' 
 
 
-##  キーバインド (割当)
+# キーバインド (割当)
 bindkey '^R' history-incremental-pattern-search-backward # [*] ワイルドカード使用出来るようにする
-# bindkey -e              # emacs風 キーバインドにする
+# キーバインドをVi化
+bindkey -v
+# emacs風 キーバインドにする
+# bindkey -e
+
+# cf. https://kojinjigyou.org/20342/
+# export LSCOLORS=exfxcxdxbxegedabagacad # Blue
+# export LSCOLORS=cxfxcxdxbxegedabagacad # Green
+export LSCOLORS=gxfxcxdxbxegedabagacad # Siann 
+alias ls='ls -GF'
+alias la='ls -a'
+alias ll='ls -l'
 
 
 
 #------------------------------------------------
 # PROMPT 
+#------------------------------------------------
+# cf. 
+#   zshプロンプトのカスタマイズ - Qiita
+#   https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 #------------------------------------------------
 
 autoload -Uz vcs_info     # vcs_infoをロード
@@ -71,15 +99,6 @@ autoload -Uz select-word-style
 select-word-style default # 単語の区切り文字指定
 
 setopt prompt_subst    # PROMPT変数内で変数参照する
-#　出力の後に改行を入れる
-# function add_line {
-#   if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
-#     PS1_NEWLINE_LOGIN=true
-#   else
-#     printf '\n'
-#   fi
-# }
-# PROMPT_COMMAND='add_line'
  
 # ここで指定した文字は単語区切りとみなされる [/]も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
@@ -107,20 +126,6 @@ function _update_vcs_info_msg() {
 }
 
 PROMPT="🐻‍❄️%{${fg[blue]}%}(%S%F{255}%n%s%f%{${fg[blue]}%})%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%} %c/ %# "
-
-
-## OS 別の設定
-# case ${OSTYPE} in
-#     darwin*)
-#         #Mac用の設定
-#         export CLICOLOR=1
-#         alias ls='ls -G -F'
-#         ;;
-#     linux*)
-#         #Linux用の設定
-#         alias ls='ls -F --color=auto'
-#         ;;
-# esac
 
 
 
@@ -151,20 +156,19 @@ setopt extended_glob        # 高機能なワイルドカード展開を使用�
 # ALIAS COMMON 
 #------------------------------------------------
 
-# グローバルエイリアス
 alias -g L='| less'
 alias -g G='| grep'
 
-alias la='ls -a'
-alias ll='ls -l'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 # alias sudo='sudo ' #sudo の後のコマンドでエイリアスを有効にする
 
-# # Cで標準出力をクリップボードにコピーする
-# # cf. http://mollifier.hatenablog.com/entry/20100317/p1
+# Cで標準出力をクリップボードにコピー
+# cf. 
+#   Mac でも Linux でも一発でクリップボードにコピーする zsh の alias　- Hatena Blog
+#   http://mollifier.hatenablog.com/entry/20100317/p1
 # if which pbcopy >/dev/null 2>&1 ; then
 #     # Mac
 #     alias -g C='| pbcopy'
@@ -176,9 +180,10 @@ alias mkdir='mkdir -p'
 #     alias -g C='| putclip'
 # fi
 
-# Git Command Alias
-# ※ 基本コマンドは、「.gitconfiu」に記載している
-# マージ済の不要ブランチ一掃 (cf. https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea ) 
+# Git Command Alias (基本コマンドは、「.gitconfiu」に)
+# cf. 
+#   Gitブランチの一括削除! 煩雑な作業を一行で解決する方法
+#   https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea ) 
 alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop)\" | xargs git branch -d'
 
 
@@ -197,7 +202,6 @@ alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|
 #     git config --global user.name "[その他のGitHubアカウント名]"
 #     git config --global user.email "[その他のGitHubのメールアドレス]"
 # }
-
 export GPG_TTY=$(tty)          # GitHub GPG（署名付コミット）
 eval "$(gh completion -s zsh)" # GitHub CLI（コマンド補完）
 
@@ -214,19 +218,21 @@ export PATH=$PATH:/Library/PostgreSQL/14/bin
 # export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
                                          # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 
-
 # direnv
 # cf. https://github.com/direnv/direnv
-#     https://zenn.dev/web_chima/articles/06edf842b0da39
-# 開発環境毎に環境変数を管理することができるツール。
+#       ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
+#       https://zenn.dev/web_chima/articles/06edf842b0da39
+#       開発環境毎に環境変数を管理することができるツール。
 eval "$(direnv hook zsh)"
-
 
 
 
 #------------------------------------------------
 # PLUGIN
-# cf.https://zenn.dev/ganta/articles/e1e0746136ce67
+#------------------------------------------------
+# cf.
+#   高速で設定しやすいZsh/BashプラグインマネージャーSheldonの紹介 - Zenn
+#   https://zenn.dev/ganta/articles/e1e0746136ce67
 #------------------------------------------------
 
 # source zsh-syntax-highlighting
