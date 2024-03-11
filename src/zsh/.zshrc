@@ -226,6 +226,14 @@ export PATH=$PATH:/Library/PostgreSQL/14/bin
 eval "$(direnv hook zsh)"
 
 
+# bat 
+# cf. https://github.com/sharkdp/bat
+#     [cat]コマンドのいい感じじしてくれる。
+#     https://programmersweekend.com/posts/linux-cli-bat/
+# 
+export BAT_CONFIG_PATH="/path/to/bat.conf"
+
+
 
 #------------------------------------------------
 # PLUGIN
