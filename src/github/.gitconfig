@@ -1,7 +1,7 @@
 [user]
 	name = shiro
-	email = shiro@shiro.com
-	signingkey = ***
+	email = "150888300+shiro-mpdm@users.noreply.github.com "
+	signingkey = 82A7730E4E2BED5B
 	# signingkey = /PATH/TO/.SSH/KEY.PUB  #(case)GPG署名
 [commit]
 	gpgsign = true

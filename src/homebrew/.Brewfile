@@ -1,5 +1,5 @@
 # 
-# $brew bundle dump
+# 🍻 $brew bundle dump
 # 
 
 tap "hashicorp/tap"
@@ -15,6 +15,7 @@ brew "direnv"
 brew "docker"
 brew "gh"            # GitHub CLI
 brew "git"
+brew "gnutls"
 brew "gnupg"
 brwe "mas"           # App Store application Search
 brew "pgformatter"   

@@ -1,3 +1,44 @@
+# """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# "  @shiro                                                ..dkQa,.          "
+# "                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "
+# "   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "
+# "                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "
+# "  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "
+# "    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "
+# "                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "
+# "       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "
+# "  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
+# "     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "
+# "       J)    ,N.C               WNVVVVVWppppbbpbWF  H|    `      M,       "
+# "  `    d]     ,"`          `  `  TNkVVWpppbppbWWMe. .Hx `    `   ,N       "
+# "       ,N          `  `  `  (p    .WNkbpbpbbkY!..(Mx .N.         `d]  `   "
+# "        Wp   `              `        _T9""=~...``. Tm.Jb `        (b      "
+# "    `    ?M,    `   `  ..,jAg,              `..JJzT4MN,N.         ,#    ` "
+# "         `J\   `JD` .?Nm#!   M,              ?!    ..?WM_     `  `.F`     "
+# "  `     ` M        .@   Hm,..J] `  `   `                          J\      "
+# "         .#        .M, .J'  .Y           `                        #       "
+# "     `   .N    `     TN-..?!`    `  `      `  `        `    `  ``,^     ` "
+# "  `      `M{                          `         `  `            .F        "
+# "          d[                  `   `     `  `    `    `  ` `  ` .P         "
+# "     `    ,N   `  `   `  `       `   `       `     7T9YTUwAgJJ/!    `  `  "
+# "      ` ...dn..             `            `          .........-N           "
+# "  ``..XHfffffWMN,  `          `   `   `     `        ..``.``..M-          "
+# "  .HffHHVVVVVffWM[   `  `  `    `         `    `   `   ...`..`d] `        "
+# " .NVVWNVVyVVVVVVWM.                `   `        `        .....,@    `  `  "
+# " ,NffM#fVVVVVVVfpM[      `   `       `     `  `            .`.-N          "
+# "  MkpWMNppfpppppbM%  `         `  `     `         `       `..` M.         "
+# "  JNpbbppppppppbW#      `  `                `       `   ` ..`..M{  `    ` "
+# "   WNbbpbbbpppbpM^            `    `  `  `     `      `    .`.`d]         "
+# "   .MMNkWbbWkKY=.   `           `               `  `       ....JF    `    "
+# "    N. _??!`.         `  `  `       `  `  `  `             ..`.(F         "
+# "   `Jb                        `   `               `  `     ...`(F       ` "
+# "    `(Ma.       `  ` .,    `            `  `  `         `  .`..J%  `      "
+# "       (Wa..   `  `..7N.       `   `  `         `          .`.`d:         "
+# "           _?""""7!   MP    `     `         `     `  `     `..-@    `  `  "
+# "                                                                          "
+# "                                cf. https://tool-taro.com/image_to_ascii/ "
+# """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 # vim:set ft=zsh:
 : << \COMMENT
 ------------------------------------------------
@@ -6,9 +47,7 @@ $ man zsh
       https://www.zsh.org/
   ZSH Documentation
       https://zsh.sourceforge.io/Doc/
-------------------------------------------------
-License (MIT) 
-  http://mit-license.org/
+
 ------------------------------------------------
 Reference 
   zshを使いこなそう！ - エンベーダー
@@ -271,11 +310,11 @@ fi
 #  Google Cloud SDK 
 #  ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 #  The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/shiro/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/shiro/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc'; 
 fi
 
 #  The next line enables shell command completion for gcloud.
-if [ -f '/Users/shiro/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/shiro/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc'; 
 fi

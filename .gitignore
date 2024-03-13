@@ -4,3 +4,8 @@ id_ed25519.pub
 
 # Noise
 .DS_Store
+
+# .vim/
+iceberg.vim/
+plugged/
+undo/
