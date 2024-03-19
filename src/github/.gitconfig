@@ -54,4 +54,7 @@
     # git where <コミットハッシュ>  そのコミットが属しているブランチを表示
     where = branch --contains
     # git here : 現在のリポジトリのパスを取得(pwdコマンドに近いが表記がWindowsオリジナルに近くなる)
-    here = rev-parse --show-toplevel
+	here = rev-parse --show-toplevel
+
+
+
