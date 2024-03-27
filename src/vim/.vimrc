@@ -42,15 +42,15 @@
 
 
 """""""""""""""""""""""""""
-" MYVIM EXPLAIN & MEMO
+" ❄︎ MYVIM EXPLAIN & MEMO
 """""""""""""""""""""""""""
 
-" ❄︎ Community 
+" - Community 
 "   vim-jp 
-"        ┗(Github) https://github.com/vim-jp
+"        ┗(GitHub) https://github.com/vim-jp
 "        ┗(Zen)    https://zenn.dev/p/vim_jp
 
-" ❄︎ Reference
+" - Reference
 "   (cf.) 
 "   https://zenn.dev/vim_jp/articles/2023-05-19-vim-keybind-philosophy 
 "   https://original-game.com/vim-mac9/
@@ -61,7 +61,7 @@
 "   https://original-game.com/convenient_tools/set-vimrc/  --.vimrc生成ツール
 "   https://minerva.mamansoft.net/Notes/%F0%9F%93%9CVim%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92Vundle%E3%81%8B%E3%82%89vim-plug%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B
 
-" ❄︎ Operation FZF
+" - Operation FZF
 "   :Commands  コマンド一覧
 "   :Files     カレントディレクトリ以下のファイルの曖昧検索
 "   :GFiles    gitファイル曖昧検索
@@ -69,8 +69,8 @@
 "   :History:  過去実行したvimコマンドの曖昧検索
 "   :Commits   commit log 確認(require fugitive.vim)
 
-" ❄︎ Operation short-cut
-"   Ctrl + o    ファイルツリー開閉    
+" - Operation short-cut
+"   Ctrl + e    ファイルツリー開閉    
 "   Ctrl + ]    fzfによるブランチチェックアウト
 "   Ctrl + e    NerdTreeによるエクスプローラ表示。デフォルトで隠しファイル表示。Shift + iで切り替え
 "   Ctrl + b    タブ移動
@@ -83,7 +83,7 @@
 
 
 """""""""""""""""""""""""""
-" VIM DISPLAY FRAME
+" ❄︎ VIM DISPLAY FRAME
 """""""""""""""""""""""""""
 set encoding=utf-8             " 
 " set fenc=utf-8               "
@@ -102,7 +102,6 @@ set tabstop=4                  " 行頭以外のtab表示幅（タブスペー�
 set shiftwidth=4               " 行頭で　のtab表示幅（シフトスペース4つ分に）
 set list listchars=tab:\▸\-    " 不可視文字を可視化(タブが「▸-」と表示される)
 set clipboard+=unnamed         " yank をクリップボードに貼付け 
-set wildmenu                   " 
 set history=5000               " 
 set nobackup                   " バックアップファイルを作らない
 set noswapfile                 " スワップファイルを作らない
@@ -116,48 +115,50 @@ set vb t_vb=                   " beepもビジュアルベルも無効
 set wildmenu                   " (補完)コマンドライン 
 set nowrap                     " 行の折り返しなし
 
-" ❄︎ UnDo (永続化)
-" cf.silent !mkdir ~/.vim/undo -p >/dev/null 2>&1
+
+"" UnDo : 永続化
 if has('persistent_undo')
     let undo_path = expand('~/.vim/undo')
-	exe 'set undodir=' .. undo_path
+    exe 'set undodir=' .. undo_path
     " set undodir=~/.vim/undo
     set undofile
 endif
 
 
-" ❄︎ Color 
+"" Color 
+" ソースコードに色付け
+syntax enable
 colorscheme iceberg
 let g:iceberg_overrides = {
-  \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
-  \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+  \    'Todo': { 'guifg': '303030',
+  \              'guibg': 'f0f000',
+  \              'ctermfg': 'Black',
+  \              'ctermbg': 'Yellow',
   \              'attr': 'bold' },
   \    'Comment': { 'guifg': 'cccccc' },
   \}
 
-syntax enable " ソースコードに色付け
 
-
-" ❄︎ Font
-" (e.g.)
-"     set guifont={NAME}:h{SIZE} 
-"     set guifont=Cica:h14, Mono:h13
+"" Font
+"" e.g.)
+""     set guifont={NAME}:h{SIZE} 
+""     set guifont=Cica:h14, Mono:h13
 set guifont=*     " 半角文字
 set guifontwide=* " 全角文字 
 
 
-" ❄︎ Pligin
-" (cf.) https://github.com/junegunn/vim-plug
-" install vim-plug if not exists.
+"" Pligin
+"" cf.) https://github.com/junegunn/vim-plug
+""      install vim-plug if not exists.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" auto install plugin.
+"" Auto install plugin.
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC
 
-" the range below is plugin.
+"" The range below is plugins.
 call plug#begin('~/.vim/plugged')
 
     Plug 'airblade/vim-gitgutter'                 " git差分（追加/削除/変更） 行の表示
@@ -167,7 +168,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'                " 
     Plug 'vim-airline/vim-airline-themes'         " 
     
-    "" Filetree
+    "" File Tree
     Plug 'junegunn/vim-easy-align'
     Plug 'lambdalisue/fern.vim'                   "（ファイルツリー）
     Plug 'lambdalisue/fern-git-status.vim'        "  ┗ ファイルツリーに、gitの差分が表示
@@ -175,18 +176,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'lambdalisue/fern-renderer-nerdfont.vim' "  ┗ ファイルツリーに、ファイルのアイコンを表示
     Plug 'lambdalisue/glyph-palette.vim'          "  ┗ ファイルツリーの、アイコンに色をつける 
 
-    "" Fileserch
-    "  cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
+    "" File Serch
+    "" (cf.) https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'                       " （検索）ファイルの曖昧検索
     Plug 'stsewd/fzf-checkout.vim'                " 
 
     Plug 'preservim/nerdtree'                     "  
     Plug 'sheerun/vim-polyglot'                   " 
-    Plug 'tpope/vim-fugitive'                     " https://github.com/tpope/vim-fugitive
+    Plug 'tpope/vim-fugitive'                     " (cf.) https://github.com/tpope/vim-fugitive
 
     Plug 'mhinz/vim-signify'                      " 
-    Plug 'ctrlpvim/ctrlp.vim'                     " （検索）Ctrl + p でファイル・バッファを曖昧検索
+    Plug 'ctrlpvim/ctrlp.vim'                     " （検索）Ctrl+p でファイル・バッファを曖昧検索
     Plug 'jmcantrell/vim-virtualenv'
     "" (caw.vimに移行したので利用していない) 通常モードでgcc, Visualモードでgcでコメントアウト
     " Plug 'tomtom/tcomment_vim'
@@ -204,10 +205,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
     
     "" Format SQL in Vim 
-    "  cf. https://dancroak.com/format-sql-in-vim/
+    "" cf.) https://dancroak.com/format-sql-in-vim/
     Plug 'dense-analysis/ale' 
 
-    " マルチカーソル
+    "" Mulch Cursor
     Plug 'mg979/vim-visual-multi'
     let g:VM_maps = {}
     let g:VM_maps['Find Under'] = '<C-k>'
@@ -217,21 +218,21 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 
-" ❄︎ FileTree
-"   (cf.) https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-let NERDTreeShowHidden = 1 " デフォルトで隠しファイルを表示（Shift + i） 
+" FileTree
+" cf.) https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
+"      you can get the file-tree when puts the Ctrl+e. 
+"      And, default view the hidden files.(Change the Shift+i)
+nnoremap <silent><C-e> :NERDTreeToggle<CR>   
+let NERDTreeShowHidden = 1
+let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
+let g:fern#renderer#nerdfont#indent_markers = 1
 
-"" Ctrl + o でファイルツリーを表示/非表示する
-" nnoremap <C-o> :Fern . -reveal=% -drawer -toggle -width=40<CR>
-" let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
-" let g:fern#renderer#nerdfont#indent_markers = 1
-""  アイコンに色をつける
-" augroup my-glyph-palette
-"    autocmd! *
-"     autocmd FileType fern call glyph_palette#apply()
-"     autocmd FileType nerdtree,startify call glyph_palette#apply()
-" augroup END
+"" アイコンに色をつける
+augroup my-glyph-palette
+    autocmd! *
+    autocmd FileType fern call glyph_palette#apply()
+    autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
 
 
 "" Mac
@@ -248,33 +249,30 @@ set ambiwidth=double
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1 " フォルダアイコンの表示をON
 
 
-" ❄︎ Operation Git
-" g[で前の変更箇所へ移動する
-nnoremap g[ :GitGutterPrevHunk<CR>
-" g]で次の変更箇所へ移動する
-nnoremap g] :GitGutterNextHunk<CR>
-" ghでdiffをハイライトする
-nnoremap gh :GitGutterLineHighlightsToggle<CR>
-" gpでカーソル行のdiffを表示する
-nnoremap gp :GitGutterPreviewHunk<CR>
-" 記号の色を変更する
+"" Operation Git
+nnoremap g[ :GitGutterPrevHunk<CR>             " g[ : 前の変更箇所へ移動する
+nnoremap g] :GitGutterNextHunk<CR>             " g] : 次の変更箇所へ移動する
+nnoremap gh :GitGutterLineHighlightsToggle<CR> " gh : diffをハイライトする
+nnoremap gp :GitGutterPreviewHunk<CR>          " gp : カーソル行のdiffを表示する
+"" 記号の色を変更する
 highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=blue
 highlight GitGutterDelete ctermfg=red
 
 
-" ❄︎ Option fzf-checkout.vim
-"  Sort branches/tags by committer date. Minus sign to show in reverse order (recent first):
+"" Option fzf-checkout.vim
+"" Sort branches/tags by committer date. Minus sign to show in reverse order (recent first):
 let g:fzf_checkout_git_options = '--sort=-committerdate'
-"  Define a diff action using fugitive. You can use it with :GBranches diff or with :GBranches and pressing ctrl-f:
-"  Ctrl + ] でfzf-checkout
+
+"" Define a diff action using fugitive. You can use it with :GBranches diff or with :GBranches and pressing ctrl-f:
+"" Ctrl + ] でfzf-checkout
 nnoremap <silent><C-]> :GBranches<CR>
 
-" タブ移動
+"" タブ移動
 nmap <C-b> <Plug>AirlineSelectPrevTab
 nmap <C-n> <Plug>AirlineSelectNextTab
 
-" コメントアウト
+"" コメントアウト
 nmap <C-/> <plug>(caw:hatpos:toggle)
 vmap <C-/> <plug>(caw:hatpos:toggle)
 
@@ -282,15 +280,15 @@ vmap <C-/> <plug>(caw:hatpos:toggle)
 vmap <C-v> "+y
 
 "" gaでEasy Align 起動
-"  e.g. =で揃える場合は、ga=
+"" (e.g.) =で揃える場合は、ga=
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 set ttimeoutlen=50 " モード変更遅延解消
 
 "" SQL Language Server.
-"  cf. https://github.com/joe-re/sql-language-server
-"  cf. https://marketplace.visualstudio.com/items?itemName=joe-re.sql-language-server#neovim
+"" (cf.) https://github.com/joe-re/sql-language-server
+"" (cf.) https://marketplace.visualstudio.com/items?itemName=joe-re.sql-language-server#neovim
 " let g:LanguageClient_serverCommands = {
 "     \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
 "     \ }
@@ -298,10 +296,10 @@ set ttimeoutlen=50 " モード変更遅延解消
 
 
 """""""""""""""""""""""""""
-" VIM DISPLAY CONTENT
+" ❄︎ VIM DISPLAY CONTENT
 """""""""""""""""""""""""""
 
-" ❄︎ StatusLine
+"" StatusLine
 set laststatus=2 " ステータスを常に表示
                  " 0: 表示しない、1: 2つ以上ウィンドウがある時だけ表示
 
@@ -329,8 +327,8 @@ let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
 let g:airline#extensions#hunks#non_zero_only = 1 " 変更がなければdiff行数を非表示
 
 
-" airline settings.
-" (cf.) https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
+"" Airline settings.
+"" cf.) https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
 " let g:airline_powerline_fonts = 1
 let g:airline_theme = 'papercolor' " テーマ指定 
                                    " cf. https://github.com/vim-airline/vim-airline/wiki/Screenshots
@@ -340,38 +338,38 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1         " タブラインを表示
 let g:airline#extensions#tabline#buffer_idx_mode = 1 " タブ番号表示
 
-"" airline symbols.
-"  cf. https://original-game.com/vim-airline/
+
+"" Airline symbols.
+"" cf.) https://original-game.com/vim-airline/
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-"" unicode symbols left.
+
+"" Unicode symbols left.
 " let g:airline_left_sep = '»'
 " let g:airline_left_sep = '▶'
 " let g:airline_left_alt_sep = ''
 
-"" unicode symbols right.
+
+"" Unicode symbols right.
 " let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'      " 暗号化されたファイル
-let g:airline_symbols.linenr = '¶'      " 行
-let g:airline_symbols.maxlinenr = '㏑'   " 最大行
-let g:airline_symbols.branch = '⎇'      " gitブランチ
-let g:airline_symbols.paste = 'ρ'       " ペーストモード
-let g:airline_symbols.spell = 'Ꞩ'       " 
-let g:airline_symbols.notexists = '∄'   " gitで管理されていない場合
-let g:airline_symbols.whitespace = 'Ξ'  " 空白の警告(余分な空白など)
+let g:airline_symbols.crypt = '🔒' " 暗号化されたファイル
+let g:airline_symbols.linenr = '¶' " 行
+let g:airline_symbols.maxlinenr = '㏑' " 最大行
+let g:airline_symbols.branch = '⎇' " gitブランチ
+let g:airline_symbols.paste = 'ρ' " ペーストモード
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄' " gitで管理されていない場合
+let g:airline_symbols.whitespace = 'Ξ' " 空白の警告(余分な空白など)
 
 
-"" 補完
-inoremap ( ()<LEFT>
-" inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT>
-inoremap { {}<LEFT>
-inoremap < <><LEFT>
+"" WebBrowser-like operation feel.
+nnoremap <C-t> :tabnew<cr>          "Ctrl + t  : 新規タブを開く
+nnoremap <C-w> :tabclose            "Ctrl + w  : タブを閉じる
+nnoremap <C-tab> :tabnext<cr>       "Ctrl + tab: 1つ右のタブを開く
+nnoremap <C-S-tab> :tabprevious<cr> "Ctrl+Shift+tab : 1つ左のタブを開く
 
 
 "" 自動インデント
@@ -379,8 +377,7 @@ inoremap {<Enter> {}<Left><CR><CR><BS><Up><Right>
 
 
 "" fzf
-"  ファイル検索を開く
-"  git管理されていれば:GFiles、そうでなければ:Filesを実行する
+"" ファイル検索
 fun! FzfOmniFiles()
     let is_git = system('git status')
     if v:shell_error
@@ -391,12 +388,13 @@ fun! FzfOmniFiles()
 endfun
 nnoremap <C-p> :call FzfOmniFiles()<CR>
 
-"" To use fzf in Vim, add the following line to your .vimrc:
+
+"" To use fzf in Vim, add the following line.
 " set rtp+=/usr/local/opt/fzf
 
 
-" 文字列検索を開く
-" <S-?>でプレビューを表示/非表示する
+"" 文字列検索を開く
+"" <S-?>でプレビューを表示/非表示する
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -406,13 +404,13 @@ command! -bang -nargs=* Rg
 nnoremap <C-g> :Rg<CR>
 
 
-" カーソル位置の単語をファイル検索する
+"" カーソル位置の単語をファイル検索する
 nnoremap fr vawy:Rg <C-R>"<CR>
-" 選択した単語をファイル検索する
+"" 選択した単語をファイル検索する
 xnoremap fr y:Rg <C-R>"<CR>
 
 
-" Auto-fix
+"" Auto-Fix
 let b:ale_fixers = ['pgformatter']
 let g:ale_fix_on_save = 1
 let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 2 --spaces 2 --no-extra-line'

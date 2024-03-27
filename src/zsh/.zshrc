@@ -118,9 +118,9 @@ bindkey -v
 # export LSCOLORS=cxfxcxdxbxegedabagacad # Green
 export LSCOLORS=gxfxcxdxbxegedabagacad # Siann 
 alias ls='ls -GF'
-alias la='ls -a'
-alias ll='ls -l'
-
+#alias la='ls -a'
+#alias ll='ls -l'
+alias lse='eza --icons --git --time-style relative -al' #cf.https://shoalwave.net/develop/2023100406414/
 
 
 #------------------------------------------------
@@ -254,14 +254,14 @@ export PATH=$PATH:/Library/PostgreSQL/14/bin
 
 # ChatGPT
 # cf. https://namileriblog.com/python/chatgpt-api/
-# export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
-                                         # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
+#     export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
+                                             # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 
 # direnv
 # cf. https://github.com/direnv/direnv
-#       ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
-#       https://zenn.dev/web_chima/articles/06edf842b0da39
-#       開発環境毎に環境変数を管理することができるツール。
+#     ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
+#     https://zenn.dev/web_chima/articles/06edf842b0da39
+#      開発環境毎に環境変数を管理することができるツール。
 eval "$(direnv hook zsh)"
 
 
@@ -310,11 +310,13 @@ fi
 #  Google Cloud SDK 
 #  ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 #  The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/shiro/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/shiro/google-cloud-sdk/path.zsh.inc'; 
 fi
 
 #  The next line enables shell command completion for gcloud.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/shiro/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/shiro/google-cloud-sdk/completion.zsh.inc'; 
 fi
+
+
