@@ -11,7 +11,7 @@
 	autoSetupRemote = true
 [alias]
 	# (cf.) https://qiita.com/YamEiR/items/d98ba009d2925e7eb305
-	
+
 	# git alias : 現在登録してあるエイリアス一覧を表示
     # 長いエイリアスが多いので前方42文字で切っている
     alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | cut -c 1-42 | sort
@@ -21,7 +21,7 @@
 	st = status -sb -uno
 
 	# git cm : commitの省略形
-	cm = commit -m 
+	cm = commit -m
 	# cma = commit -a -m
 	# cmx = commit --no-verify -m
 
@@ -39,7 +39,7 @@
 	l1c = log -1 -p --color-words
 	lg  = log --graph
 
-	# git d : 差分確認 
+	# git d : 差分確認
 	d = diff --color-words
 	dc = diff --cached
 	dcc = diff --cached --color-words

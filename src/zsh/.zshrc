@@ -254,14 +254,14 @@ export PATH=$PATH:/Library/PostgreSQL/14/bin
 
 # ChatGPT
 # cf. https://namileriblog.com/python/chatgpt-api/
-#     export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
-                                             # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
+# export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
+                                         # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
 
 # direnv
 # cf. https://github.com/direnv/direnv
-#     ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
-#     https://zenn.dev/web_chima/articles/06edf842b0da39
-#      開発環境毎に環境変数を管理することができるツール。
+#       ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
+#       https://zenn.dev/web_chima/articles/06edf842b0da39
+#       開発環境毎に環境変数を管理することができるツール。
 eval "$(direnv hook zsh)"
 
 
