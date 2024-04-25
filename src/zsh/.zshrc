@@ -123,6 +123,7 @@ alias ls='ls -GF'
 alias lse='eza --icons --git --time-style relative -al' #cf.https://shoalwave.net/develop/2023100406414/
 
 
+
 #------------------------------------------------
 # PROMPT 
 #------------------------------------------------
@@ -253,24 +254,27 @@ eval "$(pyenv init -)"
 export PATH=$PATH:/Library/PostgreSQL/14/bin
 
 # ChatGPT
-# cf. https://namileriblog.com/python/chatgpt-api/
-# export OPENAI_API_KEY="{YOUR_API_KEY}" # APIキーの取得先：https://platform.openai.com/account/api-keys
-                                         # ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
+# cf.【Python】ChatGPT APIを使ってターミナルで会話する(gpt-3.5-turbo)
+#     https://namileriblog.com/python/chatgpt-api/
+# cf. APIキーの取得先
+#     https://platform.openai.com/account/api-keys
+# export OPENAI_API_KEY="{YOUR_API_KEY}"
 
 # direnv
-# cf. https://github.com/direnv/direnv
-#       ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
-#       https://zenn.dev/web_chima/articles/06edf842b0da39
-#       開発環境毎に環境変数を管理することができるツール。
+# 開発環境毎に環境変数を管理することができるツール。
+# cf. GitHub
+#     https://github.com/direnv/direnv
+# cf. ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
+#     https://zenn.dev/web_chima/articles/06edf842b0da39
 eval "$(direnv hook zsh)"
 
-
 # bat 
-# cf. https://github.com/sharkdp/bat
-#     [cat]コマンドのいい感じじしてくれる。
-#     https://programmersweekend.com/posts/linux-cli-bat/
-# 
-export BAT_CONFIG_PATH="/path/to/bat.conf"
+# [cat]コマンドをよりいい感じにしてくれる。
+# cf. GitHub
+#     https://github.com/sharkdp/bat
+# cf. batコマンドのデフォルトハイライトテーマを変更する - Zenn
+#     https://zenn.dev/ito_shigeru/articles/bf8a8417683683
+export BAT_CONFIG_PATH=".config/bat.conf"
 
 
 
@@ -307,16 +311,15 @@ if [ -f ~/.zsh/spaceship-prompt/spaceship-prompt.zsh ];
 	then source ~/.zsh/spaceship-prompt/spaceship-prompt.zsh
 fi
 
-#  Google Cloud SDK 
-#  ⚠︎ .zshrcに設定しておくことも可能ですが漏洩には十分に注意する必要があります。
-#  The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/shiro/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/shiro/google-cloud-sdk/path.zsh.inc'; 
+# Google Cloud SDK 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ]; 
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc'; 
 fi
 
-#  The next line enables shell command completion for gcloud.
-if [ -f '/Users/shiro/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/shiro/google-cloud-sdk/completion.zsh.inc'; 
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ]; 
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc'; 
 fi
 
 
