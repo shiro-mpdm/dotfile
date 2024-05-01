@@ -20,7 +20,8 @@
 	st = status -sb -uno
 
 	# git cm : commitの省略形
-	cm = commit -m
+	commit = commit -S
+	# cm = commit -m
 	# cma = commit -a -m
 	# cmx = commit --no-verify -m
 
