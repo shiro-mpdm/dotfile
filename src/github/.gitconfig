@@ -1,12 +1,11 @@
 [user]
 	name = shiro
-	email = "150888300+shiro-mpdm@users.noreply.github.com "
-	signingkey = 82A7730E4E2BED5B
-	# signingkey = /PATH/TO/.SSH/KEY.PUB  #(case)GPG署名
+	email = "150888300+shiro-mpdm@users.noreply.github.com"
+	signingkey = D9B1E9E092252BE7
 [commit]
 	gpgsign = true
-[gpg "x509"]
-	program = smimesign  #(case)SMIME署名
+[gpg]
+	program = gpg
 [push]
 	autoSetupRemote = true
 [alias]
@@ -28,7 +27,6 @@
 	# git co : checkoutの省略形
 	co = checkout
 	# Cheackout Clean
-	#
 	cc = !git checkout master && git pull
 
 	# git graph : レポジトリのログ確認（e.g.「tig」のような挙動）
@@ -38,6 +36,9 @@
 	l1  = log -1 -p
 	l1c = log -1 -p --color-words
 	lg  = log --graph
+
+	# git show : 
+	show = show --show-signature
 
 	# git d : 差分確認
 	d = diff --color-words
@@ -55,6 +56,5 @@
     where = branch --contains
     # git here : 現在のリポジトリのパスを取得(pwdコマンドに近いが表記がWindowsオリジナルに近くなる)
 	here = rev-parse --show-toplevel
-
 
 
