@@ -41,37 +41,36 @@
 
 # vim:set ft=zsh:
 : << \COMMENT
-------------------------------------------------
-$ man zsh 
-  Welcome to Zsh
-      https://www.zsh.org/
-  ZSH Documentation
-      https://zsh.sourceforge.io/Doc/
+    ------------------------------------------------
+    $ man zsh
+      Welcome to Zsh
+        https://www.zsh.org/
+      ZSH Documentation
+        https://zsh.sourceforge.io/Doc/
 
-------------------------------------------------
-Reference 
-  zshを使いこなそう！ - エンベーダー
-      https://envader.plus/course/7/scenario/1034
-  Mac: ターミナルとプロンプトをカスタマイズする(zsh) - HatenaBLog
-      https://ktksq.hatenablog.com/entry/mac-customize
-  Macで最低限のzshの設定を行う - Qiita
-      https://qiita.com/knao124/items/04e3625eb12237de5743
-  【zsh/iTerm2】プロンプトのカスタマイズ【色付けなど】
-      https://rapicro.com/customize_zsh_prompt/#google_vignette
-  最低限の.zshrc - Hatena Blog
-      https://babababand.hatenablog.com/entry/2020/07/06/181946
+    ------------------------------------------------
+    Reference
+      zshを使いこなそう！- エンベーダー
+        https://envader.plus/course/7/scenario/1034
+      Mac: ターミナルとプロンプトをカスタマイズする(zsh) - HatenaBLog
+        https://ktksq.hatenablog.com/entry/mac-customize
+      Macで最低限のzshの設定を行う - Qiita
+        https://qiita.com/knao124/items/04e3625eb12237de5743
+      【zsh/iTerm2】プロンプトのカスタマイズ【色付けなど】
+        https://rapicro.com/customize_zsh_prompt/#google_vignette
+      最低限の.zshrc - Hatena Blog
+        https://babababand.hatenablog.com/entry/2020/07/06/181946
 
-------------------------------------------------
+    ------------------------------------------------
 COMMENT
 
 
 
 #------------------------------------------------
-# BASICLY ENVIROMENTAL 
+# BASICLY ENVIROMENTAL
 #------------------------------------------------
 
 export LANG=ja_JP.UTF-8
-# export KCODE=u  # KCODEにUTF-8を設定
 
 # 色の使用有効
 autoload -Uz colors
@@ -91,7 +90,7 @@ compinit
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'           # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' ignore-parents parent pwd ..           # ../ の後は今いるディレクトリを補完しない
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps コマンドのプロセス名補完 
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps コマンドのプロセス名補完
 # sudo の後ろでコマンド名を補完する
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                               /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
@@ -103,20 +102,16 @@ export SAVEHIST=1000000
 
 ## 表記（時間）
 setopt extended_history
-alias history='history -t "%F %T"' 
+alias history='history -t "%F %T"'
 
 
 # キーバインド (割当)
 bindkey '^R' history-incremental-pattern-search-backward # [*] ワイルドカード使用出来るようにする
 # キーバインドをVi化
 bindkey -v
-# emacs風 キーバインドにする
-# bindkey -e
 
 # cf. https://kojinjigyou.org/20342/
-# export LSCOLORS=exfxcxdxbxegedabagacad # Blue
-# export LSCOLORS=cxfxcxdxbxegedabagacad # Green
-export LSCOLORS=gxfxcxdxbxegedabagacad # Siann 
+export LSCOLORS=gxfxcxdxbxegedabagacad # Siann
 alias ls='ls -GF'
 #alias la='ls -a'
 #alias ll='ls -l'
@@ -125,9 +120,9 @@ alias lse='eza --icons --git --time-style relative -al' #cf.https://shoalwave.ne
 
 
 #------------------------------------------------
-# PROMPT 
+# PROMPT
 #------------------------------------------------
-# cf. 
+# cf.
 #   zshプロンプトのカスタマイズ - Qiita
 #   https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 #------------------------------------------------
@@ -139,7 +134,7 @@ autoload -Uz select-word-style
 select-word-style default # 単語の区切り文字指定
 
 setopt prompt_subst    # PROMPT変数内で変数参照する
- 
+
 # ここで指定した文字は単語区切りとみなされる [/]も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
@@ -149,8 +144,6 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr "+"
 zstyle ':vcs_info:*' unstagedstr "*"
 
-# zstyle ':vcs_info:*' formats '(%b%c%u)'
-# zstyle ':vcs_info:*' actionformats '(%b(%a)%c%u)'
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
@@ -158,7 +151,7 @@ function precmd() {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-} 
+}
 
 function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
@@ -170,7 +163,7 @@ PROMPT="🐻‍❄️%{${fg[blue]}%}(%S%F{255}%n%s%f%{${fg[blue]}%})%{${reset_co
 
 
 #------------------------------------------------
-# OPTION 
+# OPTION
 #------------------------------------------------
 
 setopt print_eight_bit      # 日本語ファイル名を表示可能にする
@@ -188,12 +181,12 @@ setopt hist_ignore_all_dups # 同じコマンドをヒストリに残さない
 setopt hist_ignore_space    # スペースから始まるコマンド行はヒストリに残さない
 setopt hist_reduce_blanks   # ヒストリに保存するときに余分なスペースを削除する
 setopt inc_append_history   # 即座に履歴を保存する
-setopt extended_glob        # 高機能なワイルドカード展開を使用する 
+setopt extended_glob        # 高機能なワイルドカード展開を使用する
 
 
 
 #------------------------------------------------
-# ALIAS COMMON 
+# ALIAS COMMON
 #------------------------------------------------
 
 alias -g L='| less'
@@ -203,33 +196,17 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-# alias sudo='sudo ' #sudo の後のコマンドでエイリアスを有効にする
 
-# Cで標準出力をクリップボードにコピー
-# cf. 
-#   Mac でも Linux でも一発でクリップボードにコピーする zsh の alias　- Hatena Blog
-#   http://mollifier.hatenablog.com/entry/20100317/p1
-# if which pbcopy >/dev/null 2>&1 ; then
-#     # Mac
-#     alias -g C='| pbcopy'
-# elif which xsel >/dev/null 2>&1 ; then
-#     # Linux
-#     alias -g C='| xsel --input --clipboard'
-# elif which putclip >/dev/null 2>&1 ; then
-#     # Cygwin
-#     alias -g C='| putclip'
-# fi
-
-# Git Command Alias (基本コマンドは、「.gitconfiu」に)
-# cf. 
-#   Gitブランチの一括削除! 煩雑な作業を一行で解決する方法
-#   https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea ) 
+# Git Command Alias (基本コマンドは、「.gitconfig」に)
+# cf.
+#   Gitブランチの一括削除! 煩雑な作業を一行で解決する方法 - Qiita
+#   https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea
 alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop)\" | xargs git branch -d'
 
 
 
 #------------------------------------------------
-# PATH SOFT/MIDLE WEAR 
+# PATH SOFT/MIDLE WEAR
 #------------------------------------------------
 
 # Git
@@ -262,20 +239,20 @@ export PATH=$PATH:/Library/PostgreSQL/14/bin
 
 # direnv
 # 開発環境毎に環境変数を管理することができるツール。
-# cf. GitHub
-#     https://github.com/direnv/direnv
+# cf. https://github.com/direnv/direnv
 # cf. ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv - Zenn
 #     https://zenn.dev/web_chima/articles/06edf842b0da39
 eval "$(direnv hook zsh)"
 
-# bat 
+# bat
 # [cat]コマンドをよりいい感じにしてくれる。
-# cf. GitHub
-#     https://github.com/sharkdp/bat
+# cf. https://github.com/sharkdp/bat
 # cf. batコマンドのデフォルトハイライトテーマを変更する - Zenn
 #     https://zenn.dev/ito_shigeru/articles/bf8a8417683683
 export BAT_CONFIG_PATH=".config/bat.conf"
 
+# Node.js
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 
 #------------------------------------------------
@@ -287,39 +264,37 @@ export BAT_CONFIG_PATH=".config/bat.conf"
 #------------------------------------------------
 
 # source zsh-syntax-highlighting
-if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; 
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ];
 	then source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # source zsh-autosuggestions
-if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; 
+if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ];
 	then source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # source zsh-completions
-if [ -f ~/.zsh/zsh-completions/zsh-completions.zsh ]; 
+if [ -f ~/.zsh/zsh-completions/zsh-completions.zsh ];
 	then source ~/.zsh/zsh-completions/zsh-completions.zsh
 fi
 
 # source zsh-history-substring-search
-if [ -f ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh ]; 
+if [ -f ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh ];
 	then source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 fi
 
 # source spaceship-prompt
-if [ -f ~/.zsh/spaceship-prompt/spaceship-prompt.zsh ]; 
+if [ -f ~/.zsh/spaceship-prompt/spaceship-prompt.zsh ];
 	then source ~/.zsh/spaceship-prompt/spaceship-prompt.zsh
 fi
 
-# Google Cloud SDK 
+# Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc'; 
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ];
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc';
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ]; 
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc'; 
+if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ];
+	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc';
 fi
-
-

@@ -5,8 +5,8 @@
 "                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "                 : https://github.com/vim-jp
 "  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "                 : https://zenn.dev/p/vim_jp
 "    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "                 : https://vim-jp.org/ekiden/
-"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "   エンベーダー  : https://envader.plus/
-"       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "
+"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "   エンベーダー    : https://envader.plus/
+"       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "                 : https://vim-jp.org/vimdoc-ja/
 "  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
 "     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "
 "       J)    ,N.C               WNVVVVVWppppbbpbWF  H|    `      M,       "
@@ -52,38 +52,46 @@
 """""""""""""""""""""""""""
 " ❄︎ VIM DISPLAY FRAME
 """""""""""""""""""""""""""
-set encoding=utf-8             " 読み込み時の文字コードの設定
-scriptencoding utf-8           " Vim Script内でマルチバイトを使う場合の設定
-" set fenc=utf-8               "
-set fileencodings=utf-8,cp932  "
+"" MacOS
+set fileencodings=ucs-bom,utf-8,latin1
 
+"" Windows
+" scriptencoding utf-8           " (文字) Vim Script内でマルチバイトを使う場合の設定
+" set fenc=utf-8                 " (文字) 編集中のファイルの文字エンコーディングをUTF-8に設定
+" set fileencodings=utf-8,cp932  " (文字) Windows設定
+
+
+"" Common
 set number                     " 行番号表示
 set cursorline                 " カーソールライン表示
 set backspace=indent,eol,start " バックスペースを有効にする
-" set termwinsize=12x0           " ターミナルのサイズを指定
+set termwinsize=12x0           " ターミナルのサイズを指定
 set updatetime=250             " 反映時間短縮(デフォルト=4,000ms)
-set virtualedit=onemore        " 行末の1文字先までカーソルを移動できるように
+set virtualedit=onemore        " 移動：行末の1文字先までカーソルを移動できるように
 set ambiwidth=double           " 記号表記で崩れないようにする
-set autoread                   " オートインデント
-set smartindent                " オートインデント
+set autoread                   "
+set smartindent                "
 set expandtab                  " タブをスペースにする
-set tabstop=4                  " 行頭以外のtab表示幅（タブスペース　4つ分に）
-set shiftwidth=4               " 行頭で　のtab表示幅（シフトスペース4つ分に）
+set tabstop=4                  " tab表示幅（スペース4つ分に）
+set shiftwidth=4               "
 set list listchars=tab:\▸\-    " 不可視文字を可視化(タブが「▸-」と表示される)
 set clipboard+=unnamed         " yank をクリップボードに貼付け
-set history=5000               "
+set history=5000               " 履歴
 set nobackup                   " バックアップファイルを作らない
 set noswapfile                 " スワップファイルを作らない
 set showmatch                  " 対応する括弧を表示
-set incsearch                  " (検索)インクリメントサーチ
-set ignorecase                 " (検索)サーチ時に大文字小文字を区別しない
-set smartcase                  " (検索)小文字で検索すると大文字小文字を区別しない
-set wrapscan                   " (検索)検索がファイルの終わりまで行ったら先頭に戻る
-set hlsearch                   " (検索)検索結果をハイライト表示
+set incsearch                  " 検索：インクリメントサーチ
+set ignorecase                 " 検索：サーチ時に大文字小文字を区別しない
+set smartcase                  " 検索：小文字で検索すると大文字小文字を区別しない
+set wrapscan                   " 検索：検索がファイルの終わりまで行ったら先頭に戻る
+set hlsearch                   " 検索：検索結果をハイライト表示
 set vb t_vb=                   " beepもビジュアルベルも無効
-set wildmenu                   " (補完)コマンドライン
+set wildmenu                   " 補完：コマンドライン
 set nowrap                     " 行の折り返しなし
 set ttimeoutlen=50             " モード変更遅延解消
+set mouse=a                    " マウススクロール（トラックパッド使用可）
+set confirm                    " :q 1回で抜ける
+
 
 "" UnDo : 取消（永続化）
 if has('persistent_undo')
@@ -114,7 +122,7 @@ set guifont=*     " 半角文字
 set guifontwide=* " 全角文字
 
 
-"" Pligin
+"" Plugin
 "" cf.) https://github.com/junegunn/vim-plug
 ""      install vim-plug if not exists.
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -304,10 +312,14 @@ let g:airline_symbols.notexists = '∄' " gitで管理されていない場合
 let g:airline_symbols.whitespace = 'Ξ' " 空白の警告(余分な空白など)
 
 "" WebBrowser like operation feel.
-nnoremap <C-t> :tabnew<cr>          "Ctrl + t  : 新規タブを開く
-nnoremap <C-w> :tabclose<cr>        "Ctrl + w  : タブを閉じる
-nnoremap <C-tab> :tabnext<cr>       "Ctrl + tab: 1つ右のタブを開く
-nnoremap <C-S-tab> :tabprevious<cr> "Ctrl+Shift+tab : 1つ左のタブを開く
+" Ctrl + t  : 新規タブを開く
+" Ctrl + w  : タブを閉じる
+" Ctrl + tab: 1つ右のタブを開く
+" Ctrl+Shift+tab : 1つ左のタブを開く
+nnoremap <C-t> :tabnew<cr>
+nnoremap <C-w> :tabclose<cr>
+nnoremap <C-tab> :tabnext<cr>
+nnoremap <C-S-tab> :tabprevious<cr>
 
 """ タブ移動
 nmap <C-b> <Plug>AirlineSelectPrevTab
@@ -342,13 +354,13 @@ fun! FzfOmniFiles()
         :GitFiles
     endif
 endfun
-nnoremap <C-p> :call FzfOmniFiles()<CR>
+nnoremap <C-p> :call FzfOmniFiles()<cr>
 
 "" To use fzf in Vim, add the following line.
 " set rtp+=/usr/local/opt/fzf
 
 "" 文字列検索を開く
-"" <S-?>でプレビューを表示/非表示する
+"" <S-?> でプレビューを表示/非表示する
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -381,6 +393,7 @@ nnoremap fh :History<CR>
 " コミット履歴検索を開く
 nnoremap fc :Commits<CR>
 
+
 " ESCの2回押しでハイライト消去
 nnoremap <ESC><ESC> :nohl<CR>
 
@@ -398,4 +411,8 @@ nnoremap <C-Down> "zdd"zp
 vnoremap <C-Up> "zx<Up>"zP`[V`]
 vnoremap <C-Down> "zx"zp`[V`]
 
-
+" コントロールキーと方向キーで折りたたみを操作するマッピング
+" nnoremap <C-Up> za         " 行を折りたたむ
+" nnoremap <C-Down> zA       " 折りたたみを解除
+" vnoremap <C-Up> zf         " 範囲を折りたたむ
+" vnoremap <C-Down> zd       " 折りたたみを解除

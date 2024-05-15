@@ -1,5 +1,5 @@
 # -----------------------------
-# 🍻 $brew bundle dump
+# 🍻 $ brew bundle dump
 #    -> Brewfile
 # -----------------------------
 
@@ -15,21 +15,21 @@ tap "homebrew/services"
 brew "autoconf"
 brew "automake"
 brew "bash-preexec"
-brew "bat"           # $bat
-brew "bottom"        # $btm
+brew "bat"           # $ bat extention $cat
+brew "bottom"        # $ btm
 brew "direnv"
 brew "docker"
 brew "dust"
-brew "eza"           # $eza
+brew "eza"           # $ eza extention $ls
 brew "gcc"
-brew "gh"            # GitHub CLI
+brew "gh"            # $ gh GitHub CLI
 brew "git"
 brew "unbound"
-brew "ncurses"
 brew "gnutls"
 brew "gnupg"
 brwe "mas"           # App Store application Search
-brew "pgformatter"   
+brew "ncurses"
+brew "pgformatter"
 brew "pinentry-mac"
 brew "pipenv"
 brew "postgresql@14", restart_service: true
@@ -55,6 +55,7 @@ cask "google-chrome"
 cask "google-cloud-sdk"
 cask "iterm2"
 cask "KeyboardCleanTool"
+cask "pulsar"
 cask "slack"
 cask "spectacle"
 cask "visual-studio-code"
