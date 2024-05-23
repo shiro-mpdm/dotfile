@@ -3,15 +3,18 @@
 #    -> Brewfile
 # -----------------------------
 
+# Tap
+
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 
-# ----------
-# Homebrew
-# ---------
+
+# Brew
+
 brew "autoconf"
 brew "automake"
 brew "bash-preexec"
@@ -27,6 +30,7 @@ brew "git"
 brew "unbound"
 brew "gnutls"
 brew "gnupg"
+brew "jq"
 brwe "mas"           # App Store application Search
 brew "ncurses"
 brew "pgformatter"
@@ -42,7 +46,11 @@ brew "smimesign"
 brew "tig"           # GitHub command like a $git graph
 brew "tree"
 brew "yamllint"
+brew "zplug"
 brew "hashicorp/tap/terraform"
+
+
+# Cask
 
 cask "appcleaner"
 # cask "aws-vault"
@@ -51,6 +59,7 @@ cask "caffeine"
 cask "clipy"
 cask "dexed"
 cask "docker"
+# cask "font-monaspace-nerd-font"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "iterm2"
@@ -59,15 +68,14 @@ cask "pulsar"
 cask "slack"
 cask "spectacle"
 cask "visual-studio-code"
+cask "wezterm"
 cask "zoom"
 
-# --------------------
-# App Store applications
+
+# -----------------------------
+# 🍏 $ mas search <ApplicationName>
 # if you do not know application id number that you shoud try berow command.
-# $ mas search <ApplicationName>
-# -------------------
+# -----------------------------
 mas "1Password", id: 443987910
 # mas "Bitwarden", id: 1352778147
 # mas "LINE", id: 539883307
-
-
