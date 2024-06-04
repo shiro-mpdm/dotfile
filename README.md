@@ -20,7 +20,8 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
     <summary> 🪴 companion plant </summary>
     
         ※ いいな~と思った方々の個人的覚書
-    
+
+     - https://github.com/mhanberg/.dotfiles
      - https://github.com/yutkat/dotfiles
      - https://github.com/mollifier/config 
      - https://github.com/disk-inue/dotfiles cf.[Zenn](https://zenn.dev/monicle/articles/59ff479ae51c66)
