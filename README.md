@@ -1,8 +1,8 @@
-# dotfiles
-## || WHAT
+## dotfiles
+### WHAT
 `SSIA`
 
-## || WHY
+### WHY
 Save multiple dotfiles for use in daily work.
 
 (盆栽を愛でたいお年頃...🍵)
@@ -12,7 +12,7 @@ Save multiple dotfiles for use in daily work.
 https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
 -->
 
-## || REF
+### REF
 - [ドットファイル](https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB) - Archlinux
 - [GNU StowでDotfilesを管理するのが簡単だよ](https://zenn.dev/apollyon/articles/b39ca3e0a94436) - Zenn
 - [Dotfiles の整頓とバージョン管理：XDG Base Directory Specification と YADM の活用ガイド](https://qiita.com/LuckyWindsck/items/ef8ae12a3450344d8902) - Oiita
