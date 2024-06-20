@@ -39,27 +39,11 @@
 # "                                cf. https://tool-taro.com/image_to_ascii/ "
 # """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# vim:set ft=zsh:
 : << \COMMENT
     ------------------------------------------------
     $ man zsh
-      Welcome to Zsh
-        https://www.zsh.org/
-      ZSH Documentation
-        https://zsh.sourceforge.io/Doc/
-
-    ------------------------------------------------
-    Reference
-      zshを使いこなそう！- エンベーダー
-        https://envader.plus/course/7/scenario/1034
-      Mac: ターミナルとプロンプトをカスタマイズする(zsh) - HatenaBLog
-        https://ktksq.hatenablog.com/entry/mac-customize
-      Macで最低限のzshの設定を行う - Qiita
-        https://qiita.com/knao124/items/04e3625eb12237de5743
-      【zsh/iTerm2】プロンプトのカスタマイズ【色付けなど】
-        https://rapicro.com/customize_zsh_prompt/#google_vignette
-      最低限の.zshrc - Hatena Blog
-        https://babababand.hatenablog.com/entry/2020/07/06/181946
+      ・Welcome to Zsh    https://www.zsh.org/
+      ・ZSH Documentation https://zsh.sourceforge.io/Doc/
 
     ------------------------------------------------
 COMMENT
@@ -290,11 +274,13 @@ fi
 
 # Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc' ];
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/path.zsh.inc';
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ];
+	then . "$HOME/google-cloud-sdk/path.zsh.inc";
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc' ];
-	then . '/Users/cont-t-hirukawa/google-cloud-sdk/completion.zsh.inc';
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ];
+	then . "$HOME/google-cloud-sdk/completion.zsh.inc";
 fi
+
+

@@ -30,12 +30,14 @@ brew "git"
 brew "unbound"
 brew "gnutls"
 brew "gnupg"
+brew "hugo"
 brew "jq"
-brwe "mas"           # App Store application Search
+brew "mas"           # App Store application Search
 brew "ncurses"
 brew "pgformatter"
 brew "pinentry-mac"
 brew "pipenv"
+brew "pipx"
 brew "postgresql@14", restart_service: true
 brew "pyenv"
 # brew "python@3.11"
@@ -48,6 +50,7 @@ brew "tree"
 brew "yamllint"
 brew "zplug"
 brew "hashicorp/tap/terraform"
+
 
 
 # Cask

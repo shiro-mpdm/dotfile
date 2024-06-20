@@ -38,7 +38,7 @@
 	l1c = log -1 -p --color-words
 	lg  = log --graph
 
-	# git show : 
+	# git show :
 	show = show --show-signature
 
 	# git d : 差分確認
