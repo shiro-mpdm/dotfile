@@ -10,8 +10,11 @@
 ## How to use
 https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
 -->
+### HOW
 
-### REF
+### FUT.
+
+### REF.
 - <details>
     <summary> 🪴 companion plant </summary>
     
@@ -29,3 +32,5 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
     
 
     </details>
+
+### LIC.
