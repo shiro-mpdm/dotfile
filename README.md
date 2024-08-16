@@ -28,7 +28,8 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
      - https://github.com/botamotch/dotfiles cf.[Zenn](https://zenn.dev/botamotch/articles/e7960f0dc84d8b)
      - https://github.com/ayuukumakuma/dotfiles cf.[Zenn](https://zenn.dev/ayuu/scraps/4e66fbba691781)
      - https://github.com/rainbartown/dotfiles-sample cf.[Qiita](https://qiita.com/rainbartown/items/d7f59fe4047733c14e8b)
-     - https://github.com/dtan4/dot.zsh      
+     - https://github.com/dtan4/dot.zsh
+     - https://github.com/kachick/dotfiles
     
 
     </details>
