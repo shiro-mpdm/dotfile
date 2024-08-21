@@ -30,7 +30,7 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
      - https://github.com/rainbartown/dotfiles-sample cf.[Qiita](https://qiita.com/rainbartown/items/d7f59fe4047733c14e8b)
      - https://github.com/dtan4/dot.zsh
      - https://github.com/kachick/dotfiles
-     - https://github.com/hendrikmi/dotfiles　cf.[Youtube](https://www.youtube.com/@henrymisc)
+     - https://github.com/hendrikmi/dotfiles cf.[Youtube](https://www.youtube.com/@henrymisc) 
     
 
     </details>
