@@ -5,7 +5,7 @@
 "                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "                 : https://github.com/vim-jp
 "  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "                 : https://zenn.dev/p/vim_jp
 "    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "                 : https://vim-jp.org/ekiden/
-"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "   エンベーダー    : https://envader.plus/
+"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "   エンベーダー  : https://envader.plus/
 "       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "                 : https://vim-jp.org/vimdoc-ja/
 "  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
 "     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "

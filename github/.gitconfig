@@ -3,7 +3,7 @@
 	email = "150888300+shiro-mpdm@users.noreply.github.com"
 	signingkey = D9B1E9E092252BE7
 [commit]
-	gpgsign = true
+	gpgSign = true
 [gpg]
 	program = gpg
 [push]
@@ -20,6 +20,7 @@
 	st = status -sb -uno
 
 	# git cm : commitの省略形
+	# GPG Key署名付きコミット
 	commit = commit -S
 	# cm = commit -m
 	# cma = commit -a -m
@@ -32,7 +33,10 @@
 
 	# git graph : レポジトリのログ確認（e.g.「tig」のような挙動）
 	# cf. https://medium.com/@lucaspenzeymoog/prettier-git-logs-one-graph-at-a-time-d3790a753e6b
-	graph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	graph = log --graph \
+			--abbrev-commit \
+			--decorate \
+			--format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 	lls = log --oneline -n 20
 	l1  = log -1 -p
 	l1c = log -1 -p --color-words
