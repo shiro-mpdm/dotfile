@@ -32,6 +32,7 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
      - https://github.com/kachick/dotfiles
      - https://github.com/hendrikmi/dotfiles cf.[Youtube](https://www.youtube.com/@henrymisc)
      - https://github.com/b3nj5m1n/dotfiles/
+     - https://github.com/JunichiIto/dotfiles/
     
 
     </details>
