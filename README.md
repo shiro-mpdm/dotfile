@@ -1,20 +1,20 @@
 ## dotfiles
-### WHAT
+### Why
 - `SSIA`
 
-### WHY
+### What
 - Save multiple dotfiles for use in daily work.
-- (盆栽を愛でたいお年頃...🍵)
 
 <!--
 ## How to use
 https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
 -->
-### HOW
+### How
 
-### FUT.
+### Fut.
+- https://github.com/shiro-mpdm/dotfiles/issues
 
-### REF.
+### Ref.
 - <details>
     <summary> 🪴 companion plant </summary>
     
@@ -35,4 +35,6 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
 
     </details>
 
-### LIC.
+### Lic.
+- 
+
