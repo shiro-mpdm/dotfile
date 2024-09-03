@@ -1,5 +1,5 @@
 # """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# "  @shiro                                                ..dkQa,.          "
+# "  @shiroimon                                            ..dkQa,.          "
 # "                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "
 # "   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "
 # "                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "
@@ -40,12 +40,12 @@
 # """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 : << \COMMENT
-    ------------------------------------------------
-    $ man zsh
-      ・Welcome to Zsh    https://www.zsh.org/
-      ・ZSH Documentation https://zsh.sourceforge.io/Doc/
+  ------------------------------------------------
+  $ man zsh
+    ・Welcome to Zsh    https://www.zsh.org/
+    ・ZSH Documentation https://zsh.sourceforge.io/Doc/
 
-    ------------------------------------------------
+  ------------------------------------------------
 COMMENT
 
 
@@ -66,9 +66,6 @@ if [ -e /usr/local/share/zsh-completions ]; then
 fi
 
 # 補完入力の有効化
-autoload -U compinit
-compinit -u
-
 autoload -Uz compinit
 compinit
 
@@ -150,22 +147,22 @@ PROMPT="🐻‍❄️%{${fg[blue]}%}(%S%F{255}%n%s%f%{${fg[blue]}%})%{${reset_co
 # OPTION
 #------------------------------------------------
 
-setopt print_eight_bit      # 日本語ファイル名を表示可能にする
-setopt no_beep              # beep音を無効にする
-setopt no_flow_control      # フローコントロールを無効にする
-setopt ignore_eof           # Ctrl+Dでzshを終了しない
-setopt interactive_comments # '#' 以降をコメントとして扱う
-setopt auto_cd              # ディレクトリ名だけでcdする
-setopt auto_pushd           # cd したら自動的にpushdする
-                            # 「/{dir1}/{dir2}/{dir3} $pushd cd/」 現在ディレクトリをスタックしてくれる。
-setopt pushd_ignore_dups    # 「pushd」でスタックする場所の、重複したディレクトリを追加しない
-setopt share_history        # 同時に起動したzshの間でヒストリを共有する
-setopt hist_ignore_dups     # 直前と同じコマンドは履歴に追加しない
-setopt hist_ignore_all_dups # 同じコマンドをヒストリに残さない
-setopt hist_ignore_space    # スペースから始まるコマンド行はヒストリに残さない
-setopt hist_reduce_blanks   # ヒストリに保存するときに余分なスペースを削除する
-setopt inc_append_history   # 即座に履歴を保存する
-setopt extended_glob        # 高機能なワイルドカード展開を使用する
+setopt print_eight_bit       # 日本語ファイル名を表示可能にする
+setopt no_beep               # beep音を無効にする
+setopt no_flow_control       # フローコントロールを無効にする
+setopt ignore_eof            # Ctrl+Dでzshを終了しない
+setopt interactive_comments  # '#' 以降をコメントとして扱う
+setopt auto_cd               # ディレクトリ名だけでcdする
+setopt auto_pushd            # cd したら自動的にpushdする
+                             # 「/{dir1}/{dir2}/{dir3} $pushd cd/」 現在ディレクトリをスタックしてくれる。
+setopt pushd_ignore_dups     # 「pushd」でスタックする場所の、重複したディレクトリを追加しない
+setopt share_history         # 同時に起動したzshの間でヒストリを共有する
+setopt hist_ignore_dups      # 直前と同じコマンドは履歴に追加しない
+setopt hist_ignore_all_dups  # 同じコマンドをヒストリに残さない
+setopt hist_ignore_space     # スペースから始まるコマンド行はヒストリに残さない
+setopt hist_reduce_blanks    # ヒストリに保存するときに余分なスペースを削除する
+setopt inc_append_history    # 即座に履歴を保存する
+setopt extended_glob         # 高機能なワイルドカード展開を使用する
 
 
 
@@ -185,7 +182,7 @@ alias mkdir='mkdir -p'
 # cf.
 #   Gitブランチの一括削除! 煩雑な作業を一行で解決する方法 - Qiita
 #   https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea
-alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop)\" | xargs git branch -d'
+alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop|staging)\" | xargs git branch -d'
 
 
 
@@ -239,6 +236,7 @@ export BAT_CONFIG_PATH=".config/bat.conf"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 
+
 #------------------------------------------------
 # PLUGIN
 #------------------------------------------------
@@ -283,4 +281,4 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ];
 	then . "$HOME/google-cloud-sdk/completion.zsh.inc";
 fi
 
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

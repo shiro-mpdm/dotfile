@@ -1,12 +1,12 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  @shiro                                                ..dkQa,.          " ❄ EXPLAIN & MEMORIZE
-"                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "   Vim (Official): https://www.vim.org/
-"   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "   vim-jp        : https://vim-jp.org/
-"                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "                 : https://github.com/vim-jp
-"  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "                 : https://zenn.dev/p/vim_jp
-"    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "                 : https://vim-jp.org/ekiden/
-"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "   エンベーダー  : https://envader.plus/
-"       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "                 : https://vim-jp.org/vimdoc-ja/
+"  @shiroimon                                                ..dkQa,.      "
+"                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "
+"   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "
+"                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "
+"  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "
+"    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "
+"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "
+"       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "
 "  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
 "     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "
 "       J)    ,N.C               WNVVVVVWppppbbpbWF  H|    `      M,       "
@@ -39,61 +39,182 @@
 "                                cf. https://tool-taro.com/image_to_ascii/ "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" - Reference
-"   キーマップの哲学　cf.　https://zenn.dev/vim_jp/articles/2023-05-19-vim-keybind-philosophy
-"   ミニマリズムの哲学cf.https://zenn.dev/antyuntyun/articles/vim_custmoize
-"   .vimrc自動生成　　cf.https://original-game.com/convenient_tools/set-vimrc/
-"   https://zenn.dev/monaqa
-"   https://minerva.mamansoft.net/Notes/%F0%9F%93%9CVim%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92Vundle%E3%81%8B%E3%82%89vim-plug%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B
-"   https://medium.com/@SmoQ/exploring-vim-for-python-developers-510f2d3ccb06
+" - [Vim](https://www.vim.org/)
+"   - [help - Vim日本語ドキュメント](https://vim-jp.org/vimdoc-ja/)
+"
+" - [vim-jp](https://vim-jp.org/)
+"   - https://github.com/vim-jp
+"   - https://zenn.dev/p/vim_jp
+"   - https://vim-jp.org/ekiden/
+"
+" - **cf.**
+"   - [キーマップの哲学](https://zenn.dev/vim_jp/articles/2023-05-19-vim-keybind-philosophy)
+"   - [ミニマリズムの哲学](https://zenn.dev/antyuntyun/articles/vim_custmoize)
+"   - [.vimrc自動生成](https://original-game.com/convenient_tools/set-vimrc/)
+"   - [monaqa](https://zenn.dev/monaqa)
+"   - [Exploring Vim for Python Developers](https://medium.com/@SmoQ/exploring-vim-for-python-developers-510f2d3ccb06)
+"   - [エンベーダー](https://envader.plus/)
+"
 
 
+" --------------------------------------------------
+" [Plugin]
+"  cf.https://github.com/junegunn/vim-plug
+" --------------------------------------------------
 
-"""""""""""""""""""""""""""
-" ❄︎ VIM DISPLAY FRAME
-"""""""""""""""""""""""""""
-"" MacOS
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC
+
+call plug#begin('~/.vim/plugged')
+
+    "" Status-bar
+    Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    "" File Tree
+    Plug 'junegunn/vim-easy-align'
+    Plug 'lambdalisue/fern.vim'
+    Plug 'lambdalisue/fern-git-status.vim'
+    Plug 'lambdalisue/nerdfont.vim'
+    Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+    Plug 'lambdalisue/glyph-palette.vim'
+    Plug 'preservim/nerdtree'
+
+    "" File Search (like IDE)
+    "" cf.https://akaimo.hatenablog.jp/entry/2020/02/02/211048
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+
+    " git差分（追加/削除/変更） 行の表示
+    " cf. https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
+    Plug 'airblade/vim-gitgutter'
+
+    "" Comment-out
+    Plug 'tyru/caw.vim'
+
+    "" LSP
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+
+    "" auto-complete
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+    "" [Format] SQL in Vim
+    ""  cf.https://dancroak.com/format-sql-in-vim/
+    Plug 'dense-analysis/ale'
+
+    "" Mulch Cursor
+    Plug 'mg979/vim-visual-multi'
+        let g:VM_maps = {}
+        let g:VM_maps['Find Under'] = '<C-k>'
+        let g:VM_maps['Find Subword Under'] = '<C-k>'
+
+    " カーソル位置の単語をハイライト
+    Plug 'osyo-manga/vim-brightest'
+
+    " スクロールをヌルヌルさせる
+    Plug 'yuttie/comfortable-motion.vim'
+
+    Plug 'stsewd/fzf-checkout.vim'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-fugitive'  "cf.https://github.com/tpope/vim-fugitive
+    Plug 'mhinz/vim-signify'
+    Plug 'jmcantrell/vim-virtualenv'
+    " Plug 'tomtom/tcomment_vim'
+
+call plug#end()
+
+
+" --------------------------------------------------
+" [Set]
+" --------------------------------------------------
+
+""[UNIX系(macOS)]
 set fileencodings=ucs-bom,utf-8,latin1
+set guifont=Cica:h16
+set printfont=Cica:h12
+set ambiwidth=double
 
-"" Windows
+""[Linux系(Ubuntu / Windows)]
 " scriptencoding utf-8           " (文字) Vim Script内でマルチバイトを使う場合の設定
 " set fenc=utf-8                 " (文字) 編集中のファイルの文字エンコーディングをUTF-8に設定
 " set fileencodings=utf-8,cp932  " (文字) Windows設定
+" set guifont=Cica:h11
+" set printfont=Cica:h8
+" set renderingoptions=type:directx,renmode:5
+" set ambiwidth=double
 
+""[Common Set]
+set number                      " 行番号表示
+set cursorline                  " カーソールライン表示
+set backspace=indent,eol,start  " backspaceでdeleteする
+set termwinsize=12x0            " ターミナルのサイズを指定
+set updatetime=250              " 反映時間短縮(デフォルト=4,000ms)
+set virtualedit=onemore         " 移動：行末の1文字先までカーソルを移動できるように
+set ambiwidth=double            " 記号表記で崩れないようにする
+set autoread                    "
+set smartindent                 "
+set expandtab                   " タブをスペースにする
+set tabstop=4                   " tab表示幅（スペース4つ分に）
+set shiftwidth=4                "
+set list listchars=tab:\▸\-     " 不可視文字を可視化(タブが「▸-」と表示される)
+set clipboard+=unnamed          " yank をクリップボードに貼付け
+set history=5000                " 履歴保存数
+set nobackup                    " バックアップファイルを作らない
+set noswapfile                  " スワップファイルを作らない
+set showmatch                   " 対応する括弧を表示
+set incsearch                   " 検索：インクリメントサーチ
+set ignorecase                  " 検索：サーチ時に大文字小文字を区別しない
+set smartcase                   " 検索：小文字で検索すると大文字小文字を区別しない
+set wrapscan                    " 検索：検索がファイルの終わりまで行ったら先頭に戻る
+set hlsearch                    " 検索：検索結果をハイライト表示
+set vb t_vb=                    " beepもビジュアルベルも無効
+set wildmenu                    " 補完： tabでファイル名補完を有効
+set nowrap                      " 行の折り返しなし
+set ttimeoutlen=50              " モード変更遅延解消
+set mouse=a                     " マウススクロール（トラックパッド使用可）
+set confirm                     " :q 1回で抜ける
 
-"" Common
-set number                     " 行番号表示
-set cursorline                 " カーソールライン表示
-set backspace=indent,eol,start " バックスペースを有効にする
-set termwinsize=12x0           " ターミナルのサイズを指定
-set updatetime=250             " 反映時間短縮(デフォルト=4,000ms)
-set virtualedit=onemore        " 移動：行末の1文字先までカーソルを移動できるように
-set ambiwidth=double           " 記号表記で崩れないようにする
-set autoread                   "
-set smartindent                "
-set expandtab                  " タブをスペースにする
-set tabstop=4                  " tab表示幅（スペース4つ分に）
-set shiftwidth=4               "
-set list listchars=tab:\▸\-    " 不可視文字を可視化(タブが「▸-」と表示される)
-set clipboard+=unnamed         " yank をクリップボードに貼付け
-set history=5000               " 履歴
-set nobackup                   " バックアップファイルを作らない
-set noswapfile                 " スワップファイルを作らない
-set showmatch                  " 対応する括弧を表示
-set incsearch                  " 検索：インクリメントサーチ
-set ignorecase                 " 検索：サーチ時に大文字小文字を区別しない
-set smartcase                  " 検索：小文字で検索すると大文字小文字を区別しない
-set wrapscan                   " 検索：検索がファイルの終わりまで行ったら先頭に戻る
-set hlsearch                   " 検索：検索結果をハイライト表示
-set vb t_vb=                   " beepもビジュアルベルも無効
-set wildmenu                   " 補完：コマンドライン
-set nowrap                     " 行の折り返しなし
-set ttimeoutlen=50             " モード変更遅延解消
-set mouse=a                    " マウススクロール（トラックパッド使用可）
-set confirm                    " :q 1回で抜ける
+" 再読み込み
+nnoremap <S-r> :e!<CR>
+" 全選択
+nnoremap ga ggvG$
+" ctrl+shift+tでターミナルを開く
+nnoremap <silent> <C-S-t> :bo term<CR>
 
+" 背景透過
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
 
-"" UnDo : 取消（永続化）
+" ウィンドウ分割
+nnoremap <C-s><C-s> :split<CR>:set laststatus=2<CR>
+nnoremap <C-s><C-v> :vsplit<CR><C-w>w:set laststatus=2<CR>
+
+" ウィンドウ切り替え
+nnoremap <Tab> <C-w><C-w>
+nnoremap <S-Tab> <C-w>W
+
+" 行頭に移動
+nnoremap <S-h> 0
+vnoremap <S-h> 0
+
+" 行末に移動
+nnoremap <S-l> $
+vnoremap <S-l> $
+
+" インデントを整える
+nnoremap == mmggvG$=`m
+
+""[UnDo] 取消永続化
 if has('persistent_undo')
     let undo_path = expand('~/.vim/undo')
     exe 'set undodir=' .. undo_path
@@ -101,8 +222,7 @@ if has('persistent_undo')
     set undofile
 endif
 
-
-"" Color：ソースコードに色付け
+""[Color]
 syntax enable
 colorscheme iceberg
 let g:iceberg_overrides = {
@@ -114,104 +234,34 @@ let g:iceberg_overrides = {
     \    'Comment': { 'guifg': 'cccccc' },
     \}
 
-"" Font
-"" e.g.)
-""     set guifont={NAME}:h{SIZE}
-""     set guifont=Cica:h14, Mono:h13
+""[空行のハイライト]
+augroup HighlightTrailingSpaces
+    autocmd!
+    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+    autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
+""[Font]
+"" eg.
+""  set guifont={NAME}:h{SIZE}
+""  set guifont=Cica:h14, Mono:h13
 set guifont=*     " 半角文字
 set guifontwide=* " 全角文字
 
-
-"" Plugin
-"" cf.) https://github.com/junegunn/vim-plug
-""      install vim-plug if not exists.
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-"" Auto install plugin.
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC
-
-"" The range below is plugins.
-call plug#begin('~/.vim/plugged')
-
-    Plug 'airblade/vim-gitgutter'                 " git差分（追加/削除/変更） 行の表示
-
-    "" Statusbar.
-    Plug 'bling/vim-airline'                      "
-    Plug 'vim-airline/vim-airline'                "
-    Plug 'vim-airline/vim-airline-themes'         "
-
-    "" File Tree
-    Plug 'junegunn/vim-easy-align'
-    Plug 'lambdalisue/fern.vim'                   "（ファイルツリー）
-    Plug 'lambdalisue/fern-git-status.vim'        "  ┗ ファイルツリーに、gitの差分が表示
-    Plug 'lambdalisue/nerdfont.vim'               "  ┗ ファイルツリーに、ファイルのアイコンを表示
-    Plug 'lambdalisue/fern-renderer-nerdfont.vim' "  ┗ ファイルツリーに、ファイルのアイコンを表示
-    Plug 'lambdalisue/glyph-palette.vim'          "  ┗ ファイルツリーの、アイコンに色をつける
-
-    "" File Serch
-    "" (cf.) https://qiita.com/youichiro/items/b4748b3e96106d25c5bc#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'                       "（検索）ファイルの曖昧検索
-    Plug 'stsewd/fzf-checkout.vim'                "
-    Plug 'preservim/nerdtree'                     "
-    Plug 'sheerun/vim-polyglot'                   "
-    Plug 'tpope/vim-fugitive'                     " (cf.) https://github.com/tpope/vim-fugitive
-    Plug 'mhinz/vim-signify'                      "
-    Plug 'ctrlpvim/ctrlp.vim'                     "（検索）Ctrl+p でファイル・バッファを曖昧検索
-    Plug 'jmcantrell/vim-virtualenv'
-    " Plug 'tomtom/tcomment_vim'
-    Plug 'tyru/caw.vim'                           " comment-out
-
-    "" LSP
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-
-    "" auto-complete
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-    "" Format SQL in Vim
-    "" cf.) https://dancroak.com/format-sql-in-vim/
-    Plug 'dense-analysis/ale'
-
-    "" Mulch Cursor
-    Plug 'mg979/vim-visual-multi'
-    let g:VM_maps = {}
-    let g:VM_maps['Find Under'] = '<C-k>'
-    let g:VM_maps['Find Subword Under'] = '<C-k>'
-
-call plug#end()
-
-
-"" FileTree
-"" cf.) https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
-""      you can get the file-tree when puts the Ctrl+e.
-""      And, default view the hidden files.(Change the Shift+i)
+""[FileTree]
+"" cf.https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
+""    you can get the file-tree when puts the Ctrl+e. And, default view the hidden files.(Change the Shift+i)
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
-let g:fern#renderer = 'nerdfont'  " ファイルツリーにファイルアイコンを表示: 有効化
+let g:fern#renderer = 'nerdfont'
 let g:fern#renderer#nerdfont#indent_markers = 1
 
-"" アイコンに色をつける
+""[アイコンに色をつける]
 augroup my-glyph-palette
     autocmd! *
     autocmd FileType fern call glyph_palette#apply()
     autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
-
-"" Mac
-set guifont=Cica:h16
-set printfont=Cica:h12
-set ambiwidth=double
-
-"" Windows
-" set guifont=Cica:h11
-" set printfont=Cica:h8
-" set renderingoptions=type:directx,renmode:5
-" set ambiwidth=double
 
 " let g:WebDevIconsUnicodeDecorateFolderNodes = 1 " フォルダアイコンの表示をON
 
@@ -246,10 +296,6 @@ nmap ga <Plug>(EasyAlign)
 "     \ }
 
 
-"""""""""""""""""""""""""""
-" ❄︎ VIM DISPLAY CONTENT
-"""""""""""""""""""""""""""
-
 "" StatusLine
 set laststatus=2 " ステータスを常に表示
                  " 0: 表示しない、1: 2つ以上ウィンドウがある時だけ表示
@@ -277,29 +323,29 @@ let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
 
 let g:airline#extensions#hunks#non_zero_only = 1 " 変更がなければdiff行数を非表示
 
-"" Airline settings.
-"" cf.) https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
+""[Airline settings]
+"" cf. https://www.reddit.com/r/vim/comments/crs61u/best_airline_settings/
 " let g:airline_powerline_fonts = 1
 let g:airline_theme = 'papercolor' " テーマ指定
                                    " cf. https://github.com/vim-airline/vim-airline/wiki/Screenshots
 set t_Co=256                       " この設定がないと色が正しく表示されない場合がある
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1         " タブラインを表示
-let g:airline#extensions#tabline#buffer_idx_mode = 1 " タブ番号表示
+let g:airline#extensions#tabline#enabled = 1         " ファイルタブラインを表示（上部）
+let g:airline#extensions#tabline#buffer_idx_mode = 1 " ファイルタブ番号表示（上部）
 
-"" Airline symbols.
-"" cf.) https://original-game.com/vim-airline/
+""[Airline symbols]
+"" cf. https://original-game.com/vim-airline/
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-"" Unicode symbols left.
+""[Unicode symbols left]
 " let g:airline_left_sep = '»'
 " let g:airline_left_sep = '▶'
 " let g:airline_left_alt_sep = ''
 
-"" Unicode symbols right.
+""[Unicode symbols right]
 " let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒' " 暗号化されたファイル
@@ -311,108 +357,71 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄' " gitで管理されていない場合
 let g:airline_symbols.whitespace = 'Ξ' " 空白の警告(余分な空白など)
 
-"" WebBrowser like operation feel.
-" Ctrl + t  : 新規タブを開く
-" Ctrl + w  : タブを閉じる
-" Ctrl + tab: 1つ右のタブを開く
-" Ctrl+Shift+tab : 1つ左のタブを開く
-nnoremap <C-t> :tabnew<cr>
-nnoremap <C-w> :tabclose<cr>
-nnoremap <C-tab> :tabnext<cr>
-nnoremap <C-S-tab> :tabprevious<cr>
-
-""" タブ移動
-nmap <C-b> <Plug>AirlineSelectPrevTab
-nmap <C-n> <Plug>AirlineSelectNextTab
-
-"" コメントアウト
+""[コメントアウト]
+"" Ctrl + /
 nmap <C-/> <plug>(caw:hatpos:toggle)
 vmap <C-/> <plug>(caw:hatpos:toggle)
 
-"" Clipboardからペースト可能
+""[Clipboardからペースト可]
+"" Ctrl + v
 vmap <C-v> "+y
 
-" gaでEasy Align 起動
-
-"" 自動インデント
+""[自動インデント]
 inoremap {<Enter> {}<Left><CR><CR><BS><Up><Right>
 
-"" fzf
-"   :Commands  コマンド一覧
-"   :Files     カレントディレクトリ以下のファイルの曖昧検索
-"   :GFiles    gitファイル曖昧検索
-"   :History   過去開いたファイルの曖昧検索
-"   :History:  過去実行したvimコマンドの曖昧検索
-"   :Commits   commit log 確認(require fugitive.vim)
-
-"" ファイル検索
-fun! FzfOmniFiles()
-    let is_git = system('git status')
-    if v:shell_error
-        :Files
-    else
-        :GitFiles
-    endif
-endfun
-nnoremap <C-p> :call FzfOmniFiles()<cr>
-
-"" To use fzf in Vim, add the following line.
-" set rtp+=/usr/local/opt/fzf
-
-"" 文字列検索を開く
-"" <S-?> でプレビューを表示/非表示する
-command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-    \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 3..'}, 'up:60%')
-    \ : fzf#vim#with_preview({'options': '--exact --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
-    \ <bang>0)
-
-nnoremap <C-g> :Rg<CR>
-
-"" カーソル位置の単語をファイル検索する
-nnoremap fr vawy:Rg <C-R>"<CR>
-"" 選択した単語をファイル検索する
-xnoremap fr y:Rg <C-R>"<CR>
-
-"" Auto-Fix
+""[Auto-fix]
 let b:ale_fixers = ['pgformatter']
 let g:ale_fix_on_save = 1
 let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 2 --spaces 2 --no-extra-line'
 
-" バッファ検索を開く
-nnoremap fb :Buffers<CR>
-" fpでバッファの中で1つ前に開いたファイルを開く
-nnoremap fp :Buffers<CR><CR>
-" 開いているファイルの文字列検索を開く
-nnoremap fl :BLines<CR>
-" マーク検索を開く
-nnoremap fm :Marks<CR>
+""[fzf file search look like IDE]
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>s :Rg<CR>
+nnoremap <Leader>b :Buffer<CR>
+
 " ファイル閲覧履歴検索を開く
 nnoremap fh :History<CR>
 " コミット履歴検索を開く
 nnoremap fc :Commits<CR>
 
-
-" ESCの2回押しでハイライト消去
+""[ESCの2回押しでハイライト消去]
 nnoremap <ESC><ESC> :nohl<CR>
 
-" 空行のハイライト
+""[空行のハイライト]
 augroup HighlightTrailingSpaces
     autocmd!
     autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
     autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-" 行を移動
+""[行移動]
+"" [V] Ctrl + ↑/↓
 nnoremap <C-Up> "zdd<Up>"zP
 nnoremap <C-Down> "zdd"zp
-" 複数行を移動
 vnoremap <C-Up> "zx<Up>"zP`[V`]
 vnoremap <C-Down> "zx"zp`[V`]
 
-" コントロールキーと方向キーで折りたたみを操作するマッピング
-" nnoremap <C-Up> za         " 行を折りたたむ
-" nnoremap <C-Down> zA       " 折りたたみを解除
-" vnoremap <C-Up> zf         " 範囲を折りたたむ
-" vnoremap <C-Down> zd       " 折りたたみを解除
+""[ファイルタブ移動]（上部）
+"" Ctrl + b/n : 右/左へ移動
+nmap <C-b> <Plug>AirlineSelectPrevTab
+nmap <C-n> <Plug>AirlineSelectNextTab
+
+""[Web browser like feel operations]
+"" Ctrl + t       : 新規タブを開く
+"" Ctrl + w       : タブを閉じる
+"" Ctrl + tab     : 1つ右のタブを開く
+"" Ctrl+Shift+tab : 1つ左のタブを開く
+nnoremap <C-t> :tabnew<cr>
+nnoremap <C-w> :tabclose<cr>
+nnoremap <C-tab> :tabnext<cr>
+nnoremap <C-S-tab> :tabprevious<cr>
