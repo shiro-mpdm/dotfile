@@ -1,6 +1,4 @@
-## WHAT
-
-## WHY
-
-## REFERENCE
+## Why
+## What
+## Ref.
 
