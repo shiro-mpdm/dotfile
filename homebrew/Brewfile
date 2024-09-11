@@ -12,7 +12,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 
-
 # Brew
 
 brew "autoconf"
@@ -20,6 +19,7 @@ brew "automake"
 brew "bash-preexec"
 brew "bat"           # $ bat extention $cat
 brew "bottom"        # $ btm
+brew "cue"
 brew "direnv"
 brew "docker"
 brew "dust"
@@ -32,8 +32,10 @@ brew "gnutls"
 brew "gnupg"
 brew "hugo"
 brew "jq"
+brew "make"
 brew "mas"           # App Store application Search
 brew "ncurses"
+brew "nodebrew"
 brew "pgformatter"
 brew "pinentry-mac"
 brew "pipenv"
@@ -42,16 +44,16 @@ brew "postgresql@14", restart_service: true
 brew "pyenv"
 # brew "python@3.11"
 brew "python@3.12"
-brew "virtualenv"
 brew "ripgrep"
 brew "smimesign"
+brew "stow"
 brew "tig"           # GitHub command like a $git graph
 brew "tree"
+brew "virtualenv"
+brew "xdg-ninja"
 brew "yamllint"
 brew "zplug"
 brew "hashicorp/tap/terraform"
-
-
 
 # Cask
 
@@ -62,17 +64,19 @@ cask "caffeine"
 cask "clipy"
 cask "dexed"
 cask "docker"
-# cask "font-monaspace-nerd-font"
+cask "font-hackgen"
+cask "font-hackgen-nerd"
+cask "font-monaspace-nerd-font"
 cask "google-chrome"
 cask "google-cloud-sdk"
-cask "iterm2"
+# cask "iterm2"
 cask "KeyboardCleanTool"
 cask "pulsar"
 cask "slack"
 cask "spectacle"
 cask "visual-studio-code"
 cask "wezterm"
-cask "zoom"
+# cask "zoom"
 
 
 # -----------------------------
