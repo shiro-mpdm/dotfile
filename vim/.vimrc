@@ -37,48 +37,33 @@
 "           _?""""7!   MP    `     `         `     `  `     `..-@    `  `  "
 """""""""""""""""""""""""""""""" cf. https://tool-taro.com/image_to_ascii/ "
 
-  " - [Vim](https://www.vim.org/ )
-  "   - [help - Vim日本語ドキュメント](https://vim-jp.org/vimdoc-ja/ )
-  "
-  " - [vim-jp](https://vim-jp.org/ )
-  "   - [monaqa](https://zenn.dev/monaqa )
-  "   - https://github.com/vim-jp
-  "   - https://zenn.dev/p/vim_jp
-  "   - https://vim-jp.org/ekiden/
-  "
-  " - **cf.**
-  "   - [My Vim philosophy](https://zenn.dev/skanehira/articles/2020-12-05-vim-my-philosophy )
-  "   - [vimのカスタマイズは.vimrcのみで完結させたい](https://zenn.dev/antyuntyun/articles/vim_custmoize )
-  "   - [.vimrc自動生成](https://original-game.com/convenient_tools/set-vimrc/ )
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Install vim-plug if not installed/ cf.https://github.com/junegunn/vim-plug
+    " Install 'vim-plug' if not installed.
     if empty(glob('~/.vim/autoload/plug.vim'))
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 
-    " Auto-install missing plugins
+    " Auto Install missing plugins.
     autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC
 
     call plug#begin('~/.vim/plugged')
 
         " Essential Plugins
-        Plug 'preservim/nerdtree'     " File Tree
-        Plug 'ryanoasis/vim-devicons' " Icons for NERDTree
+        Plug 'preservim/nerdtree'      " File Tree
+        Plug 'ryanoasis/vim-devicons'  " Icons for NERDTree
 
         " FZF for searching
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
         Plug 'junegunn/fzf.vim'
 
         " Git integration
-        Plug 'airblade/vim-gitgutter' " Show git changes
-        Plug 'tpope/vim-fugitive'     " Execute Git command in Vim
+        Plug 'airblade/vim-gitgutter'  " Show git changes
+        Plug 'tpope/vim-fugitive'      " Execute Git command in Vim
 
         " LSP and Autocomplete
         Plug 'prabirshrestha/vim-lsp'
@@ -86,19 +71,24 @@
         Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-        " Linter / cf. https://dancroak.com/format-sql-in-vim/
+        " Linter
         Plug 'dense-analysis/ale'
+        Plug 'hashivim/vim-terraform'  " Terraform Syntaxhighlight
 
         " UI Enhancements
-        Plug 'Yggdroot/indentLine'           " Show indent lines
-        Plug 'tyru/caw.vim'                  " Comment toggle
-        Plug 'mg981/vim-visual-multi'        " Multi-cursor
-        Plug 'osyo-manga/vim-brightest'      " Highlight cursor line
-        Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
+        Plug 'Yggdroot/indentLine'            " Show indent lines
+        Plug 'tyru/caw.vim'                   " Comment toggle
+        Plug 'mg981/vim-visual-multi'         " Multi-cursor
+        Plug 'osyo-manga/vim-brightest'       " Highlight cursor line
+        Plug 'yuttie/comfortable-motion.vim'  " Smooth scrolling
 
         " Status Bar
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+
+        " Screen operation
+        " Plug 'simeji/winresizer'    " Easy resizing windows
+        " Plug '/t9md/vim-textmanip'  " Move/Duplicate text intuitively
 
     call plug#end()
 
@@ -114,7 +104,8 @@
     set langmenu=none
     set fileformats=unix,dos,mac
     " set linespace=4
-    set guifont=Cica:h14
+    " set guifont=Cica:h14
+    set guifont=HackGen\ Console:h12
 
     " Indentation settings
     set expandtab                    " Use spaces instead of tabs
@@ -131,7 +122,7 @@
     set hlsearch                     " Highlight search results
     set noic                         " Disable case-insensitive search
 
-    " UI settings
+    " UI/UX settings
     set number                       " 行番号表示
     set cursorline                   " カーソールライン表示
     " set title                        " 編集中ファイル名表示
@@ -141,7 +132,7 @@
     " set termwinsize=14x0             " ターミナルのサイズを指定
     set updatetime=250               " 反映時間短縮(デフォルト4,000ms)
     set virtualedit=onemore          " 行末の一文字後ろに、カーソルを移動できる
-    set autoread                     "　
+    set autoread                     " 
     set backspace=indent,eol,start   " backspaceでdeleteする
     set clipboard+=unnamed           " yank をクリップボードに貼付け
     set history=5000                 " 履歴保存数
@@ -151,8 +142,8 @@
     set wildmenu                     " 補完： tabでファイル名補完を有効
     set ttimeoutlen=50               " モード変更遅延解消
     set mouse=a                      " マウススクロール（トラックパッド使用可）
-    set whichwrap=b,s,h,l,<,>,[,],~  " 行頭や行末で、前後の行へのカーソル移動を可能に
-    set autochdir
+    set whichwrap=b,s,h,l,<,>,[,],~  " 行頭行末で、前後の行へのカーソル移動を可能にする
+    set autochdir                    " 
 
     " Status-line settings
     " [0] hiden
@@ -195,7 +186,7 @@
 " File Tree Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Toggle NERDTree with ctrl+e / cf.https://original-game.com/mini_howto/how-to-show-hidden-files-in-nerdtree/
+    " Toggle NERDTree with ctrl+e
     nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
     " Show hidden files in NERDTree with shift+f
@@ -252,17 +243,19 @@
     let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 0 --spaces 0 --no-extra-line'
 
     " SQL
-    " cf. https://github.com/joe-re/sql-language-server
-    " cf. https://marketplace.visualstudio.com/items?itemName=joe-re.sql-language-server#neovim
+    " cf. httpqs://github.com/joe-re/sql-language-server
     let g:LanguageClient_serverCommands = {
         \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
     \}
+
+    " Terroform
+    let g:terraform_fmt_on_save=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Search Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " fzf with ctrl+g
+    " fzf with ctrl+p
     fun! FzfOmniFiles()
         let is_git = system('git status')
         if v:shell_error
@@ -346,7 +339,7 @@
     nnoremap <S-r> :e!<CR>
 
     " バルス (全てを無に返す...) with qq
-    nnoremap qq <Cmd>qa!<CR>
+    nnoremap qqq <Cmd>qa!<CR>
 
     " tm ターミナル起動
     nnoremap tm :belowright :terminal<CR>
@@ -383,7 +376,6 @@
     vnoremap <S-l> $
 
     " Indentline settings
-    " [Plug] Indentline の設定
     let g:indentLine_char = '┆'  " インデントラインを縦線で表示
     let g:indentLine_enabled = 1  " プラグインを有効にする
     let g:indentLine_faster = 1   " パフォーマンス向上の設定
@@ -400,6 +392,9 @@
     nnoremap <C-S-Down> "zdd"zp
     vnoremap <C-S-Up> "zx<Up>"zP`[V`]
     vnoremap <C-S-Down> "zx"zp`[V`]
+
+    " 該当行の複製 with ctrl+shift+D
+    " https://qiita.com/HyunwookPark/items/2bd5393fcadac82a88d1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
