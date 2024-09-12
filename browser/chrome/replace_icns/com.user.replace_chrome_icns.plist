@@ -13,14 +13,27 @@
     </array>
 
     <key>StartCalendarInterval</key>
-    <dict>
-        <key>Weekday</key>
-        <integer>2</integer> <!-- 1 = Sunday, 2 = Monday, ... -->
-        <key>Hour</key>
-        <integer>3</integer>
-        <key>Minute</key>
-        <integer>0</integer>
-    </dict>
+    <array>
+        <!-- 日曜 午前3時 -->
+        <dict>
+            <key>Weekday</key>
+            <integer>1</integer>
+            <key>Hour</key>
+            <integer>3</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+
+        <!-- 水曜 午前3時 -->
+        <dict>
+            <key>Weekday</key>
+            <integer>4</integer>
+            <key>Hour</key>
+            <integer>3</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+    </array>
 
     <key>RunAtLoad</key>
     <true/>

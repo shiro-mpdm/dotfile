@@ -20,15 +20,16 @@ Chromiumのアイコンに置換えたい。
     - `$ chmod +x replace_icns.sh`
 3. 自動実行の仕組み(Launchdを使用)
     - 所定パス先へファイル格納
-    - `$ cp com.user.replace_chrome_icns.plist $HOME//Library/LaunchAgents/`
+    - `$ cp com.user.replace_chrome_icns.plist $HOME/Library/LaunchAgents/`
     - ▼launchctlでロード: この設定ファイルをロードして有効化
     - `$ chmod 644 ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
-    - `$ launchctl load ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
+    - `$ sudo launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
+        - (old) `$ launchctl bootstrap ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
 
 - <details>
     <summary> Debug </summary>
     
-        （様々な確認手法）
+        様々な確認手法
     
     - ロードされたジョブの確認
         - `$ launchctl list | grep com.user.replace_chrome_icns`
@@ -42,10 +43,13 @@ Chromiumのアイコンに置換えたい。
     - スクリプトの実行確認
         - `$ echo "Script executed at $(date)" >> ~/replace_chrome_icns.log`
         -  replace_chrome_icons.logファイルに実行の履歴がTOPに残る
-    - plistファイルのフォーマットが正しいかどうかを確認
+    - plistファイルのフォーマットが正しいかどうかを確認（構文や不正な文字列がないか確認できる）
         - `$ plutil ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
+    - Plistファイルのパスと権限の確認
+        - `$ ls -l ~/Library/LaunchAgents/com.user.replace_chrome_icns.plist`
 
-</details>
+
+  </details>
 
 ### Ref.
 - Download
