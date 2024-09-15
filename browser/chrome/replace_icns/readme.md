@@ -1,4 +1,6 @@
 ## Auto Replacement Chrome icns
+<img width="100%" src="https://github.com/user-attachments/assets/538686be-3331-4e28-bad8-322675404fed">
+
 ### Why
 Googleが提供するChromeのアイコンがダサいので、
 Chromiumのアイコンに置換えたい。
@@ -55,4 +57,7 @@ Chromiumのアイコンに置換えたい。
 - Download
     - [Google Chrome](https://www.google.com/chrome/?brand=YTUH&ds_kid=43700049288280949&gad_source=1&gclid=CjwKCAjwxNW2BhAkEiwA24Cm9F5biVBlGBgzpQ_teRtC8Tm3Dg9FPOuf2JswFyXcC24d6Ogwtb0CvhoC9moQAvD_BwE&gclsrc=aw.ds)
     - [Chromium](https://www.chromium.org/getting-involved/download-chromium/)
+- [サービス管理したい（launchctl）](https://kumaroot.readthedocs.io/ja/latest/command/command-launchctl.html#launchctl)
+- [launchctl](https://ss64.com/mac/launchctl.html)
+
 
