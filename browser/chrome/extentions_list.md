@@ -31,10 +31,15 @@
 - Usability
     - https://chromewebstore.google.com/detail/eimadpbcbfnmbkopoojfekhnkhdbieeh Dark Reader
     - https://chromewebstore.google.com/detail/mbniclmhobmnbdlbpiphghaielnnpgdp Lightshot (screenshot tool)
-    - https://chromewebstore.google.com/detail/gjfbebipmmehllpcoieochgkopadmddh Online Notepad
     - https://chromewebstore.google.com/detail/dbepggeogbaibhgnhhndojpepiihcmeb Vimium
+    - https://chromewebstore.google.com/detail/gjfbebipmmehllpcoieochgkopadmddh Online Notepad
 
 - English & Translator
     - https://chromewebstore.google.com/detail/ponokiofkijoolhebggofhhibnafebna Felo Subtitles: ChatGPT Live Translation
     - https://chromewebstore.google.com/detail/kbfnbcaeplbcioakkpcpgfkobkghlhen Grammarly
     - https://chromewebstore.google.com/detail/bebmphofpgkhclocdbgomhnjcpelbenh Translator, dictionary - accurate translate
+
+- AI 
+    - https://chromewebstore.google.com/detail/fnmihdojmnkclgjpcoonokmkhjpjechg ChatGPT
+
+

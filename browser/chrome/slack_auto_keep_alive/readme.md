@@ -8,7 +8,7 @@
         - `LICENSE.chromedriver`
         - `chromedriver*`
     - 📄 slack_auto_keep_alivei.py
-
+    - ℹ️ readme.md
 
 ### Prepareation
 - Python 準備:
@@ -18,6 +18,7 @@
     - `$ python3 slack_auto_keep_alive.py`
 - [ChromeDriver](https://sites.google.com/chromium.org/driver/) :
     - https://sites.google.com/chromium.org/driver/downloads
+    - https://storage.googleapis.com/chrome-for-testing-public/129.0.6668.42/mac-arm64/chromedriver-mac-arm64.zip
     - `$ unzip ~/Downloads/chromedriver_mac64.zip -d ~/Downloads/`
         - `LICENSE.chromedriver`
         - `chromedriver*`
@@ -32,7 +33,6 @@
         - この画面で 「このまま開く」 または 「許可する」 ボタンが表示されている場合はそれをクリック
     - `$ sudo xattr -d com.apple.quarantine /usr/local/bin/chromedriver`
         - ダウンロード時に付与された「隔離（quarantine）」属性が削除される
-
 
 ### outlook (展望)
 - Python のExeファイルにして、ローカルアプリにしたい
