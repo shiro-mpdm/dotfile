@@ -38,11 +38,12 @@
 # """""""""""""""""""""""""""""""" cf. https://tool-taro.com/image_to_ascii/ "
 
 : << \COMMENT
-------------------------------------------------
+------------------------------------------------------------------------------
 $ man zsh
 ・Welcome to Zsh    https://www.zsh.org/
 ・ZSH Documentation https://zsh.sourceforge.io/Doc/
-------------------------------------------------
+                    https://zsh.sourceforge.io/Doc/Release/zsh_toc.html --Manuel
+------------------------------------------------------------------------------
 COMMENT
 
 #################################################
@@ -134,7 +135,7 @@ COMMENT
 
     alias -g L='| less'
     alias -g G='| grep'
-    alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop|staging)\" | xargs git branch -d' # https://qiita.com/itinerant_programmer/items/dbf7cdba08a5403234ea
+    alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop|staging)\" | xargs git branch -d' 
 
 #################################################
 # SETING OPTION
@@ -217,19 +218,40 @@ COMMENT
     zstyle ':vcs_info:*' actionformats '%F{red}[%s:%b|%a]%f'
 
     function precmd() {
-        #
-        # cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
-        #
         LANG=en_US.UTF-8 vcs_info
+
+        # 仮想環境名を取得アクティブなら表示
+        if [[ -n "$PIPENV_ACTIVE" ]]; then
+            # pipenv
+            VENV_NAME=$(basename "$(pipenv --venv 2>/dev/null)")
+        elif [[ -n "$VIRTUAL_ENV" ]]; then
+            # venv / virtualenv
+            VENV_NAME=$(basename "$VIRTUAL_ENV")
+        else
+            VENV_NAME=""
+        fi
+
+        if [[ -n "$VENV_NAME" ]]; then
+            VENV_PROMPT="[env:${VENV_NAME}]"
+        else
+            VENV_PROMPT=""
+        fi
+
+        # cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
         PROMPT="
 🐻‍❄️ \
-%{${fg[blue]}%}@ \
-%{${fg[cyan]}%}[%~] \
+%{${fg[blue]}%}@\
+%{${fg[blue]}%}${VENV_PROMPT}\
+%{${fg[cyan]}%} [%~] \
 %{${fg[green]}%}${vcs_info_msg_0_}
 %{${fg[cyan]}%} └ \
 %{${fg[magenta]}%}%#\
 %{${reset_color}%} "
     }
+
+    # autoload -Uz vcs_info
+    # zstyle ':vcs_info:git:*' formats '%b'
+    precmd_functions+=( precmd )
 
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

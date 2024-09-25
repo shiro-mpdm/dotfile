@@ -10,18 +10,15 @@
     autoSetupRemote = true
 [core]
     # 改行の振る舞い
-    #        true : チェックアウト時にLFをCRLFに変換、コミット時にCRLFをLFに変換。
-    #        false: Gitは改行コードの変換を行わない。
-    # (推奨) input: チェックアウト時に変換しないが、コミット時にCRLFをLFに変換します。
     autocrlf = input
+             # input: （推奨）チェックアウト時に変換しないが、コミット時にCRLFをLFに変換します。
+             # true : チェックアウト時にLFをCRLFに変換、コミット時にCRLFをLFに変換。
+             # false: Gitは改行コードの変換を行わない。
 [alias]
-    # cf.【Git】エイリアス晒す＆書き方まとめ
-    #    https://qiita.com/YamEiR/items/d98ba009d2925e7eb305
-
     # 登録エイリアス一覧表示（前方50文字）
     alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | cut -c 1-50 | sort
 
-    # git st : トラッキングしているファイルのステータスのみ表示
+    # トラッキングしているファイルのステータスのみ表示
     # st = status -uno
     st = status -sb -uno
 
@@ -46,11 +43,8 @@
     # ﾛｸﾞや差分確認
     # ----------
     # eg. tig のような挙動
-    # cf. https://medium.com/@lucaspenzeymoog/prettier-git-logs-one-graph-at-a-time-d3790a753e6b
-    graph = log --graph \
-    		--abbrev-commit\
-    		--decorate\
-    		--format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    # graph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    graph = log --graph --date=format:'%m/%d %H:%M' --format=format:'%C(yellow)%h %C(cyan)%ad %C(green)%an%Creset%x09%s %C(red)%d%Creset' --remotes --branches
     lls = log --oneline -n 20
     l1  = log -1 -p
     l1c = log -1 -p --color-words
@@ -59,11 +53,12 @@
     show = show --show-signature
 
     # git diff系( 差分確認)
-    d = diff --color-words
-    dc = diff --cached
-    dcc = diff --cached --color-words
+    dif   = diff --color-words
+    difc  = diff --cached
+    difcc = diff --cached --color-words
 
     # git-flow系
+    fl = flow
     fi = flow init -d
     ff = flow feature
     fr = flow release
@@ -74,3 +69,4 @@
     # ----------
     where = branch --contains         #そのコミットが属しているブランチを表示
     here = rev-parse --show-toplevel  # (=pwd)
+

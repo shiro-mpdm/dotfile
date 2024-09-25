@@ -62,8 +62,9 @@
         Plug 'junegunn/fzf.vim'
 
         " Git integration
-        Plug 'airblade/vim-gitgutter'  " Show git changes
-        Plug 'tpope/vim-fugitive'      " Execute Git command in Vim
+        Plug 'airblade/vim-gitgutter'       " Show git changes
+        Plug 'tpope/vim-fugitive'           " Execute Git command in Vim
+        Plug 'Xuyuanp/nerdtree-git-plugin'  " Viewing Git status in NerdTree
 
         " LSP and Autocomplete
         Plug 'prabirshrestha/vim-lsp'
@@ -74,6 +75,7 @@
         " Linter
         Plug 'dense-analysis/ale'
         Plug 'hashivim/vim-terraform'  " Terraform Syntaxhighlight
+        Plug 'jjo/vim-cue'             " CUE Syntaxhighlight
 
         " UI Enhancements
         Plug 'Yggdroot/indentLine'            " Show indent lines
@@ -105,7 +107,8 @@
     set fileformats=unix,dos,mac
     " set linespace=4
     " set guifont=Cica:h14
-    set guifont=HackGen\ Console:h12
+    " set guifont=HackGen\ Console:h12
+    set guifont=Fira\ Code\ Nerd\ Font:h12
 
     " Indentation settings
     set expandtab                    " Use spaces instead of tabs
@@ -192,21 +195,49 @@
     " Show hidden files in NERDTree with shift+f
     let NERDTreeShowHidden = 1
 
-    " Vim を起動時に自動的に NERDTree を開く
-    " autocmd VimEnter * NERDTree | wincmd p
+    " NerdTree を起動時に自動的に開く設定
+    autocmd vimenter * NERDTree
+
+    " NERDTree のウィンドウサイズ
+    let g:NERDTreeWinSize=30
+
+    " Git 状態をアイコンで表示（オプション）
+    let g:NERDTreeGitStatusUseNerdFonts = 1
+        " Modified  : ファイルが変更された場合の表示
+        " Staged    : ファイルがステージに追加された場合の表示
+        " Untracked : 未追跡ファイルの表示
+        " Renamed   : ファイルがリネームされた場合の表示
+        " Unmerged  : マージ競合が発生した場合の表示
+        " Deleted   : 削除されたファイルの表示
+        " Dirty     : 変更が加えられたファイルの表示
+        " Ignored   : 無視されているファイルの表示
+        " Clean     : クリーンなファイルの表示
+        " Unknown   : 不明な状態のファイルの表示
+    let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'+',
+                \ 'Untracked' :'U',
+                \ 'Renamed'   :'R',
+                \ 'Unmerged'  :'!',
+                \ 'Deleted'   :'X',
+                \ 'Dirty'     :'#',
+                \ 'Ignored'   :'_',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
 
     " ファイルが指定されていない場合にのみ NERDTree を開く
     " autocmd VimEnter * if argc() == 0 | NERDTree | endif
 
     " Vim起動時にNERDTreeが開かれない場合に備えて、NERDTreeの自動起動をスクリプトで管理
-    function! StartUpNERDTree()
-        " ファイルが指定されていない場合のみNERDTreeを開く
-        if argc() == 0
-            NERDTree
-            wincmd p
-        endif
-    endfunction
-    autocmd VimEnter * call StartUpNERDTree()
+    " function! StartUpNERDTree()
+    "     " ファイルが指定されていない場合のみNERDTreeを開く
+    "     if argc() == 0
+    "         NERDTree
+    "         wincmd p
+    "     endif
+    " endfunction
+    " autocmd VimEnter * call StartUpNERDTree()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Configuration
