@@ -73,20 +73,24 @@
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
         " Linter
-        Plug 'dense-analysis/ale'
-        Plug 'hashivim/vim-terraform'  " Terraform Syntaxhighlight
-        Plug 'jjo/vim-cue'             " CUE Syntaxhighlight
+        Plug 'dense-analysis/ale'            " (Asynchronous Lint Engine)
+        Plug 'hashivim/vim-terraform'        " Terraform Syntaxhighlight
+        Plug 'jjo/vim-cue'                   " CUE Syntaxhighlight
+        Plug 'Vimjas/vim-python-pep8-indent' " Python for PEP8 compliant
+        Plug 'jmcantrell/vim-virtualenv'     " Easily switch between Python virtual environments (virtualenv)
 
         " UI Enhancements
         Plug 'Yggdroot/indentLine'            " Show indent lines
         Plug 'tyru/caw.vim'                   " Comment toggle
-        Plug 'mg981/vim-visual-multi'         " Multi-cursor
         Plug 'osyo-manga/vim-brightest'       " Highlight cursor line
         Plug 'yuttie/comfortable-motion.vim'  " Smooth scrolling
 
         " Status Bar
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+
+        " 
+        " Plug 'yuucu/vimq.vim' # Vim interface to execute sql statements & extract data (csv/tsv)
 
         " Screen operation
         " Plug 'simeji/winresizer'    " Easy resizing windows
@@ -199,7 +203,7 @@
     autocmd vimenter * NERDTree
 
     " NERDTree のウィンドウサイズ
-    let g:NERDTreeWinSize=30
+    let g:NERDTreeWinSize=50
 
     " Git 状態をアイコンで表示（オプション）
     let g:NERDTreeGitStatusUseNerdFonts = 1
@@ -264,20 +268,28 @@
 
     " ALE linters configuration
     let g:ale_linters = {
-        \ 'python': ['flake8', 'mypy'],
+        \ 'python': ['flake8', 'mypy', 'pylint'],
         \ 'javascript': ['eslint'],
     \}
 
-    " Auto-fix
-    let b:ale_fixers = ['pgformatter']
-    let g:ale_fix_on_save = 2
-    let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 0 --spaces 0 --no-extra-line'
+    " Auto-fix configuration for multiple file types
+    let g:ale_fixers = {
+        \ 'python': ['black', 'isort'],
+        \ 'sql': ['pgformatter'],
+    \}
 
-    " SQL
-    " cf. httpqs://github.com/joe-re/sql-language-server
+    " Fix on save (2 means fix only when supported by file type)
+    let g:ale_fix_on_save = 2
+
+    " SQL Language Server configuration / cf. httpqs://github.com/joe-re/sql-language-server
     let g:LanguageClient_serverCommands = {
         \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
     \}
+    " pgformatter options for SQL formatting
+    let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 0 --spaces 0 --no-extra-line'
+
+    " Python
+    " autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 
     " Terroform
     let g:terraform_fmt_on_save=1
@@ -417,15 +429,15 @@
     "（矩形選択）複数行Tabインデント
     " nnoremap <C-v><tab> S-i tab esc
 
-    " Line-movement settings
-    " 単一/複数行移動 with ctrl+shift+↑/↓
-    nnoremap <C-S-Up> "zdd<Up>"zP
-    nnoremap <C-S-Down> "zdd"zp
-    vnoremap <C-S-Up> "zx<Up>"zP`[V`]
-    vnoremap <C-S-Down> "zx"zp`[V`]
+    " Move current line up or down
+    " cf. https://qiita.com/itmammoth/items/312246b4b7688875d023
+    nnoremap <C-Up> "zdd<Up>"zP
+    nnoremap <C-Down> "zdd"zp
+    vnoremap <C-Up> "zx<Up>"zP`[V`]
+    vnoremap <C-Down> "zx"zp`[V`]
 
     " 該当行の複製 with ctrl+shift+D
-    " https://qiita.com/HyunwookPark/items/2bd5393fcadac82a88d1
+    " cf. https://qiita.com/HyunwookPark/items/2bd5393fcadac82a88d1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 

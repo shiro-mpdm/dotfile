@@ -46,8 +46,8 @@ brew "pyenv"
 brew "python@3.12"
 brew "ripgrep"
 brew "smimesign"
-brew "stow"
-brew "tig"           # GitHub command like a $git graph
+brew "stow"          # GNU Stow is dotfiles manager
+brew "tig"           # GitHub command like a `$git graph`
 brew "tree"
 brew "virtualenv"
 brew "xdg-ninja"
@@ -60,22 +60,23 @@ brew "hashicorp/tap/terraform"
 cask "appcleaner"
 # cask "aws-vault"
 cask "caffeine"
-# cask "chromium"
+# cask "chromium"                # Browser
 cask "clipy"
-cask "dexed"
+cask "dexed"                     #
 cask "docker"
-cask "font-hackgen"
-cask "font-hackgen-nerd"
+# cask "font-hackgen"
+# cask "font-hackgen-nerd"
 cask "font-monaspace-nerd-font"
-cask "google-chrome"
+cask "google-chrome"             # Browser
 cask "google-cloud-sdk"
-# cask "iterm2"
+# cask "HuggingChat"             # AI
+# cask "iterm2"                  # Terminal
 cask "KeyboardCleanTool"
-cask "pulsar"
+# cask "pulsar"                  # IED
 cask "slack"
 cask "spectacle"
-cask "visual-studio-code"
-cask "wezterm"
+# cask "visual-studio-code"      # IDE
+cask "wezterm"                   # Terminal
 # cask "zoom"
 
 
@@ -83,6 +84,6 @@ cask "wezterm"
 # 🍏 $ mas search <ApplicationName>
 # if you do not know application id number that you shoud try berow command.
 # -----------------------------
-mas "1Password", id: 443987910
-# mas "Bitwarden", id: 1352778147
+# mas "1Password", id: 443987910
+mas "Bitwarden", id: 1352778147
 # mas "LINE", id: 539883307

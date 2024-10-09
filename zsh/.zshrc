@@ -162,7 +162,7 @@ COMMENT
 # PATH (環境変数)
 #################################################
 
-    # [Git]
+    # [Git/GitHub]
     # GitHub 複数アカウント運用の場合
     # function gitmain() {
     #     git config --global user.name "[メインのGitHubアカウント名]"
@@ -172,8 +172,8 @@ COMMENT
     #     git config --global user.name "[その他のGitHubアカウント名]"
     #     git config --global user.email "[その他のGitHubのメールアドレス]"
     # }
-    export GPG_TTY=$(tty)          # GitHub GPG（署名付コミット）
-    eval "$(gh completion -s zsh)" # GitHub CLI（コマンド補完）
+    export GPG_TTY=$(tty)           # GitHub GPG（署名付コミット）
+    eval "$(gh completion -s zsh)"  # GitHub CLI（コマンド補完）
 
     # [Python]
     export PYENV_ROOT="$HOME/.pyenv"
@@ -187,25 +187,26 @@ COMMENT
     export PATH=$PATH:/Library/PostgreSQL/14/bin
 
     # [ChatGPT]
-    #  cf.【Python】ChatGPT APIを使ってターミナルで会話する(gpt-3.5-turbo)
-    #      https://namileriblog.com/python/chatgpt-api/
-    #  cf. APIキーの取得先
-    #      https://platform.openai.com/account/api-keys
-    # export OPENAI_API_KEY="{YOUR_API_KEY}"
+    #  cf. https://namileriblog.com/python/chatgpt-api/
+    # export OPENAI_API_KEY="YOUR_API_KEY"
+
+    # [ZshCodex] https://github.com/tom-doerr/zsh_codex
+    # # in your/custom/path you need to have a "plugins" folder and in there you clone the repository as zsh_codex
+    source "$HOME/.zsh_codex/zsh_codex.plugin.zsh"
+    bindkey '^X' create_completion
 
     # [direnv] https://github.com/direnv/direnv
-    #  cf. ディレクトリごとに環境変数を切り替えるシェルの拡張機能direnv
-    #      https://zenn.dev/web_chima/articles/06edf842b0da39
+    #  cf. https://zenn.dev/web_chima/articles/06edf842b0da39
     eval "$(direnv hook zsh)"
 
     # [bat] https://github.com/sharkdp/bat
-    #  cf. batコマンドのデフォルトハイライトテーマを変更する
-    #      https://zenn.dev/ito_shigeru/articles/bf8a8417683683
+    #  cf. https://zenn.dev/ito_shigeru/articles/bf8a8417683683
     export BAT_CONFIG_PATH=".config/bat.conf"
 
 
 #################################################
 # PROMPT
+#  cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 #################################################
 
     autoload -Uz vcs_info
@@ -237,7 +238,6 @@ COMMENT
             VENV_PROMPT=""
         fi
 
-        # cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
         PROMPT="
 🐻‍❄️ \
 %{${fg[blue]}%}@\

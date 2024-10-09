@@ -33,7 +33,8 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
     - https://github.com/hendrikmi/dotfiles cf.[Youtube](https://www.youtube.com/@henrymisc)
     - https://github.com/b3nj5m1n/dotfiles/
     - https://github.com/JunichiIto/dotfiles/
-    - https://github.com/ysm001/dotfiles/ cf.[Qiita](https://qiita.com/ysm001/items/8ae97cfdaae3f5fe79f4#neocomplete--neocomplcache)    
+    - https://github.com/ysm001/dotfiles/ cf.[Qiita](https://qiita.com/ysm001/items/8ae97cfdaae3f5fe79f4#neocomplete--neocomplcache)
+    - https://github.com/tom-doerr/dotfiles cf.[Stackoverflow](https://meta.stackoverflow.com/users/6105651/tom-d%c3%b6rr?tab=profile)
 
     </details>
 
