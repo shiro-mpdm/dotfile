@@ -32,6 +32,7 @@
     - https://chromewebstore.google.com/detail/eimadpbcbfnmbkopoojfekhnkhdbieeh Dark Reader
     - https://chromewebstore.google.com/detail/mbniclmhobmnbdlbpiphghaielnnpgdp Lightshot (screenshot tool)
     - https://chromewebstore.google.com/detail/dbepggeogbaibhgnhhndojpepiihcmeb Vimium
+    - https://chromewebstore.google.com/detail/csv-viewer-by-table-captu/igjpnkigohahllcmmgbeabfkoklalljc CSV Viewer by Table Capture
     - https://chromewebstore.google.com/detail/gjfbebipmmehllpcoieochgkopadmddh Online Notepad
 
 - English & Translator

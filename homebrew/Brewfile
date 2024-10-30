@@ -17,15 +17,15 @@ tap "homebrew/services"
 brew "autoconf"
 brew "automake"
 brew "bash-preexec"
-brew "bat"           # $ bat extention $cat
-brew "bottom"        # $ btm
+brew "bat"             # $ bat extention $cat
+brew "bottom"          # $ btm
 brew "cue"
 brew "direnv"
 brew "docker"
 brew "dust"
-brew "eza"           # $ eza extention $ls
+brew "eza"             # $ eza extention $ls
 brew "gcc"
-brew "gh"            # $ gh GitHub CLI
+brew "gh"              # $ gh GitHub CLI
 brew "git"
 brew "unbound"
 brew "gnutls"
@@ -33,7 +33,7 @@ brew "gnupg"
 brew "hugo"
 brew "jq"
 brew "make"
-brew "mas"           # App Store application Search
+brew "mas"             # App Store application Search
 brew "ncurses"
 brew "nodebrew"
 brew "pgformatter"
@@ -46,8 +46,9 @@ brew "pyenv"
 brew "python@3.12"
 brew "ripgrep"
 brew "smimesign"
-brew "stow"          # GNU Stow is dotfiles manager
-brew "tig"           # GitHub command like a `$git graph`
+brew "stow"            # GNU Stow is dotfiles manager
+brew "tig"             # GitHub command like a `$git graph`
+brew "translate-shell" # Google Translate
 brew "tree"
 brew "virtualenv"
 brew "xdg-ninja"
@@ -57,24 +58,24 @@ brew "hashicorp/tap/terraform"
 
 # Cask
 
-cask "appcleaner"
+cask "appcleaner"                # (must)
 # cask "aws-vault"
-cask "caffeine"
+cask "caffeine"                  # (must)
 # cask "chromium"                # Browser
-cask "clipy"
-cask "dexed"                     #
+cask "clipy"                     # (must)
+cask "dexed"
 cask "docker"
 # cask "font-hackgen"
 # cask "font-hackgen-nerd"
 cask "font-monaspace-nerd-font"
 cask "google-chrome"             # Browser
-cask "google-cloud-sdk"
+cask "google-cloud-sdk"          # Cloud
 # cask "HuggingChat"             # AI
 # cask "iterm2"                  # Terminal
-cask "KeyboardCleanTool"
+cask "KeyboardCleanTool"         # (must)
 # cask "pulsar"                  # IED
 cask "slack"
-cask "spectacle"
+cask "spectacle"                 # (must)
 # cask "visual-studio-code"      # IDE
 cask "wezterm"                   # Terminal
 # cask "zoom"

@@ -22,4 +22,5 @@
 - [My Vim philosophy](https://zenn.dev/skanehira/articles/2020-12-05-vim-my-philosophy)
 - [vimのカスタマイズは.vimrcのみで完結させたい](https://zenn.dev/antyuntyun/articles/vim_custmoize)
 - [.vimrc自動生成](https://original-game.com/convenient_tools/set-vimrc/)
+- https://vimawesome.com/
 

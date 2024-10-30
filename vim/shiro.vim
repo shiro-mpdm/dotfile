@@ -1,2 +1,0 @@
-" Greeting.
-echo "🐻‍❄️'\Hello!"
