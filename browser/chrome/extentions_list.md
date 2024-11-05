@@ -40,7 +40,7 @@
     - https://chromewebstore.google.com/detail/kbfnbcaeplbcioakkpcpgfkobkghlhen Grammarly
     - https://chromewebstore.google.com/detail/bebmphofpgkhclocdbgomhnjcpelbenh Translator, dictionary - accurate translate
 
-- AI 
+- AI
     - https://chromewebstore.google.com/detail/fnmihdojmnkclgjpcoonokmkhjpjechg ChatGPT
 
 

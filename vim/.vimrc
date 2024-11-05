@@ -53,9 +53,10 @@
 
     call plug#begin('~/.vim/plugged')
 
-        " Essential Plugins
+        " Essential
         Plug 'preservim/nerdtree'      " File Tree
         Plug 'ryanoasis/vim-devicons'  " Icons for NERDTree
+        Plug 'wakatime/vim-wakatime'   " Productivity metrics
 
         " FZF for searching
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -73,9 +74,10 @@
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
         " Linter
-        Plug 'dense-analysis/ale'            " (Asynchronous Lint Engine)
+        Plug 'dense-analysis/ale'            " ALE(Asynchronous Lint Engine)
         Plug 'hashivim/vim-terraform'        " Terraform Syntaxhighlight
         Plug 'jjo/vim-cue'                   " CUE Syntaxhighlight
+        Plug 'chrisbra/csv.vim'              " CSV Viewer
         Plug 'Vimjas/vim-python-pep8-indent' " Python for PEP8 compliant
         Plug 'jmcantrell/vim-virtualenv'     " Easily switch between Python virtual environments (virtualenv)
 
@@ -294,6 +296,11 @@
     " Terroform
     let g:terraform_fmt_on_save=1
 
+    " CSV
+    " let g:csv_no_conceal=1         " デリミタ表示
+    let g:csv_highlight_column='y' " カーソルが列をハイライト
+    let b:csv_headerline=1         " ヘッダハイライトキャンセル行
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Search Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -361,11 +368,11 @@
 " Display
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " ctrl+/ コメントアウト
+    " Commentout with ctrl+/
     nmap <C-/> <plug>(caw:hatpos:toggle)
     vmap <C-/> <plug>(caw:hatpos:toggle)
 
-    " ctrl+a ファイル内全選択
+    " Select all into the fail with ctrl+a
     nnoremap <C-a> ggvG
 
     " UnDo 取消永続化
@@ -375,21 +382,21 @@
         set undofile
     endif
 
-    " Clipboardからペースト可 with ctrl+v
+    " Paste from clipboard with ctrl+v
     vmap <C-v> "+y
 
-    " 再読み込み with shift+r
+    " Reroad with shift+r
     nnoremap <S-r> :e!<CR>
 
-    " バルス (全てを無に返す...) with qq
+    " バルス (全てを無に返す...) with qqq
     nnoremap qqq <Cmd>qa!<CR>
 
-    " tm ターミナル起動
+    " Open terminal with tm
     nnoremap tm :belowright :terminal<CR>
 
     "　Split Screen settings
-    " (縦)画面分割  ctrl+s→s
-    " (横)画面分割       └→v
+    " (縦)画面分割  ctrl+s→ s
+    " (横)画面分割       └→ v
     nnoremap <C-s><C-s> :split<CR>:set laststatus=2<CR>
     nnoremap <C-s><C-v> :vsplit<CR><C-w>w:set laststatus=2<CR>
     " 新規タブを開く/閉じる with ctrl+t/w
@@ -419,7 +426,7 @@
     vnoremap <S-l> $
 
     " Indentline settings
-    let g:indentLine_char = '┆'  " インデントラインを縦線で表示
+    let g:indentLine_char = '┆'   " インデントラインを縦線で表示
     let g:indentLine_enabled = 1  " プラグインを有効にする
     let g:indentLine_faster = 1   " パフォーマンス向上の設定
     " インデントを整える
@@ -431,10 +438,10 @@
 
     " Move current line up or down
     " cf. https://qiita.com/itmammoth/items/312246b4b7688875d023
-    nnoremap <C-Up> "zdd<Up>"zP
-    nnoremap <C-Down> "zdd"zp
-    vnoremap <C-Up> "zx<Up>"zP`[V`]
-    vnoremap <C-Down> "zx"zp`[V`]
+    nnoremap <A-Up> "zdd<Up>"zP
+    nnoremap <A-Down> "zdd"zp
+    vnoremap <A-Up> "zx<Up>"zP`[V`]
+    vnoremap <A-Down> "zx"zp`[V`]
 
     " 該当行の複製 with ctrl+shift+D
     " cf. https://qiita.com/HyunwookPark/items/2bd5393fcadac82a88d1

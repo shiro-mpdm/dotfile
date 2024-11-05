@@ -18,37 +18,47 @@
     # 登録エイリアス一覧表示（前方50文字）
     alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | cut -c 1-50 | sort
 
-    # トラッキングしているファイルのステータスのみ表示
-    # st = status -uno
-    st = status -sb -uno
 
-    # ----------
+    # ------------------------------
     # コミット系
-    # ----------
+    # ------------------------------
     # GPG Key署名付きコミット
     commit = commit -S
     cm = commit -S -m
     # cma = commit -a -m
     # cmx = commit --no-verify -m
 
-    # ----------
-    # ブランチ移動
-    # ----------
-    co = checkout
-    # ﾁｪｯｸｱｳﾄして加えてﾌﾞﾗﾝﾁ更新
-    cc = !git checkout master && git pull
-    # cc = !git checkout master && git pull origin master
+    # スタッシュファイルの確認と反映
+    stl = stash list
+    stp = stash pop
+    # トラッキングしているファイルのステータスのみ表示
+    # st = status -uno
+    st = status -sb -uno
 
-    # ----------
+    # ステージングからファイルを外す
+    re = restore --staged
+
+
+    # ------------------------------
+    # ブランチ移動
+    # ------------------------------
+    co = checkout
+    # ﾁｪｯｸｱｳﾄしてﾌﾞﾗﾝﾁ更新
+    # cc = checkout master && git pull
+
+
+    # ------------------------------
     # ﾛｸﾞや差分確認
-    # ----------
+    # ------------------------------
     # eg. tig のような挙動
-    # graph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
-    graph = log --graph --date=format:'%m/%d %H:%M' --format=format:'%C(yellow)%h %C(cyan)%ad %C(green)%an%Creset%x09%s %C(red)%d%Creset' --remotes --branches
+    graph = log --graph \
+            --date=format:'%m/%d %H:%M' \
+            --format=format:'%C(yellow)%h %C(cyan)%ad %C(green)%an%Creset%x09%s %C(red)%d%Creset' \
+            --remotes --branches
     lls = log --oneline -n 20
     l1  = log -1 -p
     l1c = log -1 -p --color-words
-    lg  = log --graph
+    log = log --graph
 
     show = show --show-signature
 
@@ -64,9 +74,13 @@
     fr = flow release
     fh = flow hotfix
 
-    # ----------
+
+    # ------------------------------
     # 現在地確認
-    # ----------
+    # ------------------------------
     where = branch --contains         #そのコミットが属しているブランチを表示
     here = rev-parse --show-toplevel  # (=pwd)
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 

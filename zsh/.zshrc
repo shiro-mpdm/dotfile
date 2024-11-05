@@ -78,6 +78,7 @@ COMMENT
         . "$HOME/google-cloud-sdk/completion.zsh.inc";
     fi
 
+
 #################################################
 # BASICLY
 #################################################
@@ -159,52 +160,6 @@ COMMENT
     setopt extended_glob          # 高機能なワイルドカード展開を使用する
 
 #################################################
-# PATH (環境変数)
-#################################################
-
-    # [Git/GitHub]
-    # GitHub 複数アカウント運用の場合
-    # function gitmain() {
-    #     git config --global user.name "[メインのGitHubアカウント名]"
-    #     git config --global user.email "[メインのGitHubのメールアドレス]"
-    # }
-    # function gitsub() {
-    #     git config --global user.name "[その他のGitHubアカウント名]"
-    #     git config --global user.email "[その他のGitHubのメールアドレス]"
-    # }
-    export GPG_TTY=$(tty)           # GitHub GPG（署名付コミット）
-    eval "$(gh completion -s zsh)"  # GitHub CLI（コマンド補完）
-
-    # [Python]
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-
-    # [Node.js]
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-    # [PostgreSQL]
-    export PATH=$PATH:/Library/PostgreSQL/14/bin
-
-    # [ChatGPT]
-    #  cf. https://namileriblog.com/python/chatgpt-api/
-    # export OPENAI_API_KEY="YOUR_API_KEY"
-
-    # [ZshCodex] https://github.com/tom-doerr/zsh_codex
-    # # in your/custom/path you need to have a "plugins" folder and in there you clone the repository as zsh_codex
-    source "$HOME/.zsh_codex/zsh_codex.plugin.zsh"
-    bindkey '^X' create_completion
-
-    # [direnv] https://github.com/direnv/direnv
-    #  cf. https://zenn.dev/web_chima/articles/06edf842b0da39
-    eval "$(direnv hook zsh)"
-
-    # [bat] https://github.com/sharkdp/bat
-    #  cf. https://zenn.dev/ito_shigeru/articles/bf8a8417683683
-    export BAT_CONFIG_PATH=".config/bat.conf"
-
-
-#################################################
 # PROMPT
 #  cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
 #################################################
@@ -254,4 +209,51 @@ COMMENT
     precmd_functions+=( precmd )
 
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#################################################
+# PATH (環境変数)
+#################################################
+
+    # [Git/GitHub]
+    # GitHub 複数アカウント運用の場合
+    # function gitmain() {
+    #     git config --global user.name "[メインのGitHubアカウント名]"
+    #     git config --global user.email "[メインのGitHubのメールアドレス]"
+    # }
+    # function gitsub() {
+    #     git config --global user.name "[その他のGitHubアカウント名]"
+    #     git config --global user.email "[その他のGitHubのメールアドレス]"
+    # }
+    export GPG_TTY=$(tty)           # GitHub GPG（署名付コミット）
+    eval "$(gh completion -s zsh)"  # GitHub CLI（コマンド補完）
+
+    # [Python]
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+
+    # [Node.js]
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+    # [PostgreSQL]
+    export PATH=$PATH:/Library/PostgreSQL/14/bin
+
+    # [ChatGPT]
+    #  cf. https://namileriblog.com/python/chatgpt-api/
+    # export OPENAI_API_KEY="YOUR_API_KEY"
+
+    # [direnv] https://github.com/direnv/direnv
+    #  cf. https://zenn.dev/web_chima/articles/06edf842b0da39
+    eval "$(direnv hook zsh)"
+
+    # [bat] https://github.com/sharkdp/bat
+    #  cf. https://zenn.dev/ito_shigeru/articles/bf8a8417683683
+    export BAT_CONFIG_PATH=".config/bat.conf"
+
+    # [kubectl]
+    #  cf.https://microservices.mercari.in/guides/configure-cluster-access-for-kubectl/
+    export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

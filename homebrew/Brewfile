@@ -5,15 +5,19 @@
 
 # Tap
 
+tap "argoproj/tap"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "kouzoh/tap", "git@github.com:kouzoh/homebrew-tap.git"
 
 # Brew
 
+brew "aichat"
+brew "argo"
 brew "autoconf"
 brew "automake"
 brew "bash-preexec"
@@ -32,6 +36,8 @@ brew "gnutls"
 brew "gnupg"
 brew "hugo"
 brew "jq"
+brew "kubernetes-cli"
+brew "kubectx"
 brew "make"
 brew "mas"             # App Store application Search
 brew "ncurses"
@@ -54,7 +60,9 @@ brew "virtualenv"
 brew "xdg-ninja"
 brew "yamllint"
 brew "zplug"
+brew "zsh-syntax-highlighting"
 brew "hashicorp/tap/terraform"
+brew "kouzoh/tap/cue"
 
 # Cask
 
