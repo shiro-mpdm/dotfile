@@ -41,5 +41,5 @@ https://docs.github.com/get-started/writing-on-github/working-with-advanced-form
   </details>
 
 ## Lic.
-[MIT]()
+[MIT](https://github.com/shiro-mpdm/dotfiles/blob/main/LICENSE)
 

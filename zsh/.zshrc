@@ -1,259 +1,193 @@
-# """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# "  @shiroimon                                            ..dkQa,.          "
-# "                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "
-# "   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "
-# "                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "
-# "  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "
-# "    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "
-# "                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "
-# "       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "
-# "  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
-# "     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "
-# "       J)    ,N.C               WNVVVVVWppppbbpbWF  H|    `      M,       "
-# "  `    d]     ,"`          `  `  TNkVVWpppbppbWWMe. .Hx `    `   ,N       "
-# "       ,N          `  `  `  (p    .WNkbpbpbbkY!..(Mx .N.         `d]  `   "
-# "        Wp   `              `        _T9""=~...``. Tm.Jb `        (b      "
-# "    `    ?M,    `   `  ..,jAg,              `..JJzT4MN,N.         ,#    ` "
-# "         `J\   `JD` .?Nm#!   M,              ?!    ..?WM_     `  `.F`     "
-# "  `     ` M        .@   Hm,..J] `  `   `                          J\      "
-# "         .#        .M, .J'  .Y           `                        #       "
-# "     `   .N    `     TN-..?!`    `  `      `  `        `    `  ``,^     ` "
-# "  `      `M{                          `         `  `            .F        "
-# "          d[                  `   `     `  `    `    `  ` `  ` .P         "
-# "     `    ,N   `  `   `  `       `   `       `     7T9YTUwAgJJ/!    `  `  "
-# "      ` ...dn..             `            `          .........-N           "
-# "  ``..XHfffffWMN,  `          `   `   `     `        ..``.``..M-          "
-# "  .HffHHVVVVVffWM[   `  `  `    `         `    `   `   ...`..`d] `        "
-# " .NVVWNVVyVVVVVVWM.                `   `        `        .....,@    `  `  "
-# " ,NffM#fVVVVVVVfpM[      `   `       `     `  `            .`.-N          "
-# "  MkpWMNppfpppppbM%  `         `  `     `         `       `..` M.         "
-# "  JNpbbppppppppbW#      `  `                `       `   ` ..`..M{  `    ` "
-# "   WNbbpbbbpppbpM^            `    `  `  `     `      `    .`.`d]         "
-# "   .MMNkWbbWkKY=.   `           `               `  `       ....JF    `    "
-# "    N. _??!`.         `  `  `       `  `  `  `             ..`.(F         "
-# "   `Jb                        `   `               `  `     ...`(F       ` "
-# "    `(Ma.       `  ` .,    `            `  `  `         `  .`..J%  `      "
-# "       (Wa..   `  `..7N.       `   `  `         `          .`.`d:         "
-# "           _?""""7!   MP    `     `         `     `  `     `..-@    `  `  "
-# """""""""""""""""""""""""""""""" cf. https://tool-taro.com/image_to_ascii/ "
-
-: << \COMMENT
+<< \COMMENT
 ------------------------------------------------------------------------------
-$ man zsh
+% man zsh
 ・Welcome to Zsh    https://www.zsh.org/
 ・ZSH Documentation https://zsh.sourceforge.io/Doc/
-                    https://zsh.sourceforge.io/Doc/Release/zsh_toc.html --Manuel
+                    https://zsh.sourceforge.io/Doc/Release/zsh_toc.html
 ------------------------------------------------------------------------------
 COMMENT
 
-#################################################
-# PLUGIN
-#################################################
+# [0] プラグイン
 
-    if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-        source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Load theme file
+# i.e. FMT
+#      zplug "repository", (options) use:file_name, from:file_sorce, as:file_kind
+# zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "chrissicool/zsh-256color"
+zplug "mrowa44/emojify", as:command
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
     fi
+fi
+if ! zplug load; then
+    echo "Failed to load plugins." >&2
+fi
 
-    if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-        source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# [1] 基本設定
+export LANG=ja_JP.UTF-8
+autoload -Uz colors compinit vcs_info select-word-style
+colors
+compinit
+select-word-style default
+
+# --- 補完設定
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' ignore-parents parent pwd ..
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+
+# --- 履歴設定 ---
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
+# エラー終了したコマンドは履歴に追加しない
+zshaddhistory() {
+    if [[ $? -ne 0 ]]; then
+        return 1
     fi
+    return 0
+}
 
-    if [ -f ~/.zsh/zsh-completions/zsh-completions.zsh ]; then
-        source ~/.zsh/zsh-completions/zsh-completions.zsh
+# --- 打鍵設定 ---
+# bindkey '^R' history-incremental-pattern-search-backward
+# bindkey '^S' history-incremental-pattern-search-forward
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey -v
+
+# --- 拡張設定 ---
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # └> Ctrl+ R 履歴をﾌｧｼﾞｰ検索実行
+    # └> Alt + C ｶﾚﾝﾄﾃﾞｨﾚｸﾄﾘ配下を検索移動
+
+
+# [2] オプション設定
+# --- 基本動作 ---
+setopt prompt_subst           # PROMPT変数内で変数参照を許可
+setopt no_beep                # 無効な操作時のビープ音を無効化
+setopt no_flow_control        # フロー制御（Ctrl+S, Ctrl+Q）を無効化
+setopt ignore_eof             # Ctrl+Dでのシェル終了を無効化
+setopt interactive_comments   # コマンド行内の「#」以降をコメントと認識
+
+# --- 履歴関連 ---
+setopt extended_history       # 履歴にコマンド実行時間も記録
+setopt inc_append_history     # コマンド実行後即座に履歴に保存
+setopt hist_ignore_dups       # 直前と同じコマンドを履歴に追加しない
+setopt hist_ignore_all_dups   # 重複したコマンドを全て履歴から排除
+setopt hist_ignore_space      # 先頭がスペースのコマンドは履歴に残さない
+setopt hist_reduce_blanks     # 履歴保存時に余分なスペースを削除
+setopt share_history          # シェル間で履歴を共有
+
+# --- ディレクトリ操作 ---
+setopt auto_cd                # ディレクトリ名だけでcdコマンドとして扱う
+setopt auto_pushd             # cd時にディレクトリスタックに自動追加
+setopt pushd_ignore_dups      # 重複するディレクトリをスタックに追加しない
+
+# --- 拡張設定 ---
+setopt extended_glob          # 拡張グロブ（正規表現のようなパターン）を有効化
+
+
+# [3] プロンプト
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' formats '%F{green}[%s:%b]%f'
+zstyle ':vcs_info:*' actionformats '%F{red}[%s:%b|%a]%f'
+
+function precmd() {
+    vcs_info
+    if [[ -n "$PIPENV_ACTIVE" ]]; then
+        VENV_NAME=$(basename "$(pipenv --venv 2>/dev/null)")
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
+        VENV_NAME=$(basename "$VIRTUAL_ENV")
+    else
+        VENV_NAME=""
     fi
-
-    if [ -f ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
-        source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-    fi
-
-    if [ -f ~/.zsh/spaceship-prompt/spaceship-prompt.zsh ]; then
-        source ~/.zsh/spaceship-prompt/spaceship-prompt.zsh
-    fi
-
-    if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
-        . "$HOME/google-cloud-sdk/path.zsh.inc";
-    fi
-
-    if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
-        . "$HOME/google-cloud-sdk/completion.zsh.inc";
-    fi
-
-
-#################################################
-# BASICLY
-#################################################
-
-    export LANG=ja_JP.UTF-8
-
-    # 色の使用有効
-    autoload -Uz colors
-    colors
-
-    # 補完機能有効
-    if [ -e /usr/local/share/zsh-completions ]; then
-        fpath=(/usr/local/share/zsh-completions $fpath)
-    fi
-
-    # 補完入力の有効化
-    autoload -Uz compinit
-    compinit
-
-    # 補完で小文字でも大文字にマッチさせる
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-    # ../ の後は今いるディレクトリを補完しない
-    zstyle ':completion:*' ignore-parents parent pwd ..
-    # ps コマンドのプロセス名補完
-    zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-    # sudo の後ろでコマンド名を補完する
-    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-
-    # 履歴
-    export HISTFILE=~/.zsh_history
-    export HISTSIZE=1000000
-    export SAVEHIST=1000000
-
-    # 表記（時間）
-    setopt extended_history
-    alias history='history -t "%F %T"'
-
-    # キーバインド
-    bindkey '^R' history-incremental-pattern-search-backward
-    bindkey -v
-
-#################################################
-# ALIAS
-#################################################
-
-    # common
-    alias rm='rm -i'
-    alias cp='cp -i'
-    alias mv='mv -i'
-    alias mkdir='mkdir -p'
-    export LSCOLORS=gxfxcxdxbxegedabagacad # cyan
-    alias ls='ls -GF'
-    alias ll='ls -alGF'
-    alias lse='eza --icons --git --time-style relative -al'
-
-    alias -g L='| less'
-    alias -g G='| grep'
-    alias delete_merged_branches='git branch --merged | egrep -v \"(^\*|main|master|develop|staging)\" | xargs git branch -d' 
-
-#################################################
-# SETING OPTION
-#################################################
-
-    setopt prompt_subst           # PROMPT変数内で変数参照する
-    setopt print_eight_bit        # 日本語ファイル名を表示可能にする
-    setopt no_beep                # beep音を無効
-    setopt no_flow_control        # フローコントロールを無効にする
-    setopt ignore_eof             # ctrl+Dでzshを終了しない
-    setopt interactive_comments   # [#] 以降をコメントとして扱う
-    setopt auto_cd                # ディレクトリ名だけで$cd する
-    setopt auto_pushd             # $cd したら自動的に $pushd する
-    setopt pushd_ignore_dups      # $pushd でスタックした場所の重複ディレクトリを追加しない
-    setopt share_history          # 同時に起動したzsh間でヒストリを共有
-    setopt hist_ignore_dups       # 直前と同じコマンドは履歴に追加しない
-    setopt hist_ignore_all_dups   # 同じコマンドをヒストリに残さない
-    setopt hist_ignore_space      # スペースから始まるコマンド行はヒストリに残さない
-    setopt hist_reduce_blanks     # ヒストリに保存するときに余分なスペースを削除する
-    setopt inc_append_history     # 即座に履歴を保存する
-    setopt extended_glob          # 高機能なワイルドカード展開を使用する
-
-#################################################
-# PROMPT
-#  cf. https://qiita.com/yamagen0915/items/77fb78d9c73369c784da
-#################################################
-
-    autoload -Uz vcs_info
-    autoload -Uz select-word-style
-    select-word-style default
-
-    zstyle ':vcs_info:*' enable git
-    zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' formats '%F{green}[%s:%b]%f'
-    zstyle ':vcs_info:*' actionformats '%F{red}[%s:%b|%a]%f'
-
-    function precmd() {
-        LANG=en_US.UTF-8 vcs_info
-
-        # 仮想環境名を取得アクティブなら表示
-        if [[ -n "$PIPENV_ACTIVE" ]]; then
-            # pipenv
-            VENV_NAME=$(basename "$(pipenv --venv 2>/dev/null)")
-        elif [[ -n "$VIRTUAL_ENV" ]]; then
-            # venv / virtualenv
-            VENV_NAME=$(basename "$VIRTUAL_ENV")
-        else
-            VENV_NAME=""
-        fi
-
-        if [[ -n "$VENV_NAME" ]]; then
-            VENV_PROMPT="[env:${VENV_NAME}]"
-        else
-            VENV_PROMPT=""
-        fi
-
-        PROMPT="
-🐻‍❄️ \
+    PROMPT="🐻‍❄️ \
 %{${fg[blue]}%}@\
-%{${fg[blue]}%}${VENV_PROMPT}\
+%{${fg[blue]}%}${VENV_NAME:+[env:$VENV_NAME]}\
 %{${fg[cyan]}%} [%~] \
 %{${fg[green]}%}${vcs_info_msg_0_}
 %{${fg[cyan]}%} └ \
 %{${fg[magenta]}%}%#\
 %{${reset_color}%} "
-    }
-
-    # autoload -Uz vcs_info
-    # zstyle ':vcs_info:git:*' formats '%b'
-    precmd_functions+=( precmd )
-
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#################################################
-# PATH (環境変数)
-#################################################
-
-    # [Git/GitHub]
-    # GitHub 複数アカウント運用の場合
-    # function gitmain() {
-    #     git config --global user.name "[メインのGitHubアカウント名]"
-    #     git config --global user.email "[メインのGitHubのメールアドレス]"
-    # }
-    # function gitsub() {
-    #     git config --global user.name "[その他のGitHubアカウント名]"
-    #     git config --global user.email "[その他のGitHubのメールアドレス]"
-    # }
-    export GPG_TTY=$(tty)           # GitHub GPG（署名付コミット）
-    eval "$(gh completion -s zsh)"  # GitHub CLI（コマンド補完）
-
-    # [Python]
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-
-    # [Node.js]
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-    # [PostgreSQL]
-    export PATH=$PATH:/Library/PostgreSQL/14/bin
-
-    # [ChatGPT]
-    #  cf. https://namileriblog.com/python/chatgpt-api/
-    # export OPENAI_API_KEY="YOUR_API_KEY"
-
-    # [direnv] https://github.com/direnv/direnv
-    #  cf. https://zenn.dev/web_chima/articles/06edf842b0da39
-    eval "$(direnv hook zsh)"
-
-    # [bat] https://github.com/sharkdp/bat
-    #  cf. https://zenn.dev/ito_shigeru/articles/bf8a8417683683
-    export BAT_CONFIG_PATH=".config/bat.conf"
-
-    # [kubectl]
-    #  cf.https://microservices.mercari.in/guides/configure-cluster-access-for-kubectl/
-    export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+}
+precmd_functions+=( precmd )
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [4] エイリアス
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias history='history -t "%F %T"'
+
+export LSCOLORS=gxfxcxdxbxegedabagacad
+alias ls='ls -GF'
+alias ll='ls -alGF'
+alias lse='eza --icons --git --time-style relative -al'
+
+alias -g L='| less'
+alias -g G='| grep'
+alias -g W='| wc -l'
+alias -g P='| pbcopy'
+
+alias cleanup_git='git branch --merged | egrep -v "(^\*|main|master|develop|staging)" | xargs -p git branch -d'
+
+
+# [5] 環境設定
+# e.g.
+#   # Python
+#   export PATH="$PYENV_ROOT/bin:$PATH" -> [a]へ
+#   export PYENV_ROOT="$HOME/.pyenv"    -> [c]へ
+#   eval "$(pyenv init -)"              -> [d]へ
+
+# --- [a] PATHの設定 ---
+paths=(
+    "$PYENV_ROOT/bin"               # Python関連
+    "$HOME/.nodebrew/current/bin"   # Node.js関連
+    "/Library/PostgreSQL/14/bin"    # PostgreSQL関連
+    # "/usr/local/opt/kubectx/bin"  # K8s関連
+)
+for p in "${paths[@]}"; do
+    [[ -d "$p" ]] && PATH="$p:$PATH"
+done
+export PATH
+
+# --- [b] 環境変数：システム関連 ---
+export GPG_TTY=$(tty)                   # Git用GPG署名
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True  # K8s用Google認証
+
+# --- [c] 環境変数：アプリケーション関連 ---
+export PYENV_ROOT="$HOME/.pyenv"
+export BAT_CONFIG_PATH="$HOME/.config/bat.conf"
+# export OPENAI_API_KEY="YOUR_API_KEY"
+
+# --- [d] CLI補完スクリプト ---
+cli_scripts=(
+    "$(gh completion -s zsh)"    # GitHub CLI
+    "$(pyenv init -)"            # Pyenv
+    "$(direnv hook zsh)"         # Direnv
+    # "$(gcloud info --format="value(config.paths.sdk_root)")/path.zsh.inc" # GCP SDK
+    "$HOME/google-cloud-sdk/path.zsh.inc" # GCP SDK
+    "$HOME/google-cloud-sdk/completion.zsh.inc"
+)
+for script in "${cli_scripts[@]}"; do
+    [[ -n "$script" ]] && eval "$script"
+done
 

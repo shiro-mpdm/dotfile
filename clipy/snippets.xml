@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<folders>
+	<folder>
+		<title>bq</title>
+		<snippets>
+			<snippet>
+				<title>select all</title>
+				<content>select * from ``</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>sh</title>
+		<snippets>
+			<snippet>
+				<title>rm .DS_Store</title>
+				<content>find . -name &apos;.DS_Store&apos; -type f -ls -delete</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>py</title>
+		<snippets />
+	</folder>
+</folders>

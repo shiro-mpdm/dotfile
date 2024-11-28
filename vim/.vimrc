@@ -41,31 +41,31 @@
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Install 'vim-plug' if not installed.
+    " Install `vim-plug` if not installed.
     if empty(glob('~/.vim/autoload/plug.vim'))
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 
-    " Auto Install missing plugins.
+    " Auto install missing plugins.
     autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC
 
     call plug#begin('~/.vim/plugged')
 
         " Essential
-        Plug 'preservim/nerdtree'      " File Tree
-        Plug 'ryanoasis/vim-devicons'  " Icons for NERDTree
-        Plug 'wakatime/vim-wakatime'   " Productivity metrics
+        Plug 'preservim/nerdtree'             " File Tree
+        Plug 'ryanoasis/vim-devicons'         " Icons for NERDTree
+        Plug 'wakatime/vim-wakatime'          " Productivity metrics
 
         " FZF for searching
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
         Plug 'junegunn/fzf.vim'
 
         " Git integration
-        Plug 'airblade/vim-gitgutter'       " Show git changes
-        Plug 'tpope/vim-fugitive'           " Execute Git command in Vim
-        Plug 'Xuyuanp/nerdtree-git-plugin'  " Viewing Git status in NerdTree
+        Plug 'airblade/vim-gitgutter'         " Show git changes
+        Plug 'tpope/vim-fugitive'             " Execute Git command in Vim
+        Plug 'Xuyuanp/nerdtree-git-plugin'    " Viewing Git status in NerdTree
 
         " LSP and Autocomplete
         Plug 'prabirshrestha/vim-lsp'
@@ -73,13 +73,15 @@
         Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-        " Linter
-        Plug 'dense-analysis/ale'            " ALE(Asynchronous Lint Engine)
-        Plug 'hashivim/vim-terraform'        " Terraform Syntaxhighlight
-        Plug 'jjo/vim-cue'                   " CUE Syntaxhighlight
-        Plug 'chrisbra/csv.vim'              " CSV Viewer
-        Plug 'Vimjas/vim-python-pep8-indent' " Python for PEP8 compliant
-        Plug 'jmcantrell/vim-virtualenv'     " Easily switch between Python virtual environments (virtualenv)
+        " Linter / Syntax
+        Plug 'dense-analysis/ale'             " ALE(Asynchronous Lint Engine)
+        Plug 'hashivim/vim-terraform'         " Terraform Syntaxhighlight
+        Plug 'jjo/vim-cue'                    " CUE Syntaxhighlight
+        Plug 'chrisbra/csv.vim'               " CSV Viewer
+        Plug 'yuucu/vimq.vim'                 " CSV Data Handling at SQL using `q`
+        Plug 'Vimjas/vim-python-pep8-indent'  " Python for PEP8 compliant
+        Plug 'jmcantrell/vim-virtualenv'      " Python virtual environments easily switching (virtualenv)
+        Plug 'shirk/vim-gas'                  " GAS Syntaxhighlight
 
         " UI Enhancements
         Plug 'Yggdroot/indentLine'            " Show indent lines
@@ -91,20 +93,20 @@
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
 
-        " 
-        " Plug 'yuucu/vimq.vim' # Vim interface to execute sql statements & extract data (csv/tsv)
-
         " Screen operation
-        " Plug 'simeji/winresizer'    " Easy resizing windows
-        " Plug '/t9md/vim-textmanip'  " Move/Duplicate text intuitively
+        " Plug 'simeji/winresizer'              " Easy resizing windows
+        " Plug 't9md/vim-textmanip'             " Move/Duplicate text intuitively
 
     call plug#end()
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
+"          https://vim-jp.org/vimdoc-ja/options.html
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Encoding settings / cf. https://zenn.dev/aikige/articles/how-vim-recognizes-encoding
+    " Encoding settings
+    " cf. https://zenn.dev/aikige/articles/how-vim-recognizes-encoding
     set encoding=utf-8
     set fileencoding=&encoding
     set fileencodings=utf-8,ucs-bom,iso-2022-jp,cp932,euc-jp,default,latin
@@ -125,16 +127,16 @@
 
     " Search settings
     set incsearch                    " Incsearch option in the command mode [:]
+    set hlsearch                     " Highlight search results
     set ignorecase                   " Ignore case when searching
     set smartcase                    " Search insensitively in lowercase
     set wrapscan                     " When the end, go back to the beginning
-    set hlsearch                     " Highlight search results
     set noic                         " Disable case-insensitive search
 
     " UI/UX settings
     set number                       " 行番号表示
     set cursorline                   " カーソールライン表示
-    " set title                        " 編集中ファイル名表示
+    set title                        " 編集中ファイル名表示
     set belloff=all                  " ベル音停止
     set vb t_vb=                     " beepもビジュアルベルも無効
     set nowrap                       " 行の折り返しなし
@@ -161,6 +163,11 @@
     set laststatus=2
     set statusline=%F%m%r%h%w\ [%{&fileencoding}]\ [row=%l/%L]
 
+    " Folding settings
+    set foldmethod=syntax            " 自動で構造に基づいたフォールディングを有効化
+    set foldlevel=1                  " デフォルトで折り畳みを 1 段階に設定
+    set foldenable                   " フォールディングを有効化
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "  Color and UI Customization
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -170,7 +177,11 @@
 
     " Customize colors
     let g:iceberg_overrides = {
-        \ 'Todo': { 'guifg': '303030', 'guibg': 'f0f000', 'ctermfg': 'Black', 'ctermbg': 'Yellow', 'attr': 'bold' },
+        \ 'Todo': { 'guifg': '303030',
+        \           'guibg': 'f0f000',
+        \           'ctermfg': 'Black',
+        \           'ctermbg': 'Yellow',
+        \           'attr': 'bold' },
         \  'Comment': { 'guifg': 'ccc' },
     \}
 
@@ -191,6 +202,7 @@
     highlight Folded ctermbg=none
     highlight EndOfBuffer ctermbg=none
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " File Tree Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -209,6 +221,7 @@
 
     " Git 状態をアイコンで表示（オプション）
     let g:NERDTreeGitStatusUseNerdFonts = 1
+
         " Modified  : ファイルが変更された場合の表示
         " Staged    : ファイルがステージに追加された場合の表示
         " Untracked : 未追跡ファイルの表示
@@ -220,17 +233,17 @@
         " Clean     : クリーンなファイルの表示
         " Unknown   : 不明な状態のファイルの表示
     let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'+',
-                \ 'Untracked' :'U',
-                \ 'Renamed'   :'R',
-                \ 'Unmerged'  :'!',
-                \ 'Deleted'   :'X',
-                \ 'Dirty'     :'#',
-                \ 'Ignored'   :'_',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
+            \ 'Modified'  :'✹',
+            \ 'Staged'    :'+',
+            \ 'Untracked' :'U',
+            \ 'Renamed'   :'R',
+            \ 'Unmerged'  :'!',
+            \ 'Deleted'   :'X',
+            \ 'Dirty'     :'#',
+            \ 'Ignored'   :'_',
+            \ 'Clean'     :'✔︎',
+            \ 'Unknown'   :'?',
+        \ }
 
     " ファイルが指定されていない場合にのみ NERDTree を開く
     " autocmd VimEnter * if argc() == 0 | NERDTree | endif
@@ -244,6 +257,7 @@
     "     endif
     " endfunction
     " autocmd VimEnter * call StartUpNERDTree()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Configuration
@@ -260,9 +274,10 @@
     highlight GitGutterChange ctermfg=blue
     highlight GitGutterDelete ctermfg=red
 
-    " FZF git checkout
+    " FZF `$ git checkout`
     let g:fzf_checkout_git_options = '--sort=-committerdate'
-    nnoremap <silent><C-f> :GBranches<CR>
+    " nnoremap <silent><C-f> :GBranches<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Linters Configuration
@@ -283,7 +298,12 @@
     " Fix on save (2 means fix only when supported by file type)
     let g:ale_fix_on_save = 2
 
-    " SQL Language Server configuration / cf. httpqs://github.com/joe-re/sql-language-server
+    " SQL
+    " eg. CTEs の前後にマーキング（"-- {{{ CTE start -- }}} CTE end"）
+    "     - Close with zc (all with zM)
+    "     - Open  with zo (all with zR)
+    autocmd FileType sql setlocal foldmethod=marker
+    " cf. httpqs://github.com/joe-re/sql-language-server
     let g:LanguageClient_serverCommands = {
         \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
     \}
@@ -291,21 +311,28 @@
     let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 0 --spaces 0 --no-extra-line'
 
     " Python
+    autocmd FileType python setlocal foldmethod=indent " Folding
     " autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+
+    " JavaScript
+    autocmd FileType javascript setlocal foldmethod=indent
 
     " Terroform
     let g:terraform_fmt_on_save=1
 
     " CSV
     " let g:csv_no_conceal=1         " デリミタ表示
-    let g:csv_highlight_column='y' " カーソルが列をハイライト
+    " let g:csv_highlight_column='y' " カーソルが列をハイライト
     let b:csv_headerline=1         " ヘッダハイライトキャンセル行
+
+    " Markdown
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Search Configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " fzf with ctrl+p
+    " FZF with ctrl+p
     fun! FzfOmniFiles()
         let is_git = system('git status')
         if v:shell_error
@@ -316,7 +343,7 @@
     endfun
     nnoremap <C-p> :call FzfOmniFiles()<cr>
 
-    " fzf file search look like IDE with ctrl+g
+    " FZF file search look like IDE with ctrl+g
     command! -bang -nargs=* Rg
         \ call fzf#vim#grep(
         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
@@ -340,7 +367,7 @@
     " バッファ検索を開く
     nnoremap fb :Buffers<CR>
 
-    " fpでバッファの中で1つ前に開いたファイルを開く
+    " バッファの中で1つ前に開いたファイルを開く
     nnoremap fp :Buffers<CR><CR>
 
     " 開いているファイルの文字列検索を開く
@@ -363,6 +390,7 @@
 
     " ESC 2回押しでハイライト消去
     nnoremap <ESC><ESC> :nohl<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Display
@@ -394,19 +422,20 @@
     " Open terminal with tm
     nnoremap tm :belowright :terminal<CR>
 
-    "　Split Screen settings
-    " (縦)画面分割  ctrl+s→ s
-    " (横)画面分割       └→ v
+    " Split Screen settings
+    " with ctrl+s-> s (sideways)
+    "           └-> v (vertical)
     nnoremap <C-s><C-s> :split<CR>:set laststatus=2<CR>
     nnoremap <C-s><C-v> :vsplit<CR><C-w>w:set laststatus=2<CR>
-    " 新規タブを開く/閉じる with ctrl+t/w
-    nnoremap <C-t> :tabnew<cr>
-    nnoremap <C-w> :tabclose<cr>
-    " ウィンドウ切り替え tab/shift+tab
+    " Switch Screen with tab/shift+tab
     nnoremap <Tab> <C-w><C-w>
     nnoremap <S-TaB> <C-w>W
-    " 右/左のタブへ with ctrl+n/+shift+p
-    " nnoremap <C-n> :tabnext<cr>
+
+    " New open&close Tab with ctrl+t/w
+    nnoremap <C-t> :tabnew<cr>
+    nnoremap <C-w> :tabclose<cr>
+    " 右/左のタブへ with ctrl+n
+    nnoremap <C-n> :tabnext<CR>
     " nnoremap <C-p> :tabprevious<cr>
 
     " Cursor settings
@@ -415,7 +444,7 @@
     let &t_SI.="\e[5 q"
     let &t_EI.="\e[1 q"
     let &t_te.="\e[0 q"
-    " [Plug] マルチカーソル with ctrl＋k
+    " マルチカーソル with ctrl＋k
     let g:VM_maps = {}
     let g:VM_maps['Find Under'] = '<C-k>'
     let g:VM_maps['Find Subword Under'] = '<C-k>'
@@ -434,17 +463,19 @@
     " 自動インデント
     inoremap {<Enter> {}<Left><CR><CR><BS><Up><Right>
     "（矩形選択）複数行Tabインデント
-    " nnoremap <C-v><tab> S-i tab esc
+    " nnoremap <C-v> <S-i><tab><esc>
 
-    " Move current line up or down
+    " Move current line up / down
     " cf. https://qiita.com/itmammoth/items/312246b4b7688875d023
     nnoremap <A-Up> "zdd<Up>"zP
     nnoremap <A-Down> "zdd"zp
     vnoremap <A-Up> "zx<Up>"zP`[V`]
     vnoremap <A-Down> "zx"zp`[V`]
 
-    " 該当行の複製 with ctrl+shift+D
+    " Duplicate the row with ctrl+d
     " cf. https://qiita.com/HyunwookPark/items/2bd5393fcadac82a88d1
+    nnoremap <C-d> yyp
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
