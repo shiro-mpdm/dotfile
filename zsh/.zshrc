@@ -1,4 +1,4 @@
-<< \COMMENT
+:<< \COMMENT
 ------------------------------------------------------------------------------
 % man zsh
 ・Welcome to Zsh    https://www.zsh.org/
@@ -18,7 +18,6 @@ source $ZPLUG_HOME/init.zsh
 # zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
@@ -118,10 +117,11 @@ function precmd() {
     else
         VENV_NAME=""
     fi
-    PROMPT="🐻‍❄️ \
-%{${fg[blue]}%}@\
+    PROMPT="
+🐻‍❄️ \
+%{${fg[blue]}%}@ \
 %{${fg[blue]}%}${VENV_NAME:+[env:$VENV_NAME]}\
-%{${fg[cyan]}%} [%~] \
+%{${fg[cyan]}%}[%~]\
 %{${fg[green]}%}${vcs_info_msg_0_}
 %{${fg[cyan]}%} └ \
 %{${fg[magenta]}%}%#\
@@ -159,6 +159,7 @@ alias cleanup_git='git branch --merged | egrep -v "(^\*|main|master|develop|stag
 
 # --- [a] PATHの設定 ---
 paths=(
+    "/opt/homebrew/bin"             #
     "$PYENV_ROOT/bin"               # Python関連
     "$HOME/.nodebrew/current/bin"   # Node.js関連
     "/Library/PostgreSQL/14/bin"    # PostgreSQL関連
@@ -183,11 +184,16 @@ cli_scripts=(
     "$(gh completion -s zsh)"    # GitHub CLI
     "$(pyenv init -)"            # Pyenv
     "$(direnv hook zsh)"         # Direnv
-    # "$(gcloud info --format="value(config.paths.sdk_root)")/path.zsh.inc" # GCP SDK
-    "$HOME/google-cloud-sdk/path.zsh.inc" # GCP SDK
-    "$HOME/google-cloud-sdk/completion.zsh.inc"
 )
 for script in "${cli_scripts[@]}"; do
     [[ -n "$script" ]] && eval "$script"
 done
 
+gcloud_scripts=(
+    "$HOME/google-cloud-sdk/path.zsh.inc"
+    "$HOME/google-cloud-sdk/completion.zsh.inc"
+    "$(gcloud info --format="value(config.paths.sdk_root)")/path.zsh.inc"
+)
+for script in "${gcloud_scripts[@]}"; do
+    [[ -f "$script" ]] && source "$script"
+done

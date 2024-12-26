@@ -1,50 +1,10 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  @shiroimon                                            ..dkQa,.          "
-"                  `     `   `  `  `  `  `  `  `  ` ` .JHkqkqqqmHMN, `     "
-"   `  `  `  `  `     `     `   `                   ` dqkkkkkqqkqqHMb   `  "
-"                         ` .?""Wp      ` ` `     .qNY"MNHHNNHqqqqmHN      "
-"  `    `   `  `  `  `  ``.%    .M. `..JWMMMN..` dg.."   .TMMMNqqqqmM_   ` "
-"    `                   .F      dl.MWfVVVVfVWMN.MPW'       UMNqqqqqM!     "
-"                `       d}    ` dNVVyVVyVVVVpppMMb.         UNmmqqM^      "
-"       `  `  `     `  ` dm.    .#fVVVyVVVVVWppbbMMe.         ?NNY^        "
-"  `     `  `     `   .,?!    ` J#fVVyVVVVfpppbbpbMMp   `      .Wp     `  `"
-"     `  .?7?7N,` .,!           ,NVVVyVVVfpppbpbpbM%Ub           We        "
-"       J)    ,N.C               WNVVVVVWppppbbpbWF  H|    `      M,       "
-"  `    d]     ,"`          `  `  TNkVVWpppbppbWWMe. .Hx `    `   ,N       "
-"       ,N          `  `  `  (p    .WNkbpbpbbkY!..(Mx .N.         `d]  `   "
-"        Wp   `              `        _T9""=~...``. Tm.Jb `        (b      "
-"    `    ?M,    `   `  ..,jAg,              `..JJzT4MN,N.         ,#    ` "
-"         `J\   `JD` .?Nm#!   M,              ?!    ..?WM_     `  `.F`     "
-"  `     ` M        .@   Hm,..J] `  `   `                          J\      "
-"         .#        .M, .J'  .Y           `                        #       "
-"     `   .N    `     TN-..?!`    `  `      `  `        `    `  ``,^     ` "
-"  `      `M{                          `         `  `            .F        "
-"          d[                  `   `     `  `    `    `  ` `  ` .P         "
-"     `    ,N   `  `   `  `       `   `       `     7T9YTUwAgJJ/!    `  `  "
-"      ` ...dn..             `            `          .........-N           "
-"  ``..XHfffffWMN,  `          `   `   `     `        ..``.``..M-          "
-"  .HffHHVVVVVffWM[   `  `  `    `         `    `   `   ...`..`d] `        "
-" .NVVWNVVyVVVVVVWM.                `   `        `        .....,@    `  `  "
-" ,NffM#fVVVVVVVfpM[      `   `       `     `  `            .`.-N          "
-"  MkpWMNppfpppppbM%  `         `  `     `         `       `..` M.         "
-"  JNpbbppppppppbW#      `  `                `       `   ` ..`..M{  `    ` "
-"   WNbbpbbbpppbpM^            `    `  `  `     `      `    .`.`d]         "
-"   .MMNkWbbWkKY=.   `           `               `  `       ....JF    `    "
-"    N. _??!`.         `  `  `       `  `  `  `             ..`.(F         "
-"   `Jb                        `   `               `  `     ...`(F       ` "
-"    `(Ma.       `  ` .,    `            `  `  `         `  .`..J%  `      "
-"       (Wa..   `  `..7N.       `   `  `         `          .`.`d:         "
-"           _?""""7!   MP    `     `         `     `  `     `..-@    `  `  "
-"""""""""""""""""""""""""""""""" cf. https://tool-taro.com/image_to_ascii/ "
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
     " Install `vim-plug` if not installed.
     if empty(glob('~/.vim/autoload/plug.vim'))
-        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 
@@ -63,7 +23,8 @@
         Plug 'junegunn/fzf.vim'
 
         " Git integration
-        Plug 'airblade/vim-gitgutter'         " Show git changes
+        Plug 'airblade/vim-gitgutter'
+        " Plug 'vim-signify'                    " more lighter gitgutter
         Plug 'tpope/vim-fugitive'             " Execute Git command in Vim
         Plug 'Xuyuanp/nerdtree-git-plugin'    " Viewing Git status in NerdTree
 
@@ -108,6 +69,8 @@
     " Encoding settings
     " cf. https://zenn.dev/aikige/articles/how-vim-recognizes-encoding
     set encoding=utf-8
+    set termencoding=utf-8
+    set guicursor=
     set fileencoding=&encoding
     set fileencodings=utf-8,ucs-bom,iso-2022-jp,cp932,euc-jp,default,latin
     set ambiwidth=single
@@ -143,7 +106,7 @@
     " set termwinsize=14x0             " ターミナルのサイズを指定
     set updatetime=250               " 反映時間短縮(デフォルト4,000ms)
     set virtualedit=onemore          " 行末の一文字後ろに、カーソルを移動できる
-    set autoread                     " 
+    set autoread                     "
     set backspace=indent,eol,start   " backspaceでdeleteする
     set clipboard+=unnamed           " yank をクリップボードに貼付け
     set history=5000                 " 履歴保存数
@@ -154,7 +117,7 @@
     set ttimeoutlen=50               " モード変更遅延解消
     set mouse=a                      " マウススクロール（トラックパッド使用可）
     set whichwrap=b,s,h,l,<,>,[,],~  " 行頭行末で、前後の行へのカーソル移動を可能にする
-    set autochdir                    " 
+    set autochdir                    "
 
     " Status-line settings
     " [0] hiden
@@ -167,6 +130,7 @@
     set foldmethod=syntax            " 自動で構造に基づいたフォールディングを有効化
     set foldlevel=1                  " デフォルトで折り畳みを 1 段階に設定
     set foldenable                   " フォールディングを有効化
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "  Color and UI Customization
@@ -183,7 +147,7 @@
         \           'ctermbg': 'Yellow',
         \           'attr': 'bold' },
         \  'Comment': { 'guifg': 'ccc' },
-    \}
+        \}
 
     " Highlight trailing spaces
     augroup HighlightTrailingSpaces
@@ -213,8 +177,18 @@
     " Show hidden files in NERDTree with shift+f
     let NERDTreeShowHidden = 1
 
-    " NerdTree を起動時に自動的に開く設定
-    autocmd vimenter * NERDTree
+    " " ファイルが指定されていない場合にのみ NERDTree を開く
+    " autocmd VimEnter *
+    "    \ if argc() ==0 |
+    "    \    NERDTree |
+    "    \    wincmd p |
+    "    \ end if
+    "
+    " " NERDTree のみの場合、`:q` でVimを終了
+    " autocmd BufEnter *
+    "    \ if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree) |
+    "    \    quit |
+    "    \ endif
 
     " NERDTree のウィンドウサイズ
     let g:NERDTreeWinSize=50
@@ -222,41 +196,28 @@
     " Git 状態をアイコンで表示（オプション）
     let g:NERDTreeGitStatusUseNerdFonts = 1
 
-        " Modified  : ファイルが変更された場合の表示
-        " Staged    : ファイルがステージに追加された場合の表示
-        " Untracked : 未追跡ファイルの表示
-        " Renamed   : ファイルがリネームされた場合の表示
-        " Unmerged  : マージ競合が発生した場合の表示
-        " Deleted   : 削除されたファイルの表示
-        " Dirty     : 変更が加えられたファイルの表示
-        " Ignored   : 無視されているファイルの表示
-        " Clean     : クリーンなファイルの表示
-        " Unknown   : 不明な状態のファイルの表示
+    " Modified   : ファイルが変更された場合の表示
+    " Staged     : ファイルがステージに追加された場合の表示
+    " Untracked  : 未追跡ファイルの表示
+    " Renamed    : ファイルがリネームされた場合の表示
+    " Unmerged   : マージ競合が発生した場合の表示
+    " Deleted    : 削除されたファイルの表示
+    " Dirty      : 変更が加えられたファイルの表示
+    " Ignored    : 無視されているファイルの表示
+    " Clean      : クリーンなファイルの表示
+    " Unknown    : 不明な状態のファイルの表示
     let g:NERDTreeGitStatusIndicatorMapCustom = {
-            \ 'Modified'  :'✹',
-            \ 'Staged'    :'+',
-            \ 'Untracked' :'U',
-            \ 'Renamed'   :'R',
-            \ 'Unmerged'  :'!',
-            \ 'Deleted'   :'X',
-            \ 'Dirty'     :'#',
-            \ 'Ignored'   :'_',
-            \ 'Clean'     :'✔︎',
-            \ 'Unknown'   :'?',
+        \   'Modified'  :'✹',
+        \   'Staged'    :'+',
+        \   'Untracked' :'U',
+        \   'Renamed'   :'R',
+        \   'Unmerged'  :'!',
+        \   'Deleted'   :'X',
+        \   'Dirty'     :'#',
+        \   'Ignored'   :'_',
+        \   'Clean'     :'✔︎',
+        \   'Unknown'   :'?',
         \ }
-
-    " ファイルが指定されていない場合にのみ NERDTree を開く
-    " autocmd VimEnter * if argc() == 0 | NERDTree | endif
-
-    " Vim起動時にNERDTreeが開かれない場合に備えて、NERDTreeの自動起動をスクリプトで管理
-    " function! StartUpNERDTree()
-    "     " ファイルが指定されていない場合のみNERDTreeを開く
-    "     if argc() == 0
-    "         NERDTree
-    "         wincmd p
-    "     endif
-    " endfunction
-    " autocmd VimEnter * call StartUpNERDTree()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -285,34 +246,39 @@
 
     " ALE linters configuration
     let g:ale_linters = {
-        \ 'python': ['flake8', 'mypy', 'pylint'],
-        \ 'javascript': ['eslint'],
-    \}
+        \   'python': ['flake8', 'mypy', 'pylint'],
+        \   'javascript': ['eslint'],
+        \}
 
     " Auto-fix configuration for multiple file types
     let g:ale_fixers = {
-        \ 'python': ['black', 'isort'],
-        \ 'sql': ['pgformatter'],
-    \}
+        \   'python': ['black', 'isort'],
+        \   'sql': ['pgformatter'],
+        \}
 
     " Fix on save (2 means fix only when supported by file type)
     let g:ale_fix_on_save = 2
 
     " SQL
     " eg. CTEs の前後にマーキング（"-- {{{ CTE start -- }}} CTE end"）
+    "     vim defoult
     "     - Close with zc (all with zM)
     "     - Open  with zo (all with zR)
-    autocmd FileType sql setlocal foldmethod=marker
+    autocmd FileType sql setlocal foldmethod=marker foldmarker={{{,}}}
     " cf. httpqs://github.com/joe-re/sql-language-server
     let g:LanguageClient_serverCommands = {
-        \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
-    \}
+        \   'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+        \}
     " pgformatter options for SQL formatting
     let g:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 0 --spaces 0 --no-extra-line'
 
+    " Auto-Fix
+    let b:ale_fixers = ['pgformatter']
+    let g:ale_fix_on_save = 1
+    let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 2 --spaces 2 --no-extra-line'
+
     " Python
-    autocmd FileType python setlocal foldmethod=indent " Folding
-    " autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType python setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 
     " JavaScript
     autocmd FileType javascript setlocal foldmethod=indent
@@ -324,8 +290,6 @@
     " let g:csv_no_conceal=1         " デリミタ表示
     " let g:csv_highlight_column='y' " カーソルが列をハイライト
     let b:csv_headerline=1         " ヘッダハイライトキャンセル行
-
-    " Markdown
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -341,51 +305,43 @@
             :GitFiles
         endif
     endfun
-    nnoremap <C-p> :call FzfOmniFiles()<cr>
+    nnoremap <C-p> :call FzfOmniFiles()<CR>
 
     " FZF file search look like IDE with ctrl+g
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0.5, 'xoffset': 0.5, 'border': 'sharp' } }
     command! -bang -nargs=* Rg
         \ call fzf#vim#grep(
-        \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+        \   'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!node_modules/*" --glob "!.git/*" '.shellescape(<q-args>), 1,
         \   <bang>0 ? fzf#vim#with_preview('up:60%')
         \           : fzf#vim#with_preview('right:52%:hidden', '?'),
         \   <bang>0)
+
     nnoremap <C-g> :Rg<CR>
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+    " <Leader>f - ファイルを検索 (/+f)
+    " <Leader>s - ワードを検索
+    " <Leader>b - 開いているバッファを検索
+    " fb        - バッファリストを開く
+    " fp        - 直前のバッファを開く
+    " fl        - 開いているファイルの文字列検索
+    " fm        - マーク検索を開く
+    " fh        - ファイル閲覧履歴検索を開く
+    " fc        - コミット履歴検索を開く
     nnoremap <Leader>f :Files<CR>
     nnoremap <Leader>s :Rg<CR>
     nnoremap <Leader>b :Buffer<CR>
-
-    " Auto-Fix
-    let b:ale_fixers = ['pgformatter']
-    let g:ale_fix_on_save = 1
-    let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 2 --spaces 2 --no-extra-line'
-
-    " バッファ検索を開く
     nnoremap fb :Buffers<CR>
-
-    " バッファの中で1つ前に開いたファイルを開く
     nnoremap fp :Buffers<CR><CR>
-
-    " 開いているファイルの文字列検索を開く
     nnoremap fl :BLines<CR>
-
-    " マーク検索を開く
     nnoremap fm :Marks<CR>
-
-    " ファイル閲覧履歴検索を開く
     nnoremap fh :History<CR>
-
-    " コミット履歴検索を開く
     nnoremap fc :Commits<CR>
 
-    " カーソル位置の単語をファイル検索する
+    " 単語をファイル検索
     nnoremap fr vawy:Rg <C-R>"<CR>
-
-    " 選択した単語をファイル検索する
     xnoremap fr y:Rg <C-R>"<CR>
 
     " ESC 2回押しでハイライト消去
@@ -478,4 +434,3 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-
