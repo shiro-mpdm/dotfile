@@ -8,6 +8,8 @@
     program = /opt/homebrew/bin/gpg
 [push]
     autoSetupRemote = true
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 [core]
     # 改行の振る舞い
     autocrlf = input
@@ -31,6 +33,7 @@
     # スタッシュファイルの確認と反映
     stl = stash list
     stp = stash pop
+
     # トラッキングしているファイルのステータスのみ表示
     # st = status -uno
     st = status -sb -uno
@@ -38,14 +41,15 @@
     # ステージングからファイルを外す
     re = restore --staged
 
-
     # ------------------------------
     # ブランチ移動
     # ------------------------------
     co = checkout
-    # ﾁｪｯｸｱｳﾄしてﾌﾞﾗﾝﾁ更新
+    # ﾁｪｯｸｱｳﾄしてﾌブランチ更新
     # cc = checkout master && git pull
 
+    # 不要ブランチを削除
+    cleanup = "!f() { git branch --merged | egrep -v '(^\\*|main|master|develop|staging)' | xargs -p git branch -d; }; f"
 
     # ------------------------------
     # ﾛｸﾞや差分確認
@@ -63,9 +67,9 @@
     show = show --show-signature
 
     # git diff系( 差分確認)
-    dif   = diff --color-words
-    difc  = diff --cached
-    difcc = diff --cached --color-words
+    diff   = diff --color-words
+    diffc  = diff --cached
+    diffcc = diff --cached --color-words
 
     # git-flow系
     fl = flow
@@ -74,13 +78,8 @@
     fr = flow release
     fh = flow hotfix
 
-
     # ------------------------------
     # 現在地確認
     # ------------------------------
     where = branch --contains         #そのコミットが属しているブランチを表示
     here = rev-parse --show-toplevel  # (=pwd)
-
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-

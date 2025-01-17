@@ -1,3 +1,7 @@
+# ===================================
+# Zsh Configuration
+# ===================================
+
 :<< \COMMENT
 ------------------------------------------------------------------------------
 % man zsh
@@ -7,15 +11,12 @@
 ------------------------------------------------------------------------------
 COMMENT
 
-# [0] プラグイン
-
+# [0] Plugins
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-# Load theme file
-# i.e. FMT
-#      zplug "repository", (options) use:file_name, from:file_sorce, as:file_kind
 # zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+# └> i.e. zplug "repository", (options) use:file_name, from:file_sorce, as:file_kind
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "mafredri/zsh-async"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -25,7 +26,7 @@ zplug "zsh-users/zsh-completions"
 zplug "chrissicool/zsh-256color"
 zplug "mrowa44/emojify", as:command
 
-# Install plugins if there are plugins that have not been installed
+# Install plugins if not installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -36,73 +37,114 @@ if ! zplug load; then
     echo "Failed to load plugins." >&2
 fi
 
+# zplug load || echo "Failed to load plugins."
 
-# [1] 基本設定
+# [1] Basic Settings
 export LANG=ja_JP.UTF-8
-autoload -Uz colors compinit vcs_info select-word-style
+autoload -Uz colors compinit vcs_info select-word-style edit-command-line
 colors
-compinit
+compinit -d "$XDG_CACHE_HOME/zsh/compdump" # Use XDG-compliant cache path
 select-word-style default
 
-# --- 補完設定
+# Completion settings (補完)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
-# --- 履歴設定 ---
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000
-export SAVEHIST=1000000
 
-# エラー終了したコマンドは履歴に追加しない
-zshaddhistory() {
+# [2] History Management (履歴)
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=50000
+export SAVEHIST=10000
+
+HISTORY_IGNORE="(vz|sz|cz|ls|cd|pwd|exit|cd ..|last_command=*|grep -vxF*|sed '$d' $HISTFILE*)"
+
+# コマンドが失敗した場合に履歴を即時更新し、最後のコマンドを削除
+precmd() {
     if [[ $? -ne 0 ]]; then
-        return 1
+        # Immediately write to $HISTFILE
+        fc -W
+
+        # Safely modify the history file
+        # ∵ $HISTFILE を直接操作せずに
+        #   テンポラリファイルを経由することでエラー時の安全性を確保
+        temp_histfile=$(mktemp)
+        if sed '$d' "$HISTFILE" > "$temp_histfile"; then
+            mv "$temp_histfile" "$HISTFILE"
+        else
+            echo "Error: Failed to update $HISTFILE" >&2
+            rm -f "$temp_histfile"
+        fi
     fi
-    return 0
 }
 
-# --- 打鍵設定 ---
-# bindkey '^R' history-incremental-pattern-search-backward
-# bindkey '^S' history-incremental-pattern-search-forward
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
-bindkey -v
+# 履歴を選択してコマンドラインに反映
+select_history() {
+    # Reload history to ensure the latest changes
+    fc -R "$HISTFILE"
+
+    # Use `awk` to create unique commands list
+    BUFFER=$(awk '!seen[$0]++ { for (i=2; i<=NF; i++) printf "%s ", $i; printf "\n" }' "$HISTFILE" | fzf --query="$BUFFER")
+
+    # Move cursor to the end of the command line
+    CURSOR=${#BUFFER}
+}
+# Assign with: Ctrl + R
+zle -N select_history
+bindkey '^r' select_history
+
+# --- 履歴検索 ---
+# bindkey '^R' history-incremental-pattern-search-backward  # 履歴を逆順検索
+bindkey '^P' history-beginning-search-backward            # 履歴開始部分から逆順検索
+bindkey '^N' history-beginning-search-forward             # 履歴開始部分から順方向検索
+
+# --- モード切替 ---
+bindkey -v  # Viモードを使用する場合は有効化
+
+# --- コマンドライン編集 ---
+zle -N edit-command-line
+bindkey '^[v' edit-command-line  # 長いコマンドの編集に便利 (esc+v)
 
 # --- 拡張設定 ---
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    # └> Ctrl+ R 履歴をﾌｧｼﾞｰ検索実行
-    # └> Alt + C ｶﾚﾝﾄﾃﾞｨﾚｸﾄﾘ配下を検索移動
+# └> Ctrl+ R 履歴をﾌｧｼﾞｰ検索実行
+# └> Alt + C ｶﾚﾝﾄﾃﾞｨﾚｸﾄﾘ配下を検索移動
 
 
-# [2] オプション設定
+# [3] オプション設定
 # --- 基本動作 ---
-setopt prompt_subst           # PROMPT変数内で変数参照を許可
-setopt no_beep                # 無効な操作時のビープ音を無効化
-setopt no_flow_control        # フロー制御（Ctrl+S, Ctrl+Q）を無効化
-setopt ignore_eof             # Ctrl+Dでのシェル終了を無効化
-setopt interactive_comments   # コマンド行内の「#」以降をコメントと認識
+setopt prompt_subst            # PROMPT変数内で変数参照を許可
+setopt no_beep                 # 無効な操作時のビープ音を無効化
+setopt no_flow_control         # フロー制御（Ctrl+S, Ctrl+Q）を無効化
+setopt ignore_eof              # Ctrl+Dでのシェル終了を無効化
+setopt interactive_comments    # コマンド行内の「#」以降をコメントと認識
 
 # --- 履歴関連 ---
-setopt extended_history       # 履歴にコマンド実行時間も記録
-setopt inc_append_history     # コマンド実行後即座に履歴に保存
-setopt hist_ignore_dups       # 直前と同じコマンドを履歴に追加しない
-setopt hist_ignore_all_dups   # 重複したコマンドを全て履歴から排除
-setopt hist_ignore_space      # 先頭がスペースのコマンドは履歴に残さない
-setopt hist_reduce_blanks     # 履歴保存時に余分なスペースを削除
-setopt share_history          # シェル間で履歴を共有
+setopt hist_expire_dups_first  # 重複した履歴を古いものから削除
+setopt extended_history        # 実行時間も記録
+setopt inc_append_history      # 実行後即座に保存
+setopt hist_ignore_dups        # 直前と同じコマンドを履歴に追加しない
+# setopt hist_ignore_all_dups   # 重複したコマンドを全て履歴から排除
+# └> NOT set this flag in order to keep past successful commands (and can be searched).
+setopt hist_ignore_space       # 先頭がスペースのコマンドは履歴に残さない
+setopt hist_reduce_blanks      # 履歴保存時に余分なスペースを削除
+setopt share_history           # シェル間で履歴を共有
+setopt hist_find_no_dups       # 履歴検索時に重複するエントリをスキップ
+setopt hist_save_no_dups       # 履歴保存時に重複するエントリをスキップ
+setopt hist_no_store           # 特定のコマンド（主にプライベート用途）を履歴に保存しない
+setopt no_flow_control
 
 # --- ディレクトリ操作 ---
-setopt auto_cd                # ディレクトリ名だけでcdコマンドとして扱う
-setopt auto_pushd             # cd時にディレクトリスタックに自動追加
-setopt pushd_ignore_dups      # 重複するディレクトリをスタックに追加しない
+setopt auto_cd                 # ディレクトリ名だけでcdコマンドとして扱う
+setopt auto_pushd              # cd時にディレクトリスタックに自動追加
+setopt pushd_ignore_dups       # 重複するディレクトリをスタックに追加しない
 
 # --- 拡張設定 ---
-setopt extended_glob          # 拡張グロブ（正規表現のようなパターン）を有効化
+setopt extended_glob           # 拡張グロブ（正規表現のようなパターン）を有効化
 
 
-# [3] プロンプト
+# [4] プロンプト
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats '%F{green}[%s:%b]%f'
@@ -110,17 +152,18 @@ zstyle ':vcs_info:*' actionformats '%F{red}[%s:%b|%a]%f'
 
 function precmd() {
     vcs_info
-    if [[ -n "$PIPENV_ACTIVE" ]]; then
-        VENV_NAME=$(basename "$(pipenv --venv 2>/dev/null)")
-    elif [[ -n "$VIRTUAL_ENV" ]]; then
-        VENV_NAME=$(basename "$VIRTUAL_ENV")
-    else
-        VENV_NAME=""
-    fi
+    # if [[ -n "$PIPENV_ACTIVE" ]]; then
+    #     VENV_NAME=$(basename "$(pipenv --venv 2>/dev/null)")
+    # elif [[ -n "$VIRTUAL_ENV" ]]; then
+    #     VENV_NAME=$(basename "$VIRTUAL_ENV")
+    # else
+    #     VENV_NAME=""
+    # fi
+    VENV_NAME="${PIPENV_ACTIVE:+[env:$(basename "$(pipenv --venv 2>/dev/null)")]${VIRTUAL_ENV:+[env:$(basename "$VIRTUAL_ENV")]}}"
     PROMPT="
 🐻‍❄️ \
 %{${fg[blue]}%}@ \
-%{${fg[blue]}%}${VENV_NAME:+[env:$VENV_NAME]}\
+%{${fg[blue]}%}${VENV_NAME}\
 %{${fg[cyan]}%}[%~]\
 %{${fg[green]}%}${vcs_info_msg_0_}
 %{${fg[cyan]}%} └ \
@@ -130,12 +173,13 @@ function precmd() {
 precmd_functions+=( precmd )
 
 
-# [4] エイリアス
+# [5] エイリアス
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias history='history -t "%F %T"'
+alias -g j='ja=en'
 
 export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls='ls -GF'
@@ -147,10 +191,8 @@ alias -g G='| grep'
 alias -g W='| wc -l'
 alias -g P='| pbcopy'
 
-alias cleanup_git='git branch --merged | egrep -v "(^\*|main|master|develop|staging)" | xargs -p git branch -d'
 
-
-# [5] 環境設定
+# [6] 環境設定
 # e.g.
 #   # Python
 #   export PATH="$PYENV_ROOT/bin:$PATH" -> [a]へ

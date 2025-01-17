@@ -33,15 +33,56 @@ config.window_background_opacity = 0.75
 config.macos_window_background_blur = 20
 
 -- Tabbar
-config.use_fancy_tab_bar = false
-config.enable_wayland = false -- Waylandサポート無効（Mac）
+-- config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true -- Tabbar下方設置
+-- config.enable_wayland = false -- Waylandサポート無効（Mac）
+-- config.window_decorations = "RESIZE" -- タイトルバー除去
+config.hide_tab_bar_if_only_one_tab = true -- タブが一つなら非表示
+
+-- タブバーの形状と透過
+config.window_frame = {
+    inactive_titlebar_bg = "none",
+    active_titlebar_bg = "none",
+}
+config.window_background_gradient = {
+    colors = { "#000" },
+}
+config.show_new_tab_button_in_tab_bar = false --[+]ボタン除去
+-- config.show_close_tab_button_in_tabs = false --[×]ボタン除去
+config.colors = {
+    tab_bar = {
+        inactive_tab_edge = "none",
+    },
+}
 
 -- formating title in tabbar
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-    local process_name = tab.active_pane.foreground_process_name:match("[^/]+$") or "N/A"
-    local cwd = tab.active_pane.current_working_dir
-    local short_cwd = cwd and cwd:match("[^/]+$") or "No Dir"
-    return string.format(" %s | %s ", process_name, short_cwd)
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    local background = "#6b7089"
+    local foreground = "#aaa"
+    local edge_background = "none"
+
+    if tab.is_active then
+        background = "#84a0c6"
+        foreground = "#fff"
+    end
+
+    local edge_foreground = background
+    local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 2) .. "   "
+
+    return {
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_LEFT_ARROW },
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = title },
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_RIGHT_ARROW },
+    }
 end)
 
 -- Scrollbar

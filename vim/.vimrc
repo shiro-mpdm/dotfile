@@ -50,20 +50,12 @@
         Plug 'osyo-manga/vim-brightest'       " Highlight cursor line
         Plug 'yuttie/comfortable-motion.vim'  " Smooth scrolling
 
-        " Status Bar
-        Plug 'bling/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-
-        " Screen operation
-        " Plug 'simeji/winresizer'              " Easy resizing windows
-        " Plug 't9md/vim-textmanip'             " Move/Duplicate text intuitively
-
     call plug#end()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
-"          https://vim-jp.org/vimdoc-ja/options.html
+"   https://vim-jp.org/vimdoc-ja/options.html
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
     " Encoding settings
@@ -77,8 +69,6 @@
     set langmenu=none
     set fileformats=unix,dos,mac
     " set linespace=4
-    " set guifont=Cica:h14
-    " set guifont=HackGen\ Console:h12
     set guifont=Fira\ Code\ Nerd\ Font:h12
 
     " Indentation settings
@@ -119,35 +109,38 @@
     set whichwrap=b,s,h,l,<,>,[,],~  " 行頭行末で、前後の行へのカーソル移動を可能にする
     set autochdir                    "
 
-    " Status-line settings
-    " [0] hiden
-    " [1] Only if there are multiple windows
-    " [2] Always visible
-    set laststatus=2
+    " Statusline settings
     set statusline=%F%m%r%h%w\ [%{&fileencoding}]\ [row=%l/%L]
 
+    set laststatus=2 " 常時表示
+
+    " ファイル末尾以降の`~`の表示を削除
+    set fillchars+=eob:\\x20
+
     " Folding settings
-    set foldmethod=syntax            " 自動で構造に基づいたフォールディングを有効化
-    set foldlevel=1                  " デフォルトで折り畳みを 1 段階に設定
-    set foldenable                   " フォールディングを有効化
+    "   vim defoult
+    "   - Close with zc (all with zM)
+    "   - Open  with zo (all with zR)
+    " set foldmethod=syntax            " 自動で構造に基づいたフォールディングを有効化
+    " set foldlevel=1                  " デフォルトで折り畳みを 1 段階に設定
+    " set foldenable                   " フォールディングを有効化
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "  Color and UI Customization
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
+    " Customize colors
     syntax enable
     colorscheme iceberg
-
-    " Customize colors
-    let g:iceberg_overrides = {
-        \ 'Todo': { 'guifg': '303030',
-        \           'guibg': 'f0f000',
-        \           'ctermfg': 'Black',
-        \           'ctermbg': 'Yellow',
-        \           'attr': 'bold' },
-        \  'Comment': { 'guifg': 'ccc' },
-        \}
+    " let g:iceberg_overrides = {
+    "    \ 'Todo': { 'guifg': '303030',
+    "    \           'guibg': 'f0f000',
+    "    \           'ctermfg': 'Black',
+    "    \           'ctermbg': 'Yellow',
+    "    \           'attr': 'bold' },
+    "    \  'Comment': { 'guifg': 'ccc' },
+    "    \}
 
     " Highlight trailing spaces
     augroup HighlightTrailingSpaces
@@ -166,6 +159,11 @@
     highlight Folded ctermbg=none
     highlight EndOfBuffer ctermbg=none
 
+    " Change gitgutter symbol colors
+    highlight GitGutterAdd ctermfg=green
+    highlight GitGutterChange ctermfg=blue
+    highlight GitGutterDelete ctermfg=red
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " File Tree Configuration
@@ -177,35 +175,22 @@
     " Show hidden files in NERDTree with shift+f
     let NERDTreeShowHidden = 1
 
-    " " ファイルが指定されていない場合にのみ NERDTree を開く
-    " autocmd VimEnter *
-    "    \ if argc() ==0 |
-    "    \    NERDTree |
-    "    \    wincmd p |
-    "    \ end if
-    "
-    " " NERDTree のみの場合、`:q` でVimを終了
-    " autocmd BufEnter *
-    "    \ if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree) |
-    "    \    quit |
-    "    \ endif
-
     " NERDTree のウィンドウサイズ
-    let g:NERDTreeWinSize=50
+    let g:NERDTreeWinSize=45
 
     " Git 状態をアイコンで表示（オプション）
     let g:NERDTreeGitStatusUseNerdFonts = 1
 
-    " Modified   : ファイルが変更された場合の表示
-    " Staged     : ファイルがステージに追加された場合の表示
-    " Untracked  : 未追跡ファイルの表示
-    " Renamed    : ファイルがリネームされた場合の表示
-    " Unmerged   : マージ競合が発生した場合の表示
-    " Deleted    : 削除されたファイルの表示
-    " Dirty      : 変更が加えられたファイルの表示
-    " Ignored    : 無視されているファイルの表示
-    " Clean      : クリーンなファイルの表示
-    " Unknown    : 不明な状態のファイルの表示
+    " Modified   - ファイルが変更された場合の表示
+    " Staged     - ファイルがステージに追加された場合の表示
+    " Untracked  - 未追跡ファイルの表示
+    " Renamed    - ファイルがリネームされた場合の表示
+    " Unmerged   - マージ競合が発生した場合の表示
+    " Deleted    - 削除されたファイルの表示
+    " Dirty      - 変更が加えられたファイルの表示
+    " Ignored    - 無視されているファイルの表示
+    " Clean      - クリーンなファイルの表示
+    " Unknown    - 不明な状態のファイルの表示
     let g:NERDTreeGitStatusIndicatorMapCustom = {
         \   'Modified'  :'✹',
         \   'Staged'    :'+',
@@ -218,26 +203,6 @@
         \   'Clean'     :'✔︎',
         \   'Unknown'   :'?',
         \ }
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Git Configuration
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    " GitGutter navigation
-    nnoremap g[ :GitGutterPrevHunk<CR>
-    nnoremap g] :GitGutterNextHunk<CR>
-    nnoremap gh :GitGutterLineHighlightsToggle<CR>
-    nnoremap gp :GitGutterPreviewHunk<CR>
-
-    " Change gitgutter symbol colors
-    highlight GitGutterAdd ctermfg=green
-    highlight GitGutterChange ctermfg=blue
-    highlight GitGutterDelete ctermfg=red
-
-    " FZF `$ git checkout`
-    let g:fzf_checkout_git_options = '--sort=-committerdate'
-    " nnoremap <silent><C-f> :GBranches<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -261,9 +226,6 @@
 
     " SQL
     " eg. CTEs の前後にマーキング（"-- {{{ CTE start -- }}} CTE end"）
-    "     vim defoult
-    "     - Close with zc (all with zM)
-    "     - Open  with zo (all with zR)
     autocmd FileType sql setlocal foldmethod=marker foldmarker={{{,}}}
     " cf. httpqs://github.com/joe-re/sql-language-server
     let g:LanguageClient_serverCommands = {
@@ -293,8 +255,18 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-" Search Configuration
+" Search Configuration Mapping
 """"""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " FZF `$ git checkout`
+    let g:fzf_checkout_git_options = '--sort=-committerdate'
+    " nnoremap <silent><C-f> :GBranches<CR>
+
+    " GitGutter navigation
+    nnoremap g[ :GitGutterPrevHunk<CR>
+    nnoremap g] :GitGutterNextHunk<CR>
+    nnoremap gh :GitGutterLineHighlightsToggle<CR>
+    nnoremap gp :GitGutterPreviewHunk<CR>
 
     " FZF with ctrl+p
     fun! FzfOmniFiles()
@@ -349,7 +321,7 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-" Display
+" Other Configuration Mapping
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
     " Commentout with ctrl+/
@@ -368,6 +340,7 @@
 
     " Paste from clipboard with ctrl+v
     vmap <C-v> "+y
+    xnoremap p "_d"0P
 
     " Reroad with shift+r
     nnoremap <S-r> :e!<CR>
@@ -383,6 +356,7 @@
     "           └-> v (vertical)
     nnoremap <C-s><C-s> :split<CR>:set laststatus=2<CR>
     nnoremap <C-s><C-v> :vsplit<CR><C-w>w:set laststatus=2<CR>
+
     " Switch Screen with tab/shift+tab
     nnoremap <Tab> <C-w><C-w>
     nnoremap <S-TaB> <C-w>W
@@ -400,28 +374,33 @@
     let &t_SI.="\e[5 q"
     let &t_EI.="\e[1 q"
     let &t_te.="\e[0 q"
+
     " マルチカーソル with ctrl＋k
-    let g:VM_maps = {}
-    let g:VM_maps['Find Under'] = '<C-k>'
-    let g:VM_maps['Find Subword Under'] = '<C-k>'
-    " カーソル行頭/末移動 with shift+h/l
-    nnoremap <S-h> 0
-    vnoremap <S-h> 0
-    nnoremap <S-l> $
-    vnoremap <S-l> $
+    " let g:VM_maps = {}
+    " let g:VM_maps['Find Under'] = '<C-k>'
+    " let g:VM_maps['Find Subword Under'] = '<C-k>'
+
+    " カーソル行頭/末移動 with shift+←/→
+    nnoremap <S-Left> 0
+    vnoremap <S-Left> 0
+    nnoremap <S-Right> $
+    vnoremap <S-Right> $
 
     " Indentline settings
-    let g:indentLine_char = '┆'   " インデントラインを縦線で表示
     let g:indentLine_enabled = 1  " プラグインを有効にする
     let g:indentLine_faster = 1   " パフォーマンス向上の設定
+    let g:indentLine_char = '┆'   " インデントラインを縦線で表示
+
     " インデントを整える
     nnoremap == mmggvG$=`m
+
     " 自動インデント
     inoremap {<Enter> {}<Left><CR><CR><BS><Up><Right>
+
     "（矩形選択）複数行Tabインデント
     " nnoremap <C-v> <S-i><tab><esc>
 
-    " Move current line up / down
+    " Move current line alt+↑/↓
     " cf. https://qiita.com/itmammoth/items/312246b4b7688875d023
     nnoremap <A-Up> "zdd<Up>"zP
     nnoremap <A-Down> "zdd"zp
@@ -433,4 +412,3 @@
     nnoremap <C-d> yyp
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""
